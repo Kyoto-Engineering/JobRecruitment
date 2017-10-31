@@ -1,0 +1,12 @@
+.buton{
+    color:green;
+}
+.img_box{
+	border:1px solid black;
+	width: 34%;
+	height: auto;
+}
+.nav {
+    list-style: none;
+    font-size: 12px;
+}
