@@ -42,7 +42,7 @@
                             </div>
                             <div class=col-md-2>
                         
-                            <a href=""> <button class="btn btn-primary" type="button" >My Portfolio
+                            <a href="portfolio.php"> <button class="btn btn-primary" type="button" >My Portfolio
                             </button></a>
                            
                             </div>

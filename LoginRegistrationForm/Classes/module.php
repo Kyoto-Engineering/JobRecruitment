@@ -463,7 +463,10 @@
 	}
 	
 	public function getallreparticipant(){
-		$query = "SELECT * FROM tbl_disappertime WHERE status = '1'";
+	    $query = "SELECT p.*, u.userName
+				FROM tbl_disappertime as p, tbl_user_reg as u
+				WHERE p.userId = u.regId AND status = '1' ORDER BY p.id DESC";
+		//$query = "SELECT * FROM tbl_disappertime WHERE status = '1'";
 		$result = $this->db->select($query);
 		return $result;
 	}
@@ -556,10 +559,10 @@
 							 
 							'X-Mailer: PHP/' . phpversion();
 
-							$email_subject1= "Absentee Confirmation email";
-							$email_message1= "Dear $userName,
+		$email_subject1= "Absentee Confirmation email";
+		$email_message1= "Dear $userName,
 
-							We regret to inform you that you missed the the following interview session:
+							                  We regret to inform you that you missed the the following interview session:
 											In order to avail another session of interview please click below:
  
  

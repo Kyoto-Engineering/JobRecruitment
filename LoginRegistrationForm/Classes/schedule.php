@@ -36,7 +36,7 @@
 
 		}
 //create interview Schedule		
-		public function CreateinterviewSchedule($data, $uId){
+		public function CreateinterviewSchedule($data, $jId){
 			$date = $this->fm->validation($data['interviewdate']);
 			$stime = $this->fm->validation($data['starttime']);
 			$endtime = $this->fm->validation($data['endtime']);
@@ -49,9 +49,9 @@
 			$venue		= mysqli_real_escape_string($this->db->link, $venue);
 			
 			//get job id matching user id from apply table
-			$Jquery = "SELECT * FROM tbl_apply WHERE userId = '$uId'";
+			$Jquery = "SELECT * FROM tbl_apply WHERE jId = '$jId'";
 			$result = $this->db->select($Jquery)->fetch_assoc();
-			$jId = $result['jId'];
+			$uId = $result['userId'];
 
 			$Mquery = "SELECT * FROM tbl_user_reg WHERE regId = '$uId'";
 			$result = $this->db->select($Mquery)->fetch_assoc();
@@ -80,7 +80,7 @@
 							 
 							'X-Mailer: PHP/' . phpversion();
 
-							$email_to = "arnab.r@keal.com.bd";
+							$email_to = "recruitment@keal.com.bd";
 							$email_subject= "Interview Schedule";
 							$email_message= "This person has been registered and sent for email verification:
 							Name : $userName
@@ -189,11 +189,13 @@
 			$result = $this->db->select($query);
 			return $result;
 		}
+		
+		
 	
-		public function getApplicantBy(){
+	public function getApplicantBy(){
 			$query = "SELECT p.*, u.userName
 				FROM tbl_apply as p, tbl_user_reg as u
-				WHERE p.userId = u.regId ORDER BY p.id DESC";
+				WHERE p.userId = u.regId AND status = '1' ORDER BY p.id DESC";
 	
 		$result= $this->db->select($query);
 		return $result;
@@ -201,16 +203,42 @@
 
 
 	public function getAlladdressby($uId){
-			$query = "SELECT * FROM tbl_address WHERE userId = '$uId'";
+			$query = "SELECT p.*, d.divName, e.distName, t.thName, b.postName 
+			FROM tbl_address as p, tbl_division as d, tbl_district as e, tbl_thana as t, tbl_post as b
+			WHERE p.divId= d.divId AND
+			      p.distId = e.distId AND
+			      p.thId = t.thId AND
+			      p.postId = b.postId AND
+			      p.userId = '$uId'" ;
+			//$query = "SELECT * FROM tbl_school WHERE userId = '$uId'";
 			$result = $this->db->select($query);
 			return $result;
 	}
 
 	public function getPaddressby($uId){
-			$query = "SELECT * FROM tbl_paddress WHERE userId = '$uId'";
+			$query = "SELECT r.*, s.distName, t.thName, b.postName
+			 FROM tbl_paddress as r, tbl_district as s, tbl_thana as t, tbl_post as b
+			  WHERE r.distId = s.distId AND r.thId = t.thId AND r.postId = b.postId AND r.userId = '$uId'";
+			//$query = "SELECT * FROM tbl_paddress WHERE userId = '$uId'";
 			$result = $this->db->select($query);
 			return $result;
 	}	
 
-	
+	public function getInterview($uId, $jId){
+           $query = "SELECT * FROM tbl_interview WHERE userId = '$uId' AND jId = '$jId'";
+           $result = $this->db->select($query);
+           return $result;
+       }
+       
+     public function delByid($Did){
+
+		$query = "DELETE FROM tbl_date WHERE id = '$Did' ";
+		$delCart = $this->db->delete($query);
+		if ($delCart) {
+			echo "<script>window.location = 'schedule_create.php'</script>";
+		}else{
+			$msg = "Date Not Delete!";
+			return $msg;
+		}
+      }
 } ?>

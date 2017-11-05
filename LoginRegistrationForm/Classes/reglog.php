@@ -33,7 +33,7 @@ class Signup
 		return $result;
 	}
 
-	public function userRegistration($data){
+	public function userRegistration($data, $u_ip){
 
 		
 		$userName     = mysqli_real_escape_string($this->db->link, $data['userName']);
@@ -61,7 +61,7 @@ class Signup
 			
 					
 				
-						$query = "INSERT INTO tbl_user_reg(userName, email, phone, dob, spId) VALUES('$userName', '$email', '$phone', '$dob', '$spId')";
+						$query = "INSERT INTO tbl_user_reg(userName, email, phone, dob, spId, IP) VALUES('$userName', '$email', '$phone', '$dob', '$spId', '$u_ip')";
 	    	 			$inserted_row = $this->db->insert($query);
 
 						if($inserted_row){
@@ -116,7 +116,9 @@ class Signup
             Step 6: HR may or may not approve your request for reschedule. If you are absent for the interview you may all start over from Step 1
  
         Please note that in every step you will be notified by email. Please do not forget to check your Spam or Junk mailbox for the emails and react to them in time.
- 
+        
+        Note: Your email is your username and put your mobile number as your password
+        
         We are excited to have you on board with us in the journey of career development.
  
         Good Luck!!";

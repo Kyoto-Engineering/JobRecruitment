@@ -224,6 +224,34 @@
 
 		//upload image
 
+		public function portfolio($data, $userId){
+			
+			$link		= $this->fm->validation($data['link']);
+		
+
+			
+			$link = mysqli_real_escape_string($this->db->link, $link);
+			
+
+			if ($link == "" ) {
+
+				$msg = "Field Must Not be Empty!!";
+				return $msg;
+			}else{
+				$query = "INSERT INTO tbl_portfolio(userId, link) VALUES('$userId','$link')";
+				$result = $this->db->insert($query);
+				if ($result) {
+					$msg = "Portfolio Added";
+					return $msg;
+				}else{
+					$msg = "Portfolio not Added";
+					return $msg;
+				}
+			}
+
+
+		}
+
 		public function uploadpicture($userId, $file){
 			  $permited  = array('jpg', 'jpeg', 'png', 'gif');
 			  $file_name = $file['image']['name'];

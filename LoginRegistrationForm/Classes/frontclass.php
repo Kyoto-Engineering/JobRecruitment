@@ -418,21 +418,4 @@
 			return $result;
 	}
 
-	public function getusertrainingby($userId){
-		$query = "SELECT * FROM tbl_training WHERE userId = '$userId' limit 1";
-			$result = $this->db->select($query);
-			return $result;
-	}
-		public function getusertrainingby($userId){
-		$query = "SELECT * FROM tbl_training WHERE userId = '$userId'";
-			$result = $this->db->select($query);
-			return $result;
-	}
-
-	public function getworking($userId){
-		$query = "SELECT * FROM tbl_workingexperience WHERE userId = '$userId'";
-			$result = $this->db->select($query);
-			return $result;
-	}
-
 	}?>
