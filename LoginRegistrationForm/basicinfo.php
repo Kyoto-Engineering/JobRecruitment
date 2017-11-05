@@ -24,42 +24,42 @@
             <form action="" method="post" class="w3-container">
                 <p>
                     <label> Flat/Level/Floor No</label>
-                    <input class="w3-input" type="text" name="flat" placeholder="Your Flat/Level/Floor No; ex:Flat-B2/Level-3/2nd Floor" >
+                    <input class="form-control" id="usr" type="text" name="flat" placeholder="Your Flat/Level/Floor No; ex:Flat-B2/Level-3/2nd Floor" >
                 </p>
                 
                 <br>
                 
                 <p>
                     <label> Holding No </label>
-                    <input class="w3-input" type="text" name="holding" placeholder="Holding No of your residence; Ex;64, 432/C etc" required>
+                    <input class="form-control" id="usr" type="text" name="holding" placeholder="Holding No of your residence; Ex;64, 432/C etc" required>
                 </p>
                 
                 <br>
                 
                 <p>
                     <label> Building Name </label>
-                    <input class="w3-input" type="text" name="building" placeholder="Name of your residence; Ex: Iqbal center, Rangpur House etc" >
+                    <input class="form-control" id="usr" type="text" name="building" placeholder="Name of your residence; Ex: Iqbal center, Rangpur House etc" >
                 </p>
                 
                 <br>
                 
                 <p>
                     <label> Road No / Road Name </label>
-                    <input class="w3-input" type="text" name="road" placeholder="Road no of your residence; Ex:5, Atish Dipankar Road etc" >
+                    <input class="form-control" id="usr" type="text" name="road" placeholder="Road no of your residence; Ex:5, Atish Dipankar Road etc" >
                 </p>
                 
                 <br>
                 
                 <p>
                     <label> Block/Sector </label>
-                    <input class="w3-input" type="text" name="block" placeholder="Block/Sector name/number of your residence; Ex:B,13 etc" >
+                    <input class="form-control" id="usr" type="text" name="block" placeholder="Block/Sector name/number of your residence; Ex:B,13 etc" >
                 </p>
                 
                 <br>
                 
                 <p>
                     <label> Area </label>
-                    <input class="w3-input" type="text" name="area" placeholder="Area name of your residence; ex: Niketon, Mohakhali" >
+                    <input class="form-control" id="usr" type="text" name="area" placeholder="Area name of your residence; ex: Niketon, Mohakhali" >
                 </p>
                 
                 <br>
