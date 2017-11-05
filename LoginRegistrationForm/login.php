@@ -41,12 +41,12 @@
                             </span>
                                 <h1>Log in</h1> 
                                 <p> 
-                                    <label for="username" class="uname" data-icon="u" > Your email or username </label>
-                                    <input id="username" name="email" required="required" type="email" placeholder="myusername or mymail@mail.com"/>
+                                    <label for="username" class="uname" data-icon="u" > Your email </label>
+                                    <input id="username" name="email" required="required" type="email" placeholder="ex :- yourmail@gmail.com"/>
                                 </p>
 
                                 <p> 
-                                    <label for="password" class="youpasswd" data-icon="p"> Your  </label>
+                                    <label for="password" class="youpasswd" data-icon="p"> Your Password </label>
                                     <input id="password" name="phone" required="required" type="password" placeholder="eg. X8df!90EO" /> 
                                 </p>
 
@@ -68,9 +68,9 @@
 
 
 <?php
-
+    $u_ip = $_SERVER["REMOTE_ADDR"];
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-        $userReg = $user->userRegistration($_POST);
+        $userReg = $user->userRegistration($_POST, $u_ip);
     }
 
 ?>         

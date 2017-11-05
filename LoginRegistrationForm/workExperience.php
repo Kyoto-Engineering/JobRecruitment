@@ -30,21 +30,21 @@
                 
                 <p>
                     <label>Name of Company</label>
-                    <input class="w3-input" type="text" name="companyName" placeholder="Name of the company of your previous employment" required>
+                    <input class="form-control" type="text" id="usr" name="companyName" placeholder="Name of the company of your previous employment" required>
                 </p>
                 
                 <br>
                 
                 <p>
                     <label>Designation</label>
-                    <input class="w3-input" type="text" name="designation" placeholder="Your designation during the employment period" required>
+                    <input class="form-control" type="text" id="usr" name="designation" placeholder="Your designation during the employment period" required>
                 </p>
                 
                 <br>
                 
                 <p>
                     <label>Employment Length (in Months)</label>
-                    <input class="w3-input" type="text" name="workingPeriod" placeholder="Length of your employment" required>
+                    <input class="form-control" type="text" id="usr" name="workingPeriod" placeholder="Length of your employment" required>
                     
                     <!--<input class="w3-radio" type="radio" name="length" value="day">
                     <label>Day(s)</label>

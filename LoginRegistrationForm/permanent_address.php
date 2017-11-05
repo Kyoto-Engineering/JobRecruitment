@@ -28,23 +28,23 @@
             ?>
             <br>
             <form action="" method="post" class="w3-container">
-                 <p> 
+                 <!--<p> 
                                      <label for="sel1">Same as present Address</label>
                                         <select class="form-control" id="sellect" name="id">
                                           <option>---</option>
                                             <?php
-                                                $getsame = $add->getsameadd();
-                                                if ($getsame) {
-                                                  while ($value = $getsame->fetch_assoc()) {
+                                                //$getsame = $add->getsameadd();
+                                                //if ($getsame) {
+                                                  //while ($value = $getsame->fetch_assoc()) {
                                                     
                                               ?>
-                                           <option value="<?php echo $value['id'];?>" ><?php echo $value['name'];?></option>  
-                                          <?php } } ?>    
+                                           <option value="<?php //echo //$value['id'];?>" ><?php// echo //$value['name'];?></option>  
+                                          <?php //} } ?>    
                                         </select>
                                         
                                        
                                     <br>
-                                </p>
+                                </p>-->
                  <p>
                     <label> Flat/Level/Floor No</label>
                     <input class="w3-input" type="text" name="flat" placeholder="Your Flat/Level/Floor No; ex:Flat-B2/Level-3/2nd Floor" >

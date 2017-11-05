@@ -157,7 +157,16 @@
             </div>
            
  <?php } ?>
- <div class="col-md-3"></div>
+ <?php
+  $getreDate = $allF->getApplicantReDate($userId);
+  if($getreDate){
+    while ($result = $getreDate->fetch_assoc()) {
+ ?>
+ <div class="col-md-4">
+   <h5>My Selected Date: - <?php echo $fm->formDate($result['ddate']);?></h5>
+   <h5>My Selected Time: - <?php echo $fm->formatTime($result['dtime']);?></h5>
+ </div>
+ <?php } } ?>
       <div class="col-md-4">
 
         <table class="table">
@@ -180,7 +189,7 @@
     ?>
       <tr class="success">
         <td><?php echo $i;?></td>
-        <td><?php echo $fm->formDate($value['ddate']);?></td>
+        <td><?php echo $fm->formDate($value['date']);?></td>
         
       </tr>
       <?php } } ?>

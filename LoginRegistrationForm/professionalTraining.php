@@ -14,33 +14,42 @@
 <div class="container">
         <div>
             <h3 style="text-align:center"> Professional Training Inclusion Form</h3> <br>
-            <p> Add details about any kind of professional trainings you have attended in this section.</p>
+            <p> Add details about any kind of professional trainings you have attended so far.</p>
         </div>
         <?php
             if (isset($insertInfo)) {
                 echo $insertInfo;
             }
         ?>
-        <div>
+         <div class="row">
+            <div class="col-md-6 ">
 
             <form action="" method="post" class="container">
             <p>
                     <label>Training Institution</label>
-                    <input class="w3-input" name="tInstitution" type="text" placeholder="Name of the institution from which you have received training" required>
+                    <input class="form-control" id="usr" name="tInstitution" type="text" placeholder="Name of the institution from which you have received training" required>
                 </p>
 
            
 
                 <p>
                     <label>Training Name</label>
-                    <input class="w3-input" type="text" name="trainingName" placeholder="Name of the training course" required>
+                    <input class="form-control" id="usr" type="text" name="trainingName" placeholder="Name of the training course" required>
                 </p>
                 
                 <br>
                 
                 <p>
                     <label>Training Topic</label>
-                    <input class="w3-input" type="text" name="tTopic" placeholder="Topic of the training course" required>
+                    <input class="form-control" id="usr" type="text" name="tTopic" placeholder="Topic of the training course" required>
+                </p>
+                <p>
+                    <label>Start Month</label>
+                    <input class="form-control" id="usr" type="text" name="sMonth" placeholder="Ex :- Jan-2017" required>
+                </p>
+                <p>
+                    <label>End Month</label>
+                    <input class="form-control" id="usr" type="text" name="eMonth" placeholder="Ex :- Mar-2017" required>
                 </p>
                 
                 <br>
@@ -48,7 +57,7 @@
                 <p>
 
                     <label>Training Length</label>
-                    <input class="w3-input" type="text" name="tLenth"  placeholder="Length of the training" required>
+                    <input class="form-control" id="usr"type="text" name="tLenth"  placeholder="ex :- 3 months" required>
                 </p>
 
                 
@@ -60,7 +69,9 @@
                 </p>
                 
             </form>
-        </div>
+            </div>
+            <div class="col-md-6 col-md-offset-3"></div>
+        </div> <!--row-->
 </div>
 
 
