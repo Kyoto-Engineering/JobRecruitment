@@ -270,4 +270,9 @@
 				$result = $this->db->select($query);
 				return $result;
 			}
+		public function getreStatus($userId){
+			$query = "SELECT * FROM tbl_disappertime WHERE userId = '$userId'";
+				$result = $this->db->select($query);
+				return $result;
+		}
 	}//main class
