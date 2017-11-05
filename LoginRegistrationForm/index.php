@@ -1,7 +1,25 @@
 <?php include_once "inc/header.php";?>
 <?php include_once "Classes/address.php";?>
 <?php include_once "Classes/frontclass.php";?>
+<?php include_once "lib/Database.php"; ?>
 
+            <?php
+                $db = new Database();
+                     $userId = Session::get("userId");
+                    
+                    $iplogfile = 'logs/ip-address-mainsite.html';
+                    $ipaddress = $_SERVER['REMOTE_ADDR'];
+                    $webpage = $_SERVER['SCRIPT_NAME'];
+                    $timestamp = date('d/m/Y h:i:s');
+                    $browser = $_SERVER['HTTP_USER_AGENT'];
+                    /*$fp = fopen($iplogfile, 'a+');
+                    chmod($iplogfile, 0777);
+                    fwrite($fp, '['.$timestamp.']: '.$ipaddress.' '.$webpage.' '.$browser. "\n<br><br>");
+                    fclose($fp);*/
+                    $Iquery = "INSERT INTO tbl_urecord(userId, ip, browser) VALUES('$userId', '$ipaddress', '$browser')";
+                    $insert_row = $db->insert($Iquery);
+            
+            ?>
 <?php
     $allF = new Front();
     /* if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
@@ -13,7 +31,7 @@
                          </div>
 <?php 
 
-    $userId = Session::get("userId");
+    //$userId = Session::get("userId");
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
         $jsid = $_POST['jsId'];
         
@@ -113,12 +131,31 @@ echo $age;?>Years
             
             <br>
              <div class="row">
-            <div class="col-md-2">
-            <a href="my_jobs.php" ><button type="button" class="btn btn-primary " >My Applied Jobs</button></a> </div>
-            <div class="col-md-10">
-            <a href="resume.php" ><button type="button" class="btn btn-primary  ">My Resume</button></a>
-            </div>
-            </div>
+                <div class="col-md-4">
+                    <a href="my_jobs.php" ><button type="button" class="btn btn-primary " >My Applied Jobs</button></a> 
+                </div>
+                <div class="col-md-4">
+                     <a href="resume.php" ><button type="button" class="btn btn-primary  ">My Resume</button></a>
+                 </div>
+
+                 <?php
+                    $getTime = $allF->getreschuduleMassege($userId);
+                    if ($getTime) {
+                        while ($data = $getTime->fetch_assoc()) {
+                 ?>
+                 <div class="col-md-4">
+                     <?php 
+                        if($data['status'] == "0"){
+                           echo "<span style='color:red;'>Notice :- Your Re-Scheduled Date For Interview till now pending!!</span>";
+                        }elseif ($data['status'] == "1") {
+                             echo "<span style='color:green;'>Notice :- Your Re-Scheduled Date For Interview Has Been Accepted.</span>";
+                        }else{
+                            echo "<span style='color:red;'>Notice :- Sorry!! Your Re-Scheduled Date For Interview Has Been Rejected!!</span>";
+                        }
+                     ?>
+                 </div>
+                 <?php } } ?>
+            </div><!-- row -->
             <header>
                 <h3>Choose Your Job From List</h3>
             </header>
@@ -161,6 +198,7 @@ echo $age;?>Years
       <tr>
            <?php
             $jId = $value['jId'];
+            $vd = $value['ldApplication'];
          ?>
         <td><?php echo $i ;?></td>
         <td><?php echo $value['jobtitle'];?></td>
@@ -178,9 +216,18 @@ echo $age;?>Years
         <form action="" method="post">
     
         <input type="hidden" name="jsId" value="<?php echo $value['jsId'];?>"/>
-  
-        
-                <input type="submit" name="submit" value="Apply"/>
+        <!--<input type="submit" name="submit" value="Apply"/>
+        <input name="submit" type="button" value="Apply" />-->
+         <?php
+                    $date = date('Y-m-d');
+
+                if ($date > $vd){ ?>
+                    <input name="Disabled" type="button" disabled="disabled" value="Expired" />
+                    <?php }else{ ?>
+                     
+                     <input type="submit" name="submit" value="Apply"/>
+               
+               <?php } ?>
                 
             
       
