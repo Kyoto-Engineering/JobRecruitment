@@ -222,15 +222,17 @@
 
 		}
 
-		//upload image
+		
 
 		public function portfolio($data, $userId){
 			
 			$link		= $this->fm->validation($data['link']);
-		
-
+		     $uId		= $this->fm->validation($data['uId']);
+             $password		= $this->fm->validation($data['password']);
 			
 			$link = mysqli_real_escape_string($this->db->link, $link);
+			$uId = mysqli_real_escape_string($this->db->link, $uId);
+			$password = mysqli_real_escape_string($this->db->link, $password);
 			
 
 			if ($link == "" ) {
@@ -238,7 +240,7 @@
 				$msg = "Field Must Not be Empty!!";
 				return $msg;
 			}else{
-				$query = "INSERT INTO tbl_portfolio(userId, link) VALUES('$userId','$link')";
+				$query = "INSERT INTO tbl_portfolio(userId, link,uId,password) VALUES('$userId','$link','$uId','$password')";
 				$result = $this->db->insert($query);
 				if ($result) {
 					$msg = "Portfolio Added";
@@ -251,7 +253,7 @@
 
 
 		}
-
+//upload image
 		public function uploadpicture($userId, $file){
 			  $permited  = array('jpg', 'jpeg', 'png', 'gif');
 			  $file_name = $file['image']['name'];

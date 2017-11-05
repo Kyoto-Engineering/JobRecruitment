@@ -33,6 +33,15 @@
                 </p>
                 
                 <br>
+                <p>
+                    <label>UserId (if any)</label>
+                    <input class="form-control" id="usr" type="text"  name="uId" placeholder="userId" >
+                </p>
+                <p>
+                    <label>Password (if any)</label>
+                    <input class="form-control" id="usr" type="text"  name="password" placeholder="password" >
+                </p>
+
                  <p>
 
                     <button type="submit" name="submit" >Submit</button>
