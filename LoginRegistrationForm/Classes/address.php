@@ -158,21 +158,24 @@
 			$tInstitution 	= $this->fm->validation($data['tInstitution']);
 			$trainingName 	= $this->fm->validation($data['trainingName']);
 			$tTopic 		= $this->fm->validation($data['tTopic']);
+			$sMonth 		= $this->fm->validation($data['sMonth']);
+			$eMonth 		= $this->fm->validation($data['eMonth']);
 			$tLenth 		= $this->fm->validation($data['tLenth']);
 
 			$tInstitution = mysqli_real_escape_string($this->db->link, $tInstitution);
 			$trainingName = mysqli_real_escape_string($this->db->link, $trainingName);
 			$tTopic		  = mysqli_real_escape_string($this->db->link, $tTopic);
 			$tLenth		  = mysqli_real_escape_string($this->db->link, $tLenth);
-
+            
+            
 			if ($tInstitution == "" || $trainingName == "" || $tTopic == ""	|| $tLenth == "") {
 				$msg = "Field Must Not be Empty!!";
 				return $msg;
 			}else{
-				$query = "INSERT INTO tbl_training(userId, tInstitution, trainingName, tTopic, tLenth) VALUES('$userId','$tInstitution', '$trainingName', '$tTopic', '$tLenth')";
+				$query = "INSERT INTO tbl_training(userId, tInstitution, trainingName, tTopic, sMonth, eMonth, tLenth) VALUES('$userId','$tInstitution', '$trainingName', '$tTopic', '$sMonth', '$eMonth', '$tLenth')";
 				$result = $this->db->insert($query);
 				if ($result) {
-					$msg = "Inserted";
+					$msg = "<span style= 'color:green'><i>Your Training Information Has Been Recorded</i></span>";
 					return $msg;
 				}else{
 					$msg = "Not Inserted";
@@ -235,15 +238,15 @@
 
 		    if ($uploaded_image == "") {
 		    	 
-		    	 $errmsg = "Browse Your Picture First And Submit";
+		    	 $errmsg = "<span style='color:red'>Browse Your Picture First And Submit</span>";
 		    	 return $errmsg;
 
 		    	}elseif ($file_size >1048567) {
-			     echo "<span>Image Size should be less then 1MB!</span>";
+			     echo "<span style='color:red'>Image Size should be less then 1MB!</span>";
 
    			 	} elseif (in_array($file_ext, $permited) === false) {
 
-		     	echo "<span>You can upload only:-".implode(', ', $permited)."</span>";
+		     	echo "<span style='color:red'>You can upload only:-".implode(', ', $permited)."</span>";
 
     			} else {
 			    	 move_uploaded_file($file_temp, $uploaded_image);
@@ -284,8 +287,8 @@
 		    	 $errmsg = "Browse Your Resume First And Submit";
 		    	 return $errmsg;
 
-		    	}elseif ($file_size >102400) {
-			     $msg = "<span style='color:red'>Pdf Size should be not more then 100KB!</span>";
+		    	}elseif ($file_size >300000) {
+			     $msg = "<span style='color:red'>Pdf Size should be not more then 300KB!</span>";
 			     return $msg;
    			 	} elseif (in_array($file_ext, $permited) === false) {
 
@@ -304,6 +307,33 @@
 			    	 }
 			    	}
 
+		}
+		
+		public function getuseraddressBy($uId){
+			$query = "SELECT p.*, d.divName, e.distName, t.thName, b.postName 
+			FROM tbl_address as p, tbl_division as d, tbl_district as e, tbl_thana as t, tbl_post as b
+			WHERE p.divId= d.divId AND
+			      p.distId = e.distId AND
+			      p.thId = t.thId AND
+			      p.postId = b.postId AND
+			      p.userId = '$uId'" ;
+			//$query = "SELECT * FROM tbl_school WHERE userId = '$uId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+
+		public function getpermanentuseraddressBy($uId){
+			$query = "SELECT r.*, s.distName, t.thName, b.postName
+			 FROM tbl_paddress as r, tbl_district as s, tbl_thana as t, tbl_post as b
+			  WHERE r.distId = s.distId AND r.thId = t.thId AND r.postId = b.postId AND r.userId = '$uId'";
+			//$query = "SELECT * FROM tbl_paddress WHERE userId = '$uId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		public function getPersonalInfo($userId){
+			$query  = "SELECT * FROM  tbl_personalinfo WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
 		}
 
 	}//main class
