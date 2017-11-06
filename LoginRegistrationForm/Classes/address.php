@@ -365,6 +365,11 @@
 			$result = $this->db->select($query);
 			return $result;
 		}
+		public function getPortfolio($userId){
+			$query  = "SELECT * FROM  tbl_portfolio WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
 
 	}//main class
 ?>
