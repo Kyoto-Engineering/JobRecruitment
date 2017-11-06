@@ -370,6 +370,59 @@
 			$result = $this->db->select($query);
 			return $result;
 		}
+      public function getTraining($userId){
+			$query  = "SELECT * FROM  tbl_training WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
 
+		 public function getAllExp($userId){
+			$query  = "SELECT * FROM  tbl_workingexperience WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		public function editPortfolio($userId){
+		    $query  = "SELECT * FROM  tbl_portfolio WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+
+		public function updatePortfolio($data, $userId){
+			
+			$link		= $this->fm->validation($data['link']);
+		     $uId		= $this->fm->validation($data['uId']);
+             $password		= $this->fm->validation($data['password']);
+			
+			$link = mysqli_real_escape_string($this->db->link, $link);
+			$uId = mysqli_real_escape_string($this->db->link, $uId);
+			$password = mysqli_real_escape_string($this->db->link, $password);
+			
+
+			if ($link == "" ) {
+
+				$msg = "Field Must Not be Empty!!";
+				return $msg;
+			}else{
+				$query = "UPDATE tbl_portfolio
+				SET
+				 userId = '$userId',
+				 link = '$link',
+				 uId = '$uId',
+				 password = '$password' 
+				 WHERE userId='$userId' " ;
+
+				 
+				$result = $this->db->update($query);
+				if ($result) {
+					$msg = "Portfolio Updated";
+					return $msg;
+				}else{
+					$msg = "Portfolio not Updated";
+					return $msg;
+				}
+			}
+
+
+		}
 	}//main class
 ?>

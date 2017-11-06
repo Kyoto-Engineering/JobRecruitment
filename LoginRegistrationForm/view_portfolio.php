@@ -35,6 +35,16 @@
 
              
             </div>
+
+            <div class="col-md-6">
+               <p>
+                   <a href="update_myPortfolio.php">
+                    <button type="button" class="btn btn-default">
+                      <span class="glyphicon glyphicon-pencil"></span> Update My Portfolio
+                    </button>
+                    </a>
+               </p>
+           </div>
            
          
 
