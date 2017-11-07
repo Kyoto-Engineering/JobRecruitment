@@ -10,13 +10,14 @@
 
         <div class="container">
             <div class="row">
-            <?php
+          
+              <div class="col-md-6">
+                <?php
               $getadd = $add->getuseraddressBy($uId);
               if ($getadd) {
                 while ($data = $getadd->fetch_assoc()) {
                
             ?>
-              <div class="col-md-6">
               <div class="row">
               <div class="col-md-3"> <br/>
                 <h2> Present Address</h2>
@@ -48,13 +49,14 @@
               </div><!--address end-->
               
               <?php } } ?>
- <?php
+ 
+              <div class="col-md-6">
+              <?php
               $getadd = $add->getpermanentuseraddressBy($uId);
               if ($getadd) {
                 while ($data = $getadd->fetch_assoc()) {
                
             ?>
-              <div class="col-md-6">
               <div class="row">
               <div class="col-md-3"> <br/>
                 <h2>Permanent Address</h2>
@@ -74,9 +76,9 @@
               </div><!--address end-->
               <div class="col-md-3">
                <p>
-                   <a href="update_address.php">
+                   <a href="update_paddress.php">
                     <button type="button" class="btn btn-default">
-                      <span class="glyphicon glyphicon-pencil"></span> Update Present Address
+                      <span class="glyphicon glyphicon-pencil"></span> Update Permanent Address
                     </button>
                     </a>
                </p>

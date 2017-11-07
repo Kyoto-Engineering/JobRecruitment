@@ -245,8 +245,46 @@
       <?php } } ?>
 <!-- /5th row end-->
       <!-- 6th row -->
+      <?php
+        $getver = $edu->getpgraduationby($uId);
+        if ($getver) {
+            $i = 0;
+            while($value = $getver->fetch_assoc()){
+                $i++;
 
-<!-- /7th row end-->
+    ?>
+      <div class="row">
+       <table class="table">
+    <thead>
+      <tr>
+        <td>SL</td>
+        <td>University</td>
+        <td>Department Of Study</td>
+        <td>cgpa</td>
+        <td>Passing Year</td>
+        
+        
+      </tr>
+    </thead>
+    <tbody>
+    <h3>Postgraduate Information</h3>
+    
+      <tr>
+        <td><?php echo $i ;?></td>
+        <td><?php echo $value['uName'];?></td>
+        <td><?php echo $value['studyDept'];?></td>
+        
+        <td><?php echo $value['cgpa'];?></td>
+        <td><?php echo $value['pyear'];?></td>
+       
+      </tr>
+   
+    </tbody>
+  </table>
+      </div>
+      <?php } } ?>
+
+<!-- /6th row end-->
       <!-- Main row -->
      
     

@@ -25,7 +25,7 @@
         <div class="row">
         
        
-        <div class="col-md-6">
+        <div class="col-md-4">
             <h2> Working Experience</h2>
             <h5>Company Name:<?php echo $value['companyName'] ; ?> </h5>
             <h5>Designation:<?php echo $value['designation'] ;?> </h5>
@@ -39,11 +39,24 @@
            
          
 
+
+
+ 
+
+        
+        <div class="col-md-8">
+        <br/><br/>
+               <p>
+                   <a href="update_experience.php">
+                    <button type="button" class="btn btn-default">
+                      <span class="glyphicon glyphicon-pencil"></span> Update My Working Experience
+                    </button>
+                    </a>
+               </p>
+           </div>
 </div>
  <?php } } ?>
-
-        </div>
-
+</div>
 
 
 
