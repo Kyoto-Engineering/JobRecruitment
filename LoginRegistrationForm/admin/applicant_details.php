@@ -282,7 +282,50 @@
       </div>
       <?php } } ?>
 <!-- /5th row end-->
-      <!-- 6th row -->
+ <!-- 6th row -->
+<?php
+        $getver = $edu->getpgraduationby($uId);
+        if ($getver) {
+            $i = 0;
+            while($value = $getver->fetch_assoc()){
+                $i++;
+
+    ?>
+      <div class="row">
+       <table class="table">
+    <thead>
+      <tr>
+        <td>SL</td>
+        <td>University</td>
+        <td>Department Of Study</td>
+        <td>cgpa</td>
+        <td>Passing Year</td>
+        
+        
+      </tr>
+    </thead>
+    <tbody>
+    <h3>Postgraduate Information</h3>
+    
+      <tr>
+        <td><?php echo $i ;?></td>
+        <td><?php echo $value['uName'];?></td>
+        <td><?php echo $value['studyDept'];?></td>
+        
+        <td><?php echo $value['cgpa'];?></td>
+        <td><?php echo $value['pyear'];?></td>
+       
+      </tr>
+   
+    </tbody>
+  </table>
+      </div>
+      <?php } } ?>
+ <!-- /6th row end-->
+
+
+
+      <!-- 7th row -->
 <?php
         $gettr = $edu->gettrainingby($uId);
         if ($gettr) {
@@ -321,7 +364,7 @@
   </table>
       </div>
       <?php } } ?>
-<!-- /6th row end-->
+<!-- /7th row end-->
 
       <!-- Main row -->
     <div class="container">
@@ -337,9 +380,7 @@
                     &nbsp;
                     <input class="w3-radio" type="radio"   name="status" value="2">
                     <label>Deselect</label>
-                    &nbsp;
-                    <input class="w3-radio" type="radio"   name="status" value="3">
-                    <label>Confirm</label>
+                    
    <p><button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Submit</button></p>
   </form> 
  </div>

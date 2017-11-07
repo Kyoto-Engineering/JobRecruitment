@@ -112,8 +112,8 @@ echo "<span style='color:green'>$age years</span>";
 
                       </a></li>
                       
-                      <li><a href="education.php" class="w3-bar-item"> My Educational Details </a></li>
-                      <li><a href="professionalTraining.php" class="w3-bar-item"> My Professional Training<br/>
+                      <li><a href="view_education_detail.php" class="w3-bar-item"> My Educational Details </a></li>
+                      <li><a href="view_professional.php" class="w3-bar-item"> My Professional Training<br/>
 
                         <?php
                         $getdata = $allF->getusertrainingby($userId);
@@ -124,7 +124,7 @@ echo "<span style='color:green'>$age years</span>";
                               }
 
                              ?> </a></li>
-                      <li><a href="workExperience.php" class="w3-bar-item">My Work Experience <br/>
+                      <li><a href="view_exp.php" class="w3-bar-item">My Work Experience <br/>
                       <?php
                         $getdata = $allF->getworking($userId);
                          if (!$getdata) {
@@ -134,7 +134,7 @@ echo "<span style='color:green'>$age years</span>";
                               }
                                ?>
                        </a></li>
-                       <li><a href="#" class="w3-bar-item">My Portfolio</a></li>
+                       <li><a href="view_portfolio.php" class="w3-bar-item">My Portfolio</a></li>
                     </ul>
                     
                     <ul class="nav navbar-nav navbar-right">

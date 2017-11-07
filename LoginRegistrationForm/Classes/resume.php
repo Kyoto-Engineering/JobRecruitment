@@ -63,7 +63,13 @@
 			$value = $this->db->select($query);
 			return $value;
 		}
-
+public function getpgraduationby($uId){
+			$query = "SELECT p.*, c.pyear, d.studyDept, u.uName
+				FROM tbl_postgraduate as p, tbl_passingyear as c, tbl_studydept as d, tbl_university as u
+				WHERE p.pyearid = c.pyearid AND p.studydeptId = d.studydeptId AND p.uId = u.uId AND userId = '$uId'";
+			$value = $this->db->select($query);
+			return $value;
+		}
 		public function updateStatus($status, $uId){
 			
 			$status = mysqli_real_escape_string($this->db->link, $status);
