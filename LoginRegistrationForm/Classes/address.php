@@ -80,6 +80,7 @@
 			$flat 		 = $this->fm->validation($data['flat']);
 			$holding 	 = $this->fm->validation($data['holding']);
 			$building 	 = $this->fm->validation($data['building']);
+			$road 		 = $this->fm->validation($data['road']);
 			$block 		 = $this->fm->validation($data['block']);
 			$area 		 = $this->fm->validation($data['area']);
 			
@@ -116,7 +117,7 @@
 
 		public function paddressInsert($uId, $data){
 
-			$id 	     = $this->fm->validation($data['id']);
+			//$pid 	     = $this->fm->validation($data['pid']);
 			$flat 		 = $this->fm->validation($data['flat']);
 			$holding 	 = $this->fm->validation($data['holding']);
 			$building 	 = $this->fm->validation($data['building']);
@@ -130,7 +131,7 @@
 			$postId 	 = $this->fm->validation($data['postId']);
 			/*$codeId 	 = $this->fm->validation($data['codeId']);*/
 
-			$id		 	 = mysqli_real_escape_string($this->db->link, $id);
+			//$pid		 	 = mysqli_real_escape_string($this->db->link, $pid);
 			$flat		 = mysqli_real_escape_string($this->db->link, $flat);
 			$holding	 = mysqli_real_escape_string($this->db->link, $holding);
 			$building	 = mysqli_real_escape_string($this->db->link, $building);
@@ -143,7 +144,7 @@
 			$thId		 = mysqli_real_escape_string($this->db->link, $thId);
 			$postId		 = mysqli_real_escape_string($this->db->link, $postId);
 
-			$query = "INSERT INTO tbl_paddress(userId, id,flat, holding, building,road, block, area, divId, distId, thId, postId) VALUES('$uId','$id','$flat', '$holding', '$building','$road', '$block','$area', 'divId', '$distId', '$thId', '$postId')";
+			$query = "INSERT INTO tbl_paddress(userId, flat, holding, building,road, block, area, divId, distId, thId, postId) VALUES('$uId','$flat', '$holding', '$building','$road', '$block','$area', 'divId', '$distId', '$thId', '$postId')";
 				$result = $this->db->insert($query);
 				if ($result) {
 					$msg = "Your Permanent Address has been recorded";
@@ -424,5 +425,153 @@
 
 
 		}
+		public function editmyAddress($userId){
+			 $query  = "SELECT * FROM  tbl_address WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		public function addressUpdate($uId, $data){
+			$flat 		 = $this->fm->validation($data['flat']);
+			$holding 	 = $this->fm->validation($data['holding']);
+			$building 	 = $this->fm->validation($data['building']);
+			$road 		 = $this->fm->validation($data['road']);
+			$block 		 = $this->fm->validation($data['block']);
+			$area 		 = $this->fm->validation($data['area']);
+			
+			$divId 		 = $this->fm->validation($data['divId']);
+			$distId 	 = $this->fm->validation($data['distId']);
+			$thId 		 = $this->fm->validation($data['thId']);
+			$postId 	 = $this->fm->validation($data['postId']);
+			/*$codeId 	 = $this->fm->validation($data['codeId']);*/
+
+			$flat		 = mysqli_real_escape_string($this->db->link, $flat);
+			$holding	 = mysqli_real_escape_string($this->db->link, $holding);
+			$building	 = mysqli_real_escape_string($this->db->link, $building);
+			$road		 = mysqli_real_escape_string($this->db->link, $road);
+			$block		 = mysqli_real_escape_string($this->db->link, $block);
+			$area		 = mysqli_real_escape_string($this->db->link, $area);
+
+			$divId		 = mysqli_real_escape_string($this->db->link, $divId);
+			$distId		 = mysqli_real_escape_string($this->db->link, $distId);
+			$thId		 = mysqli_real_escape_string($this->db->link, $thId);
+			$postId		 = mysqli_real_escape_string($this->db->link, $postId);
+			
+
+			
+				$query ="UPDATE tbl_address
+			SET	
+				flat = '$flat',
+				holding = '$holding',
+				 building = '$building',
+				 block = '$block',
+				 road='$road',
+				 area = '$area',
+				 divId =  '$divId',
+				 distId = '$distId', 
+				 thId = '$thId',
+				 postId ='$postId'
+				 WHERE userId='$uId' " ; 
+
+				
+				$result = $this->db->update($query);
+				if ($result) {
+					header("Location:view_address.php");
+				}else{
+					$msg = "Your present Address not updated";
+					return $msg;
+				}
+			
+
+		}
+		public function editmypAddress($userId){
+			$query  = "SELECT * FROM  tbl_paddress WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		public function paddressUpdate($uId, $data){
+			$flat 		 = $this->fm->validation($data['flat']);
+			$holding 	 = $this->fm->validation($data['holding']);
+			$building 	 = $this->fm->validation($data['building']);
+			$block 		 = $this->fm->validation($data['block']);
+			$area 		 = $this->fm->validation($data['area']);
+			
+			$divId 		 = $this->fm->validation($data['divId']);
+			$distId 	 = $this->fm->validation($data['distId']);
+			$thId 		 = $this->fm->validation($data['thId']);
+			$postId 	 = $this->fm->validation($data['postId']);
+			/*$codeId 	 = $this->fm->validation($data['codeId']);*/
+
+			$flat		 = mysqli_real_escape_string($this->db->link, $flat);
+			$holding	 = mysqli_real_escape_string($this->db->link, $holding);
+			$building	 = mysqli_real_escape_string($this->db->link, $building);
+			$block		 = mysqli_real_escape_string($this->db->link, $block);
+			$area		 = mysqli_real_escape_string($this->db->link, $area);
+
+			$divId		 = mysqli_real_escape_string($this->db->link, $divId);
+			$distId		 = mysqli_real_escape_string($this->db->link, $distId);
+			$thId		 = mysqli_real_escape_string($this->db->link, $thId);
+			$postId		 = mysqli_real_escape_string($this->db->link, $postId);
+			
+
+			
+				$query ="UPDATE tbl_paddress
+			SET	userId = '$uId',
+				flat = '$flat',
+				holding = '$holding',
+				 building = '$building',
+				 block = '$block',
+				 area = '$area',
+				 divId =  '$divId',
+				 distId = '$distId', 
+				 thId = '$thId',
+				 postId ='$postId'
+				 WHERE userId='$uId' " ; 
+
+				
+				$result = $this->db->update($query);
+				if ($result) {
+					header("Location:view_address.php");
+				}else{
+					$msg = "Your present Address not updated";
+					return $msg;
+				}
+
+		}
+
+		public function editAllExp($uId){
+			$query="SELECT * FROM tbl_workingexperience WHERE userId='$uId'";
+			$result=$this->db->select($query);
+			return $result ;
+		}
+		 public function expUpdate($data, $uId){
+            $companyName 		 = $this->fm->validation($data['companyName']);
+            $designation		 = $this->fm->validation($data['designation']);
+            $workingPeriod 		 = $this->fm->validation($data['workingPeriod']);
+          
+            
+            $companyName		 = mysqli_real_escape_string($this->db->link, $companyName);
+            $designation		 = mysqli_real_escape_string($this->db->link, $designation);
+            $workingPeriod		 = mysqli_real_escape_string($this->db->link, $workingPeriod);
+           
+           
+               $query = "UPDATE tbl_workingexperience
+              SET userId = '$uId', 
+               companyName = '$companyName',
+                designation = '$designation',
+                workingPeriod = '$workingPeriod'
+                WHERE userId='$uId' ";
+
+              
+               $update_row = $this->db->update($query);
+               if($update_row){
+                   $msg= "Your Working Experience Updated Successfully";
+                   return $msg;
+               }else{
+                    $msg= "Your Working Experience Not Updated!!";
+                   return $msg;
+               }
+           
+            
+        }
 	}//main class
 ?>

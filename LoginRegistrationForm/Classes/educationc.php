@@ -254,6 +254,45 @@ class Education
 
 	}
 
+
+
+	public function postgraduateInsert($data, $userId){
+		$uId 		 = $this->fm->validation($data['uId']);
+		$studydeptId = $this->fm->validation($data['studydeptId']);
+		$cgpa 		 = $this->fm->validation($data['cgpa']);
+		$pyearid 	 = $this->fm->validation($data['pyearid']);
+		
+
+		$uId 		 = mysqli_real_escape_string($this->db->link, $uId);
+		$studydeptId = mysqli_real_escape_string($this->db->link, $studydeptId);
+		$cgpa 		 = mysqli_real_escape_string($this->db->link, $cgpa);
+		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
+		
+
+		if ($uId == "" || $studydeptId == "" || $cgpa == "" || $pyearid == "" ) {
+			$msg = "Select or Fill All The Data";
+			return $msg;
+		}
+		$squery = "SELECT * FROM tbl_postgraduate WHERE userId = '$userId'";
+		$getData = $this->db->select($squery);
+		if ($getData) {
+			$msg = "<span style='color:red'>Your Postgraduate Info Already Added By You</span>";
+			return $msg;
+
+
+
+		}else{
+			$query = "INSERT INTO tbl_postgraduate(userId, uId, studydeptId, cgpa, pyearid) VALUES('$userId', '$uId', '$studydeptId', '$cgpa', '$pyearid')";
+			$result = $this->db->insert($query);
+			if ($result) {
+					echo "<script>window.location = 'education.php'</script>";
+			}else{
+				$msg = "Not Insert";
+				return $msg;
+			}
+		}
+
+	}
 	
 }//main class
 ?>
