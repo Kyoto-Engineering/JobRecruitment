@@ -166,6 +166,8 @@
 			$tInstitution = mysqli_real_escape_string($this->db->link, $tInstitution);
 			$trainingName = mysqli_real_escape_string($this->db->link, $trainingName);
 			$tTopic		  = mysqli_real_escape_string($this->db->link, $tTopic);
+			$sMonth 		  = mysqli_real_escape_string($this->db->link, $sMonth );
+			$eMonth 		  = mysqli_real_escape_string($this->db->link, $eMonth );
 			$tLenth		  = mysqli_real_escape_string($this->db->link, $tLenth);
             
             
@@ -573,5 +575,50 @@
            
             
         }
+        public function editAllTraining($uId){
+			$query="SELECT * FROM tbl_training WHERE userId='$uId'";
+			$result=$this->db->select($query);
+			return $result ;
+		}
+		public function trainingUpdate($data, $uId){
+			$tInstitution 	= $this->fm->validation($data['tInstitution']);
+			$trainingName 	= $this->fm->validation($data['trainingName']);
+			$tTopic 		= $this->fm->validation($data['tTopic']);
+			$sMonth 		= $this->fm->validation($data['sMonth']);
+			$eMonth 		= $this->fm->validation($data['eMonth']);
+			$tLenth 		= $this->fm->validation($data['tLenth']);
+
+			$tInstitution = mysqli_real_escape_string($this->db->link, $tInstitution);
+			$trainingName = mysqli_real_escape_string($this->db->link, $trainingName);
+			$tTopic		  = mysqli_real_escape_string($this->db->link, $tTopic);
+			$sMonth 		= mysqli_real_escape_string($this->db->link, $sMonth );
+			$eMonth 		= mysqli_real_escape_string($this->db->link, $eMonth);
+			$tLenth		  = mysqli_real_escape_string($this->db->link, $tLenth);
+            
+            
+			if ($tInstitution == "" || $trainingName == "" || $tTopic == ""	|| $tLenth == "") {
+				$msg = "Field Must Not be Empty!!";
+				return $msg;
+			}else{
+				$query = "UPDATE  tbl_training
+				 
+				SET tInstitution = '$tInstitution',
+				 trainingName = '$trainingName',
+				 tTopic =   '$tTopic',
+				 sMonth = '$sMonth',
+				 eMonth = '$eMonth',
+				  tLenth = '$tLenth' WHERE userId = '$uId'" ; 
+				
+				$result = $this->db->update($query);
+				if ($result) {
+					$msg = "<span style= 'color:green'><i>Your Training Information Has Been Updated</i></span>";
+					return $msg;
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}
+			}
+
+		}
 	}//main class
 ?>
