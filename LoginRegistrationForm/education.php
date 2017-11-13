@@ -8,7 +8,7 @@
       $addImage = $add->uploadpicture($userId, $_FILES);
     }
 ?>
-          <div class="container">
+          <div class="container" style="margin-bottom: 350px;">
 
 
               <div class="row">
@@ -44,24 +44,25 @@
                         <span class="caret"></span></button>
                         <ul class="dropdown-menu">
                             <li><a href="under_graduate.php">Under Graduate</a></li>
-                            <li><a href="#">Post Graduate</a></li>
+                            <li><a href="post_graduate.php">Post Graduate</a></li>
                         </ul>
                     </div>
                   </div>
               </div>
 
               <br/><br/><br/>
+              </div>
              
-              </span>
-              <form action="" method="post" enctype="multipart/form-data">
+              
+              <!--<form action="" method="post" enctype="multipart/form-data">
               <div class="row">
                   <div class="col-md-12 text-center">
                     <h3>Upload Your Picture</h3>
                      <span style="color:green">
               <?php 
-                if (isset($addImage)) {
-                  echo $addImage;
-                }
+                //if (isset($addImage)) {
+                  //echo $addImage;
+                //}
               ?>
                     <hr/>
                     <div class="col-sm-12" style="margin-bottom:20px;">
@@ -73,34 +74,8 @@
               </div>
 
           </div>
-          </form>
-        <?php 
-   if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['upload'])) {
-      $addResume = $add->uploadresume($userId, $_FILES);
-    }
-     ?>
-          <form action="" method="post" enctype="multipart/form-data">
-              <div class="row">
-                  <div class="col-md-12 text-center">
-                    <h3>Upload Your Resume</h3>
-                     
-             <?php 
-                if (isset($addResume)) {
-                  echo $addResume;
-                }
-              ?>
-              
-                    <hr/>
-                    <div class="col-sm-12" style="margin-bottom:20px;">
-                      <label class="btn-bs-file btn btn-lg btn-primary">           
-                    <input type="file" name="resume" />
-                    <input class="buton" type="submit" name="upload" value="Upload"/>
-            </label>
-                  </div>
-              </div>
+          </form>-->
 
-          </div>
-          </form>
                                 
 
 

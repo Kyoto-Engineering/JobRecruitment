@@ -25,19 +25,30 @@
         <div class="row">
         
         
-        <div class="col-md-6">
+        <div class="col-md-4">
             <h2> Professional Training </h2>
             <h5>Training Institution:<?php echo $value['tInstitution'] ; ?> </h5>
             <h5>Training Name:<?php echo $value['trainingName'] ; ?> </h5>
             <h5>Training Topic:<?php echo $value['tTopic'] ;?> </h5>
             <h5>Training Length:<?php echo $value['tLenth'] ;?> </h5>
+              <h5>Starting Month:<?php echo $value['sMonth'] ;?> </h5>
+            <h5>Ending Month:<?php echo $value['eMonth'] ;?> </h5>
 
             
            
 
              
             </div>
-            
+            <div class="col-md-8">
+        <br/><br/>
+               <p>
+                   <a href="update_training.php">
+                    <button type="button" class="btn btn-default">
+                      <span class="glyphicon glyphicon-pencil"></span> Update My professional Training
+                    </button>
+                    </a>
+               </p>
+           </div>
 
 </div>
 <?php } } ?>

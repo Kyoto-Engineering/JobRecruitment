@@ -1,6 +1,20 @@
        <?php include_once "inc/header.php";?>
  <?php include_once "Classes/frontResume.php";?>
  <?php include_once "helpers/Format.php";?>
+ <style>.icon{
+    float:right;
+    font-weight:bold;
+ }
+ 
+ .icon:hover{
+     background-color:#eee;
+     border:1px solid gray;
+     border-radius:5px;
+     height: auto;
+     width:2.3%;
+     padding:5px 8px;
+ }
+ </style>
           <?php
             $edu = new FrontResume();
             $fm = new Format();
@@ -38,7 +52,7 @@
        </div>
        <div class="col-md-4">
          <div class="img_box">
-           <img src="<?php echo $value['image'];?>" alt="image" height="140" width="120px" />
+           <img src="<?php echo $value['image'];?>" alt="image" height="160" width="120px" />
          </div>
        </div>
        <?php } } ?>
@@ -57,6 +71,11 @@
 
     ?>
       <div class="row">
+          <div class="col-md-12">
+              <a href="update_school.php">
+                 <span class="glyphicon glyphicon-pencil icon"></span>
+              </a>
+          </div>
        <table class="table">
     <thead>
       <tr>
@@ -87,35 +106,40 @@
       <!-- /.row -->
 <!-- /2nd row -->
 <?php
-        $geto = $edu->getoLevelinfoby($uId);
-        if ($geto) {
+        $getv = $edu->getvocationalby($uId);
+        if ($getv) {
             $i = 0;
-            while($value = $geto->fetch_assoc()){
+            while($value = $getv->fetch_assoc()){
                 $i++;
 
     ?>
       <div class="row">
+          <div class="col-md-12">
+              <a href="update_vocational.php">
+                 <span class="glyphicon glyphicon-pencil icon"></span>
+              </a>
+          </div>
        <table class="table">
     <thead>
       <tr>
         <td>SL</td>
         <td>Institute</td>
-        <td>Group</td>
-        <td>cgpa</td>
+        <td>Achieved Grade/td>
         <td>Passing Year</td>
-        <td>Board</td>
+        
+        <td>Education Board</td>
       </tr>
     </thead>
     <tbody>
-    <h3>O-level Information</h3>
+    <h3>Vocational Information</h3>
     
       <tr>
         <td><?php echo $i ;?></td>
         <td><?php echo $value['name'];?></td>
-        <td><?php echo $value['GName'];?></td>
         <td><?php echo $value['cgpa'];?></td>
         <td><?php echo $value['pyear'];?></td>
         <td><?php echo $value['divName'];?></td>
+        
       </tr>
    
     </tbody>
@@ -135,13 +159,18 @@
 
     ?>
       <div class="row">
+          <div class="col-md-12">
+              <a href="edithsc.php">
+                 <span class="glyphicon glyphicon-pencil icon"></span>
+              </a>
+          </div>
        <table class="table">
     <thead>
       <tr>
         <td>SL</td>
         <td>Institute</td>
         
-        <td>cgpa</td>
+        <td>gpa</td>
         <td>Passing Year</td>
         <td>Board</td>
       </tr>
@@ -174,12 +203,17 @@
 
     ?>
       <div class="row">
+          <div class="col-md-12">
+              <a href="update_diploma.php">
+                 <span class="glyphicon glyphicon-pencil icon"></span>
+              </a>
+          </div>
        <table class="table">
     <thead>
       <tr>
         <td>SL</td>
         <td>Institute</td>
-        
+        <td>Name of Degree</td>
         <td>cgpa</td>
         <td>Passing Year</td>
         <td>Board</td>
@@ -192,7 +226,7 @@
         <td><?php echo $i ;?></td>
         <td><?php echo $value['name'];?></td>
         <td><?php echo $value['degName'];?></td>
-         <td><?php echo $value['deptName'];?></td>
+       
         <td><?php echo $value['cgpa'];?></td>
         <td><?php echo $value['pyear'];?></td>
         <td><?php echo $value['divName'];?></td>
@@ -214,6 +248,11 @@
 
     ?>
       <div class="row">
+          <div class="col-md-12">
+              <a href="update_undergraduate.php">
+                 <span class="glyphicon glyphicon-pencil icon"></span>
+              </a>
+          </div>
        <table class="table">
     <thead>
       <tr>
@@ -254,6 +293,12 @@
 
     ?>
       <div class="row">
+          
+          <div class="col-md-12">
+              <a href="update_postgraduate.php">
+                 <span class="glyphicon glyphicon-pencil icon"></span>
+              </a>
+          </div>
        <table class="table">
     <thead>
       <tr>

@@ -46,6 +46,15 @@
                             </button></a>
                            
                             </div>
+                             <div class="row other_row">
+                             <div class="col-md-12 text-center">
+                              <p>(If Your Institute Is Not In the List You Can Insert Form Here.)</p>
+                                <a href="others.php"> <button class="btn btn-primary" type="button" >Others..
+                            </button></a>
+
+                             </div>
+
+                           </div> 
                             </div>
 
 
@@ -78,5 +87,24 @@
           </div>
           <hr/>
           </form>
-                  
+          
+          
+          <?php
+            $getresume = $add->getuserresume($userId);
+            if($getresume){
+                while($data = $getresume->fetch_assoc()){
+            
+          ?>
+          
+                        <a href="<?php echo $data['resume'] ?>" target="_blank">
+                         <img src="image/adobe-pdf-icon.png" alt="pdf" height="90px" width="80px">
+                         <p>My Resume.pdf</p>
+                       </a>
+          
+          
+      
+              <?php } } ?>    
                             </div>
+                            
+                            
+                            <?php include_once "inc/footer.php";?>

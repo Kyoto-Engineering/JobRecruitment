@@ -20,7 +20,7 @@
                    <form action="" method="post">
   <div class="form-group">
     <label for="exampleFormControlInput1">Name of Institution</label>
-    <input type="text" class="form-control" name="name" id="exampleFormControlInput1" placeholder="name@example.com">
+    <input type="text" class="form-control" name="name" id="exampleFormControlInput1" >
   </div>
   <div class="form-group">
                 <label for="exampleFormControlSelect1">Name Of Degree</label>
@@ -37,21 +37,7 @@
                   <?php } } ?>
                 </select>
               </div>
-  <div class="form-group">
-                <label for="exampleFormControlSelect1">Name Of Department</label>
-                <select class="form-control" id="exampleFormControlSelect1" name="dId">
-                <option>Select Your Department</option>
-                 <?php
-                    $cvd = new Curriculum();
-                    $getyd = $cvd->getDept();
-                    if ($getyd) {
-                    while ($value = $getyd->fetch_assoc()) {
-                   
-                ?>
-                   <option value="<?php echo $value['dId'];?>" ><?php echo $value['deptName'];?></option>
-                  <?php } } ?>
-                </select>
-              </div>
+  
   <div class="form-group">
                 <label for="exampleFormControlSelect1">Education Board</label>
                 <select class="form-control" id="exampleFormControlSelect1" name="divId">
