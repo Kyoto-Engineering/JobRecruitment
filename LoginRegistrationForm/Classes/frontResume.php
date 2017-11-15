@@ -34,6 +34,13 @@
 			$result = $this->db->select($query);
 			return $result;
 		}
+		public function getvocationalby($uId){
+			$query = "SELECT p.*, c.pyear, j.divName
+				FROM tbl_vocational as p, tbl_passingyear as c, tbl_division as j
+				WHERE p.divId = j.divId AND p.pyearid = c.pyearid AND userId = '$uId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
 
 			public function gethscinfoby($uId){
 			$query = "SELECT p.*, c.pyear, j.divName
@@ -47,9 +54,9 @@
 		}
 
 		public function getdiplomainfoby($uId){
-			$query = "SELECT p.*, c.pyear, j.divName, d.deptName, g.degName
-				FROM tbl_diploma as p, tbl_passingyear as c, tbl_division as j, tbl_department as d, tbl_degree as g
-				WHERE p.divId = j.divId AND p.pyearid = c.pyearid AND p.degId = g.degId AND p.dId = d.dId AND userId = '$uId'";
+			$query = "SELECT p.*, c.pyear, j.divName,  g.degName
+				FROM tbl_diploma as p, tbl_passingyear as c, tbl_division as j, tbl_degree as g
+				WHERE p.divId = j.divId AND p.pyearid = c.pyearid AND p.degId = g.degId  AND userId = '$uId'";
 
 		
 		$value = $this->db->select($query);

@@ -262,6 +262,11 @@ public function getpgraduationby($uId){
 			$result = $this->db->select($query);
 			return $result;
 		}
+		public function getApplicant($uId){
+			$query = "SELECT * FROM tbl_user_reg WHERE regId = '$uId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
 		
 		public function getWorkby($uId){
 			$query = "SELECT * FROM tbl_workingexperience WHERE userId = '$uId'";

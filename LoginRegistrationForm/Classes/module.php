@@ -56,7 +56,7 @@
 			$description = mysqli_real_escape_string($this->db->link, $description);
 
 			if ($deptName == "" || $description == "") {
-				$msg = "Department Name Inserted";
+				$msg = "Fill Up All field";
 						return $msg;
 			}
 			$dpquery = "SELECT * FROM tbl_department WHERE deptName = '$deptName' LIMIT 1";
@@ -426,6 +426,12 @@
 				$result= $this->db->select($query);
 				return $result;
 	}
+
+	public function getAllpeopleforGap(){
+		$query = "SELECT * FROM tbl_user_reg ORDER BY regId DESC limit 100 ";
+		$result = $this->db->select($query);
+		return $result;
+	} 
 	
 	
 	public function getallparticipant(){
@@ -704,6 +710,94 @@ public function sendProcess($userId, $jId, $info){
 				$result = $this->db->select($query);
 				return $result;
 			}
+    public function getGapAnalysis(){
+	$query="SELECT p.*, r.userName
+	FROM tbl_gap_analysis as p,tbl_user_reg as r
+	WHERE p.userId= r.regId";
+			$result=$this->db->select($query);
+			return $result;
+			
+}
+public function gapCreate($data, $uId){
 
+		$gap = 	$this->fm->validation($data['gap']);
+		$gap = mysqli_real_escape_string($this->db->link, $gap);
+		if ($gap == "") {
+			$msg = "Fillup all Field!";
+			return $msg;
+		
+
+			}else {
+					$query  = "INSERT INTO tbl_gap_analysis(userId, gap) VALUES ('$uId', '$gap')";
+					$result = $this->db->insert($query);
+					if ($result) {
+						$msg = "Gap Inserted";
+						return $msg;
+					}else{
+						$msg = "Gap Not Inserted";
+						return $msg;
+				}
+			}
+		}
+		public function criteriaInput($data, $adminId, $uId){
+			$criteria1		= 	$this->fm->validation($data['criteria1']);
+			$criteria2 		= 	$this->fm->validation($data['criteria2']);
+			$criteria3 		= 	$this->fm->validation($data['criteria3']);
+			$criteria4      = $this->fm->validation($data['criteria4']);
+			$criteria5 		= 	$this->fm->validation($data['criteria5']);
+			//$joblocation 		= 	$this->fm->validation($data['joblocation']);
+			$criteria6 		= 	$this->fm->validation($data['criteria6']);
+			$criteria7		= 	$this->fm->validation($data['criteria7']);
+			
+			$criteria8 	= 	$this->fm->validation($data['criteria8']);
+			$criteria9 = $this->fm->validation($data['criteria9']);
+			$criteria10 = $this->fm->validation($data['criteria10']);
+
+			$criteria1	 = mysqli_real_escape_string($this->db->link, $criteria1);
+			$criteria2 = mysqli_real_escape_string($this->db->link, $criteria2);
+			$criteria3  = mysqli_real_escape_string($this->db->link, $criteria3 );
+			$criteria4 = mysqli_real_escape_string($this->db->link, $criteria4);
+			$criteria5  = mysqli_real_escape_string($this->db->link, $criteria5 );
+			//$joblocation = mysqli_real_escape_string($this->db->link, $joblocation);
+			$criteria6  = mysqli_real_escape_string($this->db->link, $criteria6 );
+			$criteria7= mysqli_real_escape_string($this->db->link, $criteria7);
+			$criteria8 = mysqli_real_escape_string($this->db->link, $criteria8);
+			$criteria9 = mysqli_real_escape_string($this->db->link, $criteria9);
+				$criteria10= mysqli_real_escape_string($this->db->link, $criteria10);
+				  $date = date('Y-m-d');
+
+				$query = "INSERT INTO tbl_score(eId, userId, datee,criteria1, criteria2, criteria3 , criteria4, criteria5, criteria6, criteria7, criteria8,criteria9,criteria10) VALUES('$adminId', '$uId', '$date', '$criteria1', '$criteria2', '$criteria3', '$criteria4',
+				'$criteria5', '$criteria6', '$criteria7', '$criteria8','$criteria9','$criteria10')";
+				$result = $this->db->insert($query);
+				if ($result) {
+					$msg = "Record Successfully Inserted";
+					return $msg;
+				}else{
+					$msg = "Record Not Successfully Inserted";
+					return $msg;
+				}
+			
+		}
+		public function criteriaCreate($data){
+			$criteriaName 	 = $this->fm->validation($data['criteriaName']);
+			
+
+			$criteriaName = mysqli_real_escape_string($this->db->link, $criteriaName);
+			
+			if ($criteriaName == "" ) {
+				$msg = "Fill up the Field";
+						return $msg;
+			}else {
+					$query  = "INSERT INTO tbl_criteria(criteriaName) VALUES ('$criteriaName')";
+					$result = $this->db->insert($query);
+					if ($result) {
+						$msg = "Criteria Name Inserted";
+						return $msg;
+					}else{
+						$msg = "Criteria Name Not Inserted";
+						return $msg;
+				}
+			}
+		}
 	
 } ?>

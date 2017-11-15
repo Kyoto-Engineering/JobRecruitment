@@ -178,7 +178,7 @@ class Education
 	public function diplomaInsert($data, $userId){
 		$name 		 = $this->fm->validation($data['name']);
 		$degId 		 = $this->fm->validation($data['degId']);
-		$dId 		 = $this->fm->validation($data['dId']);
+	
 		$cgpa 		 = $this->fm->validation($data['cgpa']);
 		$pyearid 	 = $this->fm->validation($data['pyearid']);
 		$divId 	     = $this->fm->validation($data['divId']);
@@ -186,12 +186,12 @@ class Education
 
 		$name		 = mysqli_real_escape_string($this->db->link, $name);
 		$degId		 = mysqli_real_escape_string($this->db->link, $degId);
-		$dId		 = mysqli_real_escape_string($this->db->link, $dId);
+		
 		$cgpa		 = mysqli_real_escape_string($this->db->link, $cgpa);
 		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
 		$divId	 	 = mysqli_real_escape_string($this->db->link, $divId);
 
-		if ($name == "" || $cgpa == "" || $pyearid == ""|| $divId == "" || $degId == "" || $dId == "") {
+		if ($name == "" || $cgpa == "" || $pyearid == ""|| $divId == "" || $degId == "" ) {
 			$msg = "Select or Fill All The Data";
 			return $msg;
 		}
@@ -204,8 +204,8 @@ class Education
 
 
 		}else{
-			$query = "INSERT INTO tbl_diploma(userId, name, degId, dId, cgpa, pyearid, divId) VALUES('$userId', '$name',
-			 '$degId', '$dId', '$cgpa', '$pyearid', '$divId')";
+			$query = "INSERT INTO tbl_diploma(userId, name, degId, cgpa, pyearid, divId) VALUES('$userId', '$name',
+			 '$degId',  '$cgpa', '$pyearid', '$divId')";
 			$result = $this->db->insert($query);
 			if ($result) {
 				echo "<script>window.location = 'education.php'</script>";
@@ -253,6 +253,37 @@ class Education
 		}
 
 	}
+	public function otherInsert($data, $userId){
+		$eduType     =$this->fm->validation($data['eduType']);
+		$name        =$this->fm->validation($data['name']);
+		$studydeptId = $this->fm->validation($data['studydeptId']);
+		$cgpa 		 = $this->fm->validation($data['cgpa']);
+		$pyearid 	 = $this->fm->validation($data['pyearid']);
+		
+
+		
+		$eduType 	 = mysqli_real_escape_string($this->db->link, $eduType);
+		$name 	     = mysqli_real_escape_string($this->db->link, $name);
+		$studydeptId = mysqli_real_escape_string($this->db->link, $studydeptId);
+		$cgpa 		 = mysqli_real_escape_string($this->db->link, $cgpa);
+		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
+		
+
+		if ($eduType =="" || $name == "" || $studydeptId == "" || $cgpa == "" || $pyearid == "" ) {
+			$msg = "Select or Fill All The Data";
+			return $msg;
+		}else{
+			$query = "INSERT INTO tbl_other(userId, eduType, name, studydeptId, cgpa, pyearid) VALUES('$userId', '$eduType', '$name', '$studydeptId', '$cgpa', '$pyearid')";
+			$result = $this->db->insert($query);
+			if ($result) {
+					echo "<script>window.location = 'education.php'</script>";
+			}else{
+				$msg = "Not Insert";
+				return $msg;
+			}
+		}
+
+	}
 
 
 
@@ -273,15 +304,7 @@ class Education
 			$msg = "Select or Fill All The Data";
 			return $msg;
 		}
-		$squery = "SELECT * FROM tbl_postgraduate WHERE userId = '$userId'";
-		$getData = $this->db->select($squery);
-		if ($getData) {
-			$msg = "<span style='color:red'>Your Postgraduate Info Already Added By You</span>";
-			return $msg;
-
-
-
-		}else{
+		else{
 			$query = "INSERT INTO tbl_postgraduate(userId, uId, studydeptId, cgpa, pyearid) VALUES('$userId', '$uId', '$studydeptId', '$cgpa', '$pyearid')";
 			$result = $this->db->insert($query);
 			if ($result) {
@@ -293,6 +316,268 @@ class Education
 		}
 
 	}
-	
+	public function editmyschool($userId){
+		 $query  = "SELECT * FROM  tbl_school WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+	}
+	public function sscUpdate($data, $userId){
+		$name 		 = $this->fm->validation($data['name']);
+		$gId 		 = $this->fm->validation($data['gId']);
+		$cgpa 		 = $this->fm->validation($data['cgpa']);
+		$pyearid 	 = $this->fm->validation($data['pyearid']);
+		$divId 	     = $this->fm->validation($data['divId']);
+		
+
+		$name		 = mysqli_real_escape_string($this->db->link, $name);
+		$gId		 = mysqli_real_escape_string($this->db->link, $gId);
+		$cgpa		 = mysqli_real_escape_string($this->db->link, $cgpa);
+		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
+		$divId	 	 = mysqli_real_escape_string($this->db->link, $divId);
+
+		if ($name == "" || $gId == "" || $cgpa == "" || $pyearid == ""||$divId == "") {
+			$msg = "Select or Fill All The Data";
+			return $msg;
+		}else{
+			$query = "UPDATE tbl_school 
+			SET 
+		    name = '$name',
+		    gId = '$gId',
+		    cgpa ='$cgpa',
+		    pyearid ='$pyearid',
+		    divId = '$divId'
+		     WHERE userId = '$userId'" ;
+		       
+			$result = $this->db->update($query);
+			if ($result) {
+				echo "<script>window.location = 'view_education_detail.php'</script>";
+			}else{
+				$msg = "Not updated";
+				return $msg;
+			}
+		}
+
+
+	}
+
+	public function editmyhsc($userId){
+		 $query  = "SELECT * FROM  tbl_hsc WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+
+	}
+	public function hscUpdate($data, $userId){
+        $name 		 = $this->fm->validation($data['name']);
+		$cgpa 		 = $this->fm->validation($data['cgpa']);
+		$pyearid 	 = $this->fm->validation($data['pyearid']);
+		$divId 	     = $this->fm->validation($data['divId']);
+		$gId 	     = $this->fm->validation($data['gId']);
+		
+
+		$name		 = mysqli_real_escape_string($this->db->link, $name);
+		$cgpa		 = mysqli_real_escape_string($this->db->link, $cgpa);
+		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
+		$divId	 	 = mysqli_real_escape_string($this->db->link, $divId);
+		$gId	 	 = mysqli_real_escape_string($this->db->link, $gId);
+
+		if ($name == "" || $cgpa == "" || $pyearid == ""|| $divId == ""||$gId == "") {
+			$msg = "Select or Fill All The Data";
+			return $msg;
+		}
+		else{
+			$query = "UPDATE tbl_hsc
+                      SET  
+                      name ='$name', 
+                       cgpa='$cgpa', 
+                        pyearid='$pyearid', 
+                        divId='$divId',  
+                        gId=  '$gId' 
+                        WHERE userId='$userId'";
+                       
+			$result = $this->db->update($query);
+			if ($result) {
+				echo "<script>window.location = 'view_education_detail.php'</script>";
+			}else{
+				$msg = "Not updated";
+				return $msg;
+			}
+		}
+	}
+	public function editmygrad($userId){
+		 $query  = "SELECT * FROM  tbl_grad WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+
+	}
+	public function undergraduateUpdate($data, $userId){
+		$uId 		 = $this->fm->validation($data['uId']);
+		$studydeptId = $this->fm->validation($data['studydeptId']);
+		$cgpa 		 = $this->fm->validation($data['cgpa']);
+		$pyearid 	 = $this->fm->validation($data['pyearid']);
+		
+
+		$uId 		 = mysqli_real_escape_string($this->db->link, $uId);
+		$studydeptId = mysqli_real_escape_string($this->db->link, $studydeptId);
+		$cgpa 		 = mysqli_real_escape_string($this->db->link, $cgpa);
+		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
+		
+
+		if ($uId == "" || $studydeptId == "" || $cgpa == "" || $pyearid == "" ) {
+			$msg = "Select or Fill All The Data";
+			return $msg;
+		}
+		
+
+
+		else{
+			$query = "UPDATE tbl_grad
+			SET
+			uId = '$uId',
+			studydeptId ='$studydeptId',
+			cgpa =  '$cgpa', 
+			pyearid =  '$pyearid'
+			WHERE userId = '$userId' " ;
+
+			
+			$result = $this->db->update($query);
+			if ($result) {
+					echo "<script>window.location = 'view_education_detail.php'</script>";
+			}else{
+				$msg = "Not Updated";
+				return $msg;
+			}
+		}
+
+	}
+public function editmypostgrad($userId){
+		 $query  = "SELECT * FROM  tbl_postgraduate WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+
+	}
+	public function postgraduateUpdate($data, $userId){
+		$uId 		 = $this->fm->validation($data['uId']);
+		$studydeptId = $this->fm->validation($data['studydeptId']);
+		$cgpa 		 = $this->fm->validation($data['cgpa']);
+		$pyearid 	 = $this->fm->validation($data['pyearid']);
+		
+
+		$uId 		 = mysqli_real_escape_string($this->db->link, $uId);
+		$studydeptId = mysqli_real_escape_string($this->db->link, $studydeptId);
+		$cgpa 		 = mysqli_real_escape_string($this->db->link, $cgpa);
+		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
+		
+
+		if ($uId == "" || $studydeptId == "" || $cgpa == "" || $pyearid == "" ) {
+			$msg = "Select or Fill All The Data";
+			return $msg;
+		}
+		
+
+
+		else{
+			$query = "UPDATE tbl_postgraduate
+			SET
+			uId = '$uId',
+			studydeptId ='$studydeptId',
+			cgpa =  '$cgpa', 
+			pyearid =  '$pyearid'
+			WHERE userId = '$userId' " ;
+
+			
+			$result = $this->db->update($query);
+			if ($result) {
+					echo "<script>window.location = 'view_education_detail.php'</script>";
+			}else{
+				$msg = "Not Updated";
+				return $msg;
+			}
+		}
+
+	}
+	public function editmydiploma($userId){
+		    $query  = "SELECT * FROM  tbl_diploma WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+	}
+	public function diplomaUpdate($data, $userId){
+        $name 		 = $this->fm->validation($data['name']);
+		$degId 		 = $this->fm->validation($data['degId']);
+		
+		$cgpa 		 = $this->fm->validation($data['cgpa']);
+		$pyearid 	 = $this->fm->validation($data['pyearid']);
+		$divId 	     = $this->fm->validation($data['divId']);
+		
+
+		$name		 = mysqli_real_escape_string($this->db->link, $name);
+		$degId		 = mysqli_real_escape_string($this->db->link, $degId);
+		
+		$cgpa		 = mysqli_real_escape_string($this->db->link, $cgpa);
+		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
+		$divId	 	 = mysqli_real_escape_string($this->db->link, $divId);
+
+		if ($name == "" || $cgpa == "" || $pyearid == ""|| $divId == "" || $degId == "" ) {
+			$msg = "Select or Fill All The Data";
+			return $msg;
+		}else{
+			$query = "UPDATE tbl_diploma
+			SET userId = '$userId',
+			    name = '$name',
+			    degId = '$degId',
+			   
+			    cgpa = '$cgpa',
+			    pyearid = '$pyearid',
+			    divId = '$divId'
+			    WHERE userId = '$userId'" ;
+
+			$result = $this->db->update($query);
+			if ($result) {
+				echo "<script>window.location = 'education.php'</script>";
+			}else{
+				$msg = "Not Updated";
+				return $msg;
+			}
+		}
+
+	}
+	public function editmyvocational($userId){
+		$query  = "SELECT * FROM   tbl_vocational WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+	}
+	public function vocationalUpdate($data, $userId){
+		$name 		 = $this->fm->validation($data['name']);
+		$cgpa 		 = $this->fm->validation($data['cgpa']);
+		$pyearid 	 = $this->fm->validation($data['pyearid']);
+		$divId 	     = $this->fm->validation($data['divId']);
+		
+
+		$name		 = mysqli_real_escape_string($this->db->link, $name);
+		$cgpa		 = mysqli_real_escape_string($this->db->link, $cgpa);
+		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
+		$divId	 	 = mysqli_real_escape_string($this->db->link, $divId);
+
+		if ($name == "" || $cgpa == "" || $pyearid == ""|| $divId == "") {
+			$msg = "Select or Fill All The Data";
+			return $msg;
+		}else{
+			$query = "UPDATE tbl_vocational
+		SET	userId = '$userId',
+			name = '$name',
+			cgpa = '$cgpa', 
+			pyearid = '$cgpa', 
+			divId = '$divId' 
+			WHERE userId = '$userId'" ;
+			
+			$result = $this->db->update($query);
+			if ($result) {
+				echo "<script>window.location = 'education.php'</script>";
+			}else{
+				$msg = "Not Updated";
+				return $msg;
+			}
+		}
+	}
+
 }//main class
 ?>

@@ -241,4 +241,12 @@
 			return $msg;
 		}
       }
+      public function getInterviewApplicant(){
+      	
+      	$query="SELECT p.*,r.userName FROM tbl_interview as p,tbl_user_reg as r WHERE p.userId=r.regId AND 
+      	            p.status='1' ORDER BY p.interviewdate DESC";
+      	  $result = $this->db->select($query);
+           return $result;
+
+      }
 } ?>
