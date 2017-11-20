@@ -61,6 +61,7 @@
         <div class="col-md-8">
           <h5>Name:<?php echo $value['userName'];?></h5>
           <h5>Email:<?php echo $value['email'];?></h5>
+          <h5>Phone:<?php echo $value['phone'];?></h5>
           <h5>BirthDate:<?php echo $value['dob'];?></h5>
 
         </div>

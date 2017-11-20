@@ -40,30 +40,31 @@
         }
       ?>
       <div class="row">
-      <h4>Present Address</h4>
+      
       <?php
         $getadd = $time->getAlladdressby($uId);
         if ($getadd) {
          while ($value = $getadd->fetch_assoc()) {
          
       ?>
+       <h4>Present Address</h4>
       <div class="col-md-5">
-        <p>Flat/Level : <?php echo $value['flat'];?></p>
-        <p>Holding : <?php echo $value['holding'];?></p>
-        <p>Building : <?php echo $value['building'];?></p>
-        <p>Road : <?php echo $value['road'];?></p>
-        <p>Block : <?php echo $value['block'];?></p>
-        <p>Area : <?php echo $value['area'];?></p>
-        <p>Divission : <?php echo $value['divName'];?></p>
-        <p>District : <?php echo $value['distName'];?></p>
-        <p>Thana : <?php echo $value['thName'];?></p>
-        <p>Post : <?php echo $value['postName'];?></p>
-      </div>
+        
+                  <br>
+                  <h5>Flat:  <?php echo $value['flat']; ?></h5>
+                  <h5>Holding:  <?php echo $value['holding']; ?></h5>
+                  <h5>Building:  <?php echo $value['building']; ?></h5>
+                  <h5>Road:  <?php echo $value['road']; ?></h5>
+                  <h5>Block:  <?php echo $value['block']; ?></h5>
+                  <h5>Area:  <?php echo $value['area']; ?></h5>
+                  <h5>Divission:  <?php echo $value['divName']; ?></h5>
+                  <h5>District:  <?php echo $value['distName']; ?></h5>
+                  <h5>Thana:  <?php echo $value['thName']; ?></h5>
+                  <h5>Post:  <?php echo $value['postName']; ?></h5>
+
+              </div><!--address end-->
 <?php } } ?>
- <div class="col-md-3">
 
-
-      </div>
 
        <?php
         $getpadd = $time->getPaddressby($uId);
@@ -73,23 +74,16 @@
       ?>
       <h4>Permanent Address</h4>
       <div class="col-md-5">
-        <p> <?php
-        if ($value['id'] == "1") {
-          echo "Same as Present address";
-        }
-         
-         ?></p>
-         <p>Flat/Level : <?php echo $value['flat'];?></p>
-        <p>Holding : <?php echo $value['holding'];?></p>
-        <p>Building : <?php echo $value['building'];?></p>
-        <p>Road : <?php echo $value['road'];?></p>
-        <p>Block : <?php echo $value['block'];?></p>
-        <p>Area : <?php echo $value['area'];?></p>
-        <p>Divission : <?php echo $value['divName'];?></p>
-        <p>District : <?php echo $value['distName'];?></p>
-        <p>Thana : <?php echo $value['thName'];?></p>
-        <p>Post : <?php echo $value['postName'];?></p>
-        
+        <h5>Flat:  <?php echo $value['flat']; ?></h5>
+        <h5>Holding:  <?php echo $value['holding']; ?></h5>
+        <h5>Building:  <?php echo $value['building']; ?></h5>
+        <h5>Road:  <?php echo $value['road']; ?></h5>
+        <h5>Block:  <?php echo $value['block']; ?></h5>
+        <h5>Area:  <?php echo $value['area']; ?></h5>
+        <h5>Divission:  <?php echo $value['divId']; ?></h5>
+        <h5>District:  <?php echo $value['distName']; ?></h5>
+        <h5>Thana:  <?php echo $value['thName']; ?></h5>
+        <h5>Post:  <?php echo $value['postName']; ?></h5>
       </div>
       <?php } } ?>
       </div>
