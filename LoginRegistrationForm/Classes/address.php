@@ -196,6 +196,8 @@
 			$gender 		= $this->fm->validation($data['gender']);
 			$nId 		= $this->fm->validation($data['nId']);
 			$maritalStatus 	= $this->fm->validation($data['maritalStatus']);
+			
+			
 
 			
 			$perName = mysqli_real_escape_string($this->db->link, $perName);
@@ -205,8 +207,9 @@
 			$gender = mysqli_real_escape_string($this->db->link, $gender);
 			$nId = mysqli_real_escape_string($this->db->link, $nId);
 			$maritalStatus = mysqli_real_escape_string($this->db->link, $maritalStatus);
-
-			if ($perName == "" || $perEmail == "" || $perPhone == "" || $dob == "" || $gender == "" || $nId == "" || $maritalStatus == "") {
+			
+			
+			if ($perName == "" || $perEmail == "" || $perPhone == "" || $dob == "" || $gender == "" || $nId == "" || $maritalStatus == "" ) {
 
 				$msg = "Field Must Not be Empty!!";
 				return $msg;
@@ -220,6 +223,7 @@
 					$msg = "Personal Info not recorded";
 					return $msg;
 				}
+
 			}
 
 
@@ -625,5 +629,47 @@
             $result = $this->db->select($query);
             return $result;
         }
+        public function statUpdate($data , $userId){
+        $status=$this->fm->validation($data['status']);
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_personalinfo
+                   SET status=' $status' WHERE userId='$userId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='basicinfo.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+            
+		}
+		public function statUpdateSchool($data , $userId){
+        $status=$this->fm->validation($data['status']);
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_school
+                   SET status=' $status' WHERE userId='$userId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='secondarySchooling.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+            
+		}
+		public function statUpdateHsc($data , $userId){
+			$status=$this->fm->validation($data['status']);
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_hsc
+                   SET status=' $status' WHERE userId='$userId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='hsc.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+            
+		}
 	}//main class
 ?>

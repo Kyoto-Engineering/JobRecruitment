@@ -67,11 +67,28 @@
        
     ?>
       <tr class="success">
+          <?php
+            $userId = $value['userId'];
+            ?>
         <td><?php echo $value['jobtitle'];?></td>
         <td><?php echo $value['userName'];?></td>
         
         <td><a href="reschedule_details.php?joid=<?php echo $value['id'];?>"><input type="button" name="button" value="View Details"/></a></td>
-        
+        <?php
+          $getstat = $edu->getreStatus($userId);
+          if ($getstat) {
+            while ($data = $getstat->fetch_assoc()) {
+        ?>
+        <td><?php
+            if ($data['status'] == "0") {
+              echo "<span style='color:blue;'>Pending</span>"; 
+            }elseif($data['status'] == "1"){
+                echo "<span style='color:green;'>Selected</span>"; 
+            }else{
+              echo "<span style='color:red;'>Rejected</span>";
+            }
+        ?></td>
+        <?php } } ?>
       </tr>
       <?php } } ?>
     </tbody>
