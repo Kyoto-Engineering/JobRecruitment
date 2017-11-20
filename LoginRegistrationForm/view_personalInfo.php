@@ -9,42 +9,59 @@
       
 
 ?>
-
-
-       
-
-        <div class="container">
-        <div class="row">
-        
-        <?php
+ <?php
          $getinfo=$add->getPersonalInfo($userId);
          if ($getinfo) {
 
           
          while ($value = $getinfo->fetch_assoc()) {
-          
+          if ($value['status']=="1") {
+            
         ?>
-        <div class="col-md-6">
+
+       
+
+        <div class="container">
+           
+        <div class="row">
+        <div> <h1 style="color:green;"> <center> Thank You for Completing This Section.</center></h2></div>
+        
+       
+            <div class="col-md-6">
             <h2> Personal Information </h2>
-            <h5>Full Name:<?php echo $value['perName'] ; ?> </h5>
-            <h5>Email:<?php echo $value['perEmail'] ; ?> </h5>
-            <h5>Phone:<?php echo $value['perPhone'] ;?> </h5>
-            <h5> Date of Birth:<?php echo $value['dob'] ; ?></h5>
-            <h5>Gender  : <?php echo $value['gender'] ; ?> </h5>
-            <h5>National ID: <?php echo $value['nId'] ; ?> </h5>
-            <h5>Marital Status: <?php echo $value['maritalStatus'] ; ?> </h5>
+            <h4>Full Name:&nbsp;<?php echo $value['perName'] ; ?> </h4>
+            <h4>Email:&nbsp;<?php echo $value['perEmail'] ; ?> </h4>
+            <h4>Phone:&nbsp;<?php echo $value['perPhone'] ;?> </h4>
+            <h4> Date of Birth:&nbsp;<?php echo $value['dob'] ; ?></h4>
+            <h4>Gender  :&nbsp;<?php echo $value['gender'] ; ?> </h4>
+            <h4>National ID:&nbsp;<?php echo $value['nId'] ; ?> </h4>
+            <h4>Marital Status:&nbsp;<?php echo $value['maritalStatus'] ; ?> </h4>
            
 
              
             </div>
-            <?php } } ?>
+        
+           <div class="col-md-6">
+               <p>
+                   <a href="update_myInfo.php">
+                    <button type="button" class="btn btn-default">
+                      <span class="glyphicon glyphicon-pencil"></span> Edit My Information
+                    </button>
+                    </a>
+               </p>
+           </div>
          
 
 </div>
+ <?php } } } else{ ?>
+ <div style="margin-bottom: 300px;margin-top:80px;">
+<h2 style="color:red;"> <center>You Don't Complete This Section.</center></h2>
+</div>
+ <?php } ?>
 
         </div>
 
-
+<br/><br/>
 
 
 

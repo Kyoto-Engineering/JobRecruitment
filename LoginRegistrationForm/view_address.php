@@ -46,9 +46,10 @@
            </div>
            </div>
 
-              </div><!--address end-->
+              
               
               <?php } } ?>
+              </div><!--address end-->
  
               <div class="col-md-6">
               <?php
@@ -88,6 +89,7 @@
            
             </div>
 
+        </div>
         </div>
         <br/> </br>
        
