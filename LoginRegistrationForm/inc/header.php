@@ -101,6 +101,7 @@ echo "<span style='color:green'>$age years</span>";
                           while($value = $getdata->fetch_assoc()){
                             ?>
                             <?php 
+
                               if ($userId == $value['userId']) {
                                echo $value['area']; echo $value['distName'];
                               }else{
@@ -108,7 +109,7 @@ echo "<span style='color:green'>$age years</span>";
                               }
                             ?>
          
-                            <?php } } ?>
+                            <?php } } ?> 
 
                       </a></li>
                       

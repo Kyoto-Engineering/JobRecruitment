@@ -1,6 +1,8 @@
 <?php include_once "inc/header.php";?>
 <?php include_once "Classes/educationc.php";?>
 <?php include_once "Classes/cvdrop.php";?>
+<?php include_once "Classes/address.php";?>
+
 
 <?php 
   $edu = new Education();
@@ -10,7 +12,17 @@
     }
  
 ?>
-    
+    <?php
+      $add=new address();
+       $edu = new Education();
+        $userId = Session::get("userId");
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
+            
+             $insertssc = $edu->hscInsert($_POST, $userId);
+             $updatestat = $add->statUpdateHsc($_POST , $userId);
+        }
+ 
+?>
     
 
 
@@ -76,9 +88,17 @@
                   <?php } } ?>
                 </select>
               </div>
-             <p>
-                <button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Submit</button>  
-            </p>
+              <div class="row">
+              <div class="col-md-3">
+             <input class="form-control"  type="hidden" name="status" value="1" /> 
+            <input type="submit" name="academic" value="My Academic Life Ends Here" class="btn btn-primary">
+              </div>
+              <div class="col-md-3" style="margin-left: -50px;">
+              
+                <button type="submit" name="submit"  class="btn btn-primary">More Education</button>
+                </div>
+                
+            </div>
 </form>
     </div>
 

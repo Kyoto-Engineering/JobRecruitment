@@ -1,6 +1,7 @@
 <?php include_once "inc/header.php";?>
 <?php include_once "Classes/address.php";?>
 
+
 <?php 
 
       $add = new Address();
@@ -10,9 +11,11 @@
         $userId = Session::get("userId");
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             $infoAdd = $add->personalInfo($_POST , $userId);
+
         }
  
 ?>
+
 
 
        
@@ -78,15 +81,38 @@
                     <label>Single</label>
                 </p>
                 
+                
+                
                 <br>
                                   
                 <p>
+                    
+                    
+                    <button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Submit </button> 
 
-                    <button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Submit</button>
+               </p>
+               </form>
+
+                <?php
+        $userId = Session::get("userId");
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['next'])) {
+            $updatestat = $add->statUpdate($_POST , $userId);
+        }
+ 
+?>
 
 
-                </p>
+            <form action="" method="post">
+            <input class="form-control"  type="hidden" name="status" value="1"/> 
+            <input type="submit" name="next" value="next">
             </form>
+
+                    
+          
+
+
+                
+            
             </div>
              <div class="col-md-6 ">
 <?php 
