@@ -87,7 +87,7 @@
             <input type="submit" name="academic" value="My Academic Life Ends Here" class="btn btn-primary" >
              </div>
               <div class="col-md-3" style="margin-left: -50px;">
-                <button type="submit" name="submit"  class="btn btn-primary">More Education</button>
+                <button type="submit" name="submit"  class="btn btn-primary">I have More Education to Input</button>
                 
             </div>
             </div>

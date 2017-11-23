@@ -85,12 +85,13 @@
                 
                 <br>
                                   
-                <p>
-                    
-                    
-                    <button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Submit </button> 
+                
+                    <div class="row">
+                    <div class="col-md-3">
+                    <button type="submit" name="submit" class="btn btn-primary">Submit </button> 
+                    </div>
 
-               </p>
+               
                </form>
 
                 <?php
@@ -101,11 +102,13 @@
  
 ?>
 
-
-            <form action="" method="post">
+             <div class="col-md-3"> 
+            <form action="" method="post" >
             <input class="form-control"  type="hidden" name="status" value="1"/> 
-            <input type="submit" name="next" value="next">
+            <input type="submit" name="next" value="next" class="btn btn-primary">
             </form>
+            </div>
+            </div>
 
                     
           

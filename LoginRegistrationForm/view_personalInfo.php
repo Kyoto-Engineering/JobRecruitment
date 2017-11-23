@@ -24,7 +24,7 @@
         <div class="container">
            
         <div class="row">
-        <div> <h1 style="color:green;"> <center> Thank You for Completing This Section.</center></h2></div>
+        <div> <h2 style="color:green;"> <center> Thank You for Completing This Section.</center></h2></div>
         
        
             <div class="col-md-6">
@@ -55,7 +55,7 @@
 </div>
  <?php } } } else{ ?>
  <div style="margin-bottom: 300px;margin-top:80px;">
-<h2 style="color:red;"> <center>You Don't Complete This Section.</center></h2>
+<h2 style="color:red;"> <center>You have not Completed This Section.</center></h2>
 </div>
  <?php } ?>
 

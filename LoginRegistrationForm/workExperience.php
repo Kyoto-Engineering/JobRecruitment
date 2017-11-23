@@ -5,8 +5,17 @@
   $add = new Address();
   $uId = Session::get('userId');
    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-        $insertAdd = $add->expInsert($_POST, $uId);
+        $insertExp = $add->expInsert($_POST, $uId);
     }
+ 
+?>
+<?php
+     
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
+            
+              $insertExp = $add->expInsert($_POST, $uId);
+             $updateExp = $add->statUpdateExp($_POST , $uId);
+        }
  
 ?>
 
@@ -14,8 +23,8 @@
         
 <div class="container">
         <?php
-            if(isset($insertAdd)){
-                echo $insertAdd;
+            if(isset($insertExp)){
+                echo $insertExp;
             }
         ?>
         <div id="adminForm" style="margin:10px">
@@ -59,9 +68,16 @@
                 <br>
                 
                                 
-                <p>
-                    <button class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding" type="submit" name="submit" class="btn btn-default">Submit</button>
-                </p>
+                <div class="row">
+              <div class="col-md-4">
+               <input class="form-control"  type="hidden" name="status" value="1"/> 
+            <input type="submit" name="academic" value="My Working Experience Ends Here" class="btn btn-primary" >
+             </div>
+              <div class="col-md-4" style="margin-left: -50px;">
+                <button type="submit" name="submit"  class="btn btn-primary">I have More Working Experience to Input</button>
+                
+            </div>
+            </div>
                 
             </form>
         </div>

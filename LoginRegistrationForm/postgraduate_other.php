@@ -2,23 +2,22 @@
 <?php include_once "Classes/educationc.php";?>
 <?php include_once "Classes/cvdrop.php";?>
 <?php include_once "Classes/address.php";?>
-
 <?php 
   $edu = new Education();
-  $userId = Session::get("userId");
+ $userId = Session::get("userId");
    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-        $insertUg = $edu->postgraduateInsert($_POST, $userId);
+        $insertUg = $edu->postotherInsert($_POST, $userId);
     }
  
 ?>
 <?php
       $add=new address();
-       $edu = new Education();
+       
         $userId = Session::get("userId");
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
             
-             $insertUg = $edu->postgraduateInsert($_POST, $userId);
-             $updatestat = $add->statUpdatePostGrad($_POST , $userId);
+             $insertUg = $edu->postotherInsert($_POST, $userId);
+             $updatestat = $add->statUpdatePostOther($_POST , $userId);
         }
  
 ?>
@@ -28,29 +27,15 @@
 
     
     <div class="container">
-        <a href="education.php"><button type="submit" name="" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Go Back</button></a>  
-        <header> <h2>  Postgraduate Details </h2> </header> <br>
+        <a href="post_graduate.php"><button type="submit" name="" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Go Back</button></a>  
+        <header> <h2>Postgraduate Details</h2> </header> <br>
         
         <form action="" method="post">
+            
             <div class="form-group">
-                <label for="exampleFormControlSelect1">University Name</label>
-                <select class="form-control" id="exampleFormControlSelect1" name="uId">
-                <option>Select Your University</option>
-                 <?php
-                    $cvd = new Curriculum();
-                    $getvr = $cvd->getVersity();
-                    if ($getvr) {
-                    while ($value = $getvr->fetch_assoc()) {
-                   
-                ?>
-                   <option value="<?php echo $value['uId'];?>" ><?php echo $value['uName'];?></option>
-                  <?php } } ?>
-                </select>
+                <label for="exampleFormControlInput1">University Name</label>
+                <input type="text" class="form-control" name="name" id="exampleFormControlInput1" placeholder="Your Institute Name">
               </div>
-
-              <p>(If Your University Name Is Not in the List You Can Insert Form Here.)</p>
-                                <a href="postgraduate_other.php"> <button class="btn btn-primary" type="button" >Click Here if Your University is not on the List
-                            </button></a>
 
 
               <div class="form-group">
@@ -68,8 +53,8 @@
                   <?php } } ?>
                 </select>
               </div>
-
-              <div class="form-group">
+             
+             <div class="form-group">
                 <label for="exampleFormControlSelect1">Your Minor Subject</label>
                 <select class="form-control" id="exampleFormControlSelect1" name="minor">
                 <option>Select Your Minor Subject</option>
@@ -111,7 +96,7 @@
                 </select>
               </div>
  
-             <div class="row">
+           <div class="row">
               <div class="col-md-3">
                <input class="form-control"  type="hidden" name="status" value="1"/> 
             <input type="submit" name="academic" value="My Academic Life Ends Here" class="btn btn-primary" >

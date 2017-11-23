@@ -1,7 +1,7 @@
 <?php include_once "inc/header.php";?>
 <?php include_once "Classes/educationc.php";?>
 <?php include_once "Classes/cvdrop.php";?>
-
+<?php include_once "Classes/address.php";?>
 <?php 
   $edu = new Education();
  $userId = Session::get("userId");
@@ -10,30 +10,54 @@
     }
  
 ?>
+<?php
+      $add=new address();
+       
+        $userId = Session::get("userId");
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
+            
+             $insertUg = $edu->otherInsert($_POST, $userId);
+             $updatestat = $add->statUpdateOther($_POST , $userId);
+        }
+ 
+?>
     
     
 
 
     
     <div class="container">
-        <a href="resume.php"><button type="submit" name="" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Go Back</button></a>  
-        <header> <h2>Give Your Input</h2> </header> <br>
+        <a href="under_graduate.php"><button type="submit" name="" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Go Back</button></a>  
+        <header> <h2>Undergraduate Details</h2> </header> <br>
         
         <form action="" method="post">
+            
             <div class="form-group">
-                <label for="exampleFormControlInput1">Education Type</label>
-                <input type="text" class="form-control" name="eduType" id="exampleFormControlInput1" placeholder="Ex:- Under Graduate/Post Graduate">
-              </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Name of Institution</label>
+                <label for="exampleFormControlInput1">University Name</label>
                 <input type="text" class="form-control" name="name" id="exampleFormControlInput1" placeholder="Your Institute Name">
               </div>
 
 
               <div class="form-group">
-                <label for="exampleFormControlSelect1">Study Department</label>
+                <label for="exampleFormControlSelect1">Your Mejor Subject</label>
                 <select class="form-control" id="exampleFormControlSelect1" name="studydeptId">
-                <option>Select Your Department</option>
+                <option>Select Your Mejor Subject</option>
+                 <?php
+                    $cvd = new Curriculum();
+                    $getstudy = $cvd->getStudydept();
+                    if ($getstudy) {
+                    while ($value = $getstudy->fetch_assoc()) {
+                   
+                ?>
+                   <option value="<?php echo $value['studydeptId'];?>" ><?php echo $value['studyDept'];?></option>
+                  <?php } } ?>
+                </select>
+              </div>
+             
+             <div class="form-group">
+                <label for="exampleFormControlSelect1">Your Minor Subject</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="minor">
+                <option>Select Your Minor Subject</option>
                  <?php
                     $cvd = new Curriculum();
                     $getstudy = $cvd->getStudydept();
@@ -72,9 +96,16 @@
                 </select>
               </div>
  
-             <p>
-                <button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Submit</button>  
-            </p>
+           <div class="row">
+              <div class="col-md-3">
+               <input class="form-control"  type="hidden" name="status" value="1"/> 
+            <input type="submit" name="academic" value="My Academic Life Ends Here" class="btn btn-primary" >
+             </div>
+              <div class="col-md-3" style="margin-left: -50px;">
+                <button type="submit" name="submit"  class="btn btn-primary">I have More Education to Input</button>
+                
+            </div>
+            </div>
 </form>
     </div>
 

@@ -219,17 +219,19 @@ class Education
 	public function undergraduateInsert($data, $userId){
 		$uId 		 = $this->fm->validation($data['uId']);
 		$studydeptId = $this->fm->validation($data['studydeptId']);
+		$minor = $this->fm->validation($data['minor']);
 		$cgpa 		 = $this->fm->validation($data['cgpa']);
 		$pyearid 	 = $this->fm->validation($data['pyearid']);
 		
 
 		$uId 		 = mysqli_real_escape_string($this->db->link, $uId);
 		$studydeptId = mysqli_real_escape_string($this->db->link, $studydeptId);
+		$minor = mysqli_real_escape_string($this->db->link, $minor);
 		$cgpa 		 = mysqli_real_escape_string($this->db->link, $cgpa);
 		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
 		
 
-		if ($uId == "" || $studydeptId == "" || $cgpa == "" || $pyearid == "" ) {
+		if ($uId == "" || $studydeptId == "" ||  $cgpa == "" || $pyearid == "" ) {
 			$msg = "Select or Fill All The Data";
 			return $msg;
 		}
@@ -242,7 +244,7 @@ class Education
 
 
 		}else{
-			$query = "INSERT INTO tbl_grad(userId, uId, studydeptId, cgpa, pyearid) VALUES('$userId', '$uId', '$studydeptId', '$cgpa', '$pyearid')";
+			$query = "INSERT INTO tbl_grad(userId, uId, studydeptId,minor, cgpa, pyearid) VALUES('$userId', '$uId', '$studydeptId', '$minor','$cgpa', '$pyearid')";
 			$result = $this->db->insert($query);
 			if ($result) {
 					echo "<script>window.location = 'education.php'</script>";
@@ -254,26 +256,62 @@ class Education
 
 	}
 	public function otherInsert($data, $userId){
-		$eduType     =$this->fm->validation($data['eduType']);
+	
 		$name        =$this->fm->validation($data['name']);
 		$studydeptId = $this->fm->validation($data['studydeptId']);
+		$minor = $this->fm->validation($data['minor']);
 		$cgpa 		 = $this->fm->validation($data['cgpa']);
 		$pyearid 	 = $this->fm->validation($data['pyearid']);
 		
 
 		
-		$eduType 	 = mysqli_real_escape_string($this->db->link, $eduType);
+		
 		$name 	     = mysqli_real_escape_string($this->db->link, $name);
 		$studydeptId = mysqli_real_escape_string($this->db->link, $studydeptId);
+		$minor = mysqli_real_escape_string($this->db->link, $minor);
 		$cgpa 		 = mysqli_real_escape_string($this->db->link, $cgpa);
 		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
 		
 
-		if ($eduType =="" || $name == "" || $studydeptId == "" || $cgpa == "" || $pyearid == "" ) {
+		if ( $name == "" || $studydeptId == "" ||  $cgpa == "" || $pyearid == "" ) {
 			$msg = "Select or Fill All The Data";
 			return $msg;
 		}else{
-			$query = "INSERT INTO tbl_other(userId, eduType, name, studydeptId, cgpa, pyearid) VALUES('$userId', '$eduType', '$name', '$studydeptId', '$cgpa', '$pyearid')";
+			$query = "INSERT INTO tbl_other(userId,  name, studydeptId, minor, cgpa, pyearid) VALUES('$userId',  '$name', '$studydeptId', '$minor' ,'$cgpa', '$pyearid')";
+			$result = $this->db->insert($query);
+			if ($result) {
+					echo "<script>window.location = 'education.php'</script>";
+			}else{
+				$msg = "Not Insert";
+				return $msg;
+			}
+		}
+
+	}
+
+	public function postotherInsert($data, $userId){
+	
+		$name        =$this->fm->validation($data['name']);
+		$studydeptId = $this->fm->validation($data['studydeptId']);
+		$minor = $this->fm->validation($data['minor']);
+		$cgpa 		 = $this->fm->validation($data['cgpa']);
+		$pyearid 	 = $this->fm->validation($data['pyearid']);
+		
+
+		
+		
+		$name 	     = mysqli_real_escape_string($this->db->link, $name);
+		$studydeptId = mysqli_real_escape_string($this->db->link, $studydeptId);
+		$minor = mysqli_real_escape_string($this->db->link, $minor);
+		$cgpa 		 = mysqli_real_escape_string($this->db->link, $cgpa);
+		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
+		
+
+		if ( $name == "" || $studydeptId == "" ||  $cgpa == "" || $pyearid == "" ) {
+			$msg = "Select or Fill All The Data";
+			return $msg;
+		}else{
+			$query = "INSERT INTO tbl_p_other(userId,  name, studydeptId, minor, cgpa, pyearid) VALUES('$userId',  '$name', '$studydeptId', '$minor' ,'$cgpa', '$pyearid')";
 			$result = $this->db->insert($query);
 			if ($result) {
 					echo "<script>window.location = 'education.php'</script>";
@@ -287,15 +325,18 @@ class Education
 
 
 
+
 	public function postgraduateInsert($data, $userId){
 		$uId 		 = $this->fm->validation($data['uId']);
 		$studydeptId = $this->fm->validation($data['studydeptId']);
+		$minor = $this->fm->validation($data['minor']);
 		$cgpa 		 = $this->fm->validation($data['cgpa']);
 		$pyearid 	 = $this->fm->validation($data['pyearid']);
 		
 
 		$uId 		 = mysqli_real_escape_string($this->db->link, $uId);
 		$studydeptId = mysqli_real_escape_string($this->db->link, $studydeptId);
+		$minor = mysqli_real_escape_string($this->db->link, $minor);
 		$cgpa 		 = mysqli_real_escape_string($this->db->link, $cgpa);
 		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
 		
@@ -305,7 +346,7 @@ class Education
 			return $msg;
 		}
 		else{
-			$query = "INSERT INTO tbl_postgraduate(userId, uId, studydeptId, cgpa, pyearid) VALUES('$userId', '$uId', '$studydeptId', '$cgpa', '$pyearid')";
+			$query = "INSERT INTO tbl_postgraduate(userId, uId, studydeptId,minor, cgpa, pyearid) VALUES('$userId', '$uId', '$studydeptId','$minor', '$cgpa', '$pyearid')";
 			$result = $this->db->insert($query);
 			if ($result) {
 					echo "<script>window.location = 'education.php'</script>";

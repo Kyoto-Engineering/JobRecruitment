@@ -671,5 +671,90 @@
 				}        
             
 		}
+
+		public function statUpdateGrad($data , $userId){
+			$status=$this->fm->validation($data['status']);
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_grad
+                   SET status=' $status' WHERE userId='$userId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='under_graduate.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+            
+		}
+		public function statUpdatePostGrad($data , $userId){
+			$status=$this->fm->validation($data['status']);
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_postgraduate
+                   SET status=' $status' WHERE userId='$userId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='under_graduate.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+            
+		}
+		public function statUpdateTraining($data , $userId){
+			$status=$this->fm->validation($data['status']);
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_training
+                   SET status=' $status' WHERE userId='$userId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='professionalTraining.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+
+		}
+		public function statUpdateExp($data , $uId){
+      $status=$this->fm->validation($data['status']);
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_workingexperience
+                   SET status=' $status' WHERE userId='$uId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='workExperience.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}     
+		}
+		public function statUpdateOther($data , $userId){
+			$status=$this->fm->validation($data['status']);
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_other
+                   SET status=' $status' WHERE userId='$userId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='education.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+            
+		}
+
+		public function statUpdatePostOther($data , $userId){
+			$status=$this->fm->validation($data['status']);
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_p_other
+                   SET status=' $status' WHERE userId='$userId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='education.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+            
+		}
 	}//main class
 ?>

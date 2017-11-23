@@ -3,12 +3,24 @@
 
 <?php 
   $add = new Address();
-  $uId = Session::get('userId');
+  $userId = Session::get('userId');
    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-        $insertInfo = $add->infoInsert($_POST, $uId);
+        $insertInfo = $add->infoInsert($_POST, $userId);
     }
  
 ?>
+<?php
+      $add=new address();
+       
+        $userId = Session::get("userId");
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
+            
+             $insertInfo = $add->infoInsert($_POST, $userId);
+             $updateInfo = $add->statUpdateTraining($_POST , $userId);
+        }
+ 
+?>
+
 
         
 <div class="container">
@@ -64,9 +76,16 @@
                 <br>
                 
                                 
-                <p>
-                    <button type="submit" name="submit" class="btn btn-default">Submit</button>
-                </p>
+                <div class="row">
+              <div class="col-md-4">
+               <input class="form-control"  type="hidden" name="status" value="1"/> 
+            <input type="submit" name="academic" value="My Professional Training Ends Here" class="btn btn-primary" >
+             </div>
+              <div class="col-md-4" style="margin-left: -50px;">
+                <button type="submit" name="submit"  class="btn btn-primary">I have More Training to Input</button>
+                
+            </div>
+            </div>
                 
             </form>
             </div>
