@@ -64,6 +64,17 @@
                     <input class="w3-radio" type="radio" name="length" value="month">
                     <label>Month(s)</label>-->
                 </p>
+                <p>
+                    <label>Starting Month</label>
+                    <input class="form-control" type="text" id="usr" name="sMonth" placeholder="Your Starting Month" required>
+                </p>
+                
+                <br>
+                <p>
+                    <label>Ending Month</label>
+                    <input class="form-control" type="text" id="usr" name="eMonth" placeholder="Your Ending Month " required>
+                </p>
+                
                 
                 <br>
                 
