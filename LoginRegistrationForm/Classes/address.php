@@ -155,27 +155,26 @@
 				}
 		}
 
-		public function infoInsert($data, $userId){
+			public function infoInsert($data, $userId){
 			$tInstitution 	= $this->fm->validation($data['tInstitution']);
 			$trainingName 	= $this->fm->validation($data['trainingName']);
 			$tTopic 		= $this->fm->validation($data['tTopic']);
 			$sMonth 		= $this->fm->validation($data['sMonth']);
 			$eMonth 		= $this->fm->validation($data['eMonth']);
 			$tLenth 		= $this->fm->validation($data['tLenth']);
-
+            $status 		= $this->fm->validation($data['status']);
+            
 			$tInstitution = mysqli_real_escape_string($this->db->link, $tInstitution);
 			$trainingName = mysqli_real_escape_string($this->db->link, $trainingName);
 			$tTopic		  = mysqli_real_escape_string($this->db->link, $tTopic);
-			$sMonth 		  = mysqli_real_escape_string($this->db->link, $sMonth );
-			$eMonth 		  = mysqli_real_escape_string($this->db->link, $eMonth );
 			$tLenth		  = mysqli_real_escape_string($this->db->link, $tLenth);
-            
+            $status		  = mysqli_real_escape_string($this->db->link, $status);
             
 			if ($tInstitution == "" || $trainingName == "" || $tTopic == ""	|| $tLenth == "") {
 				$msg = "Field Must Not be Empty!!";
 				return $msg;
 			}else{
-				$query = "INSERT INTO tbl_training(userId, tInstitution, trainingName, tTopic, sMonth, eMonth, tLenth) VALUES('$userId','$tInstitution', '$trainingName', '$tTopic', '$sMonth', '$eMonth', '$tLenth')";
+				$query = "INSERT INTO tbl_training(userId, tInstitution, trainingName, tTopic, sMonth, eMonth, tLenth, status) VALUES('$userId','$tInstitution', '$trainingName', '$tTopic', '$sMonth', '$eMonth', '$tLenth','$status')";
 				$result = $this->db->insert($query);
 				if ($result) {
 					$msg = "<span style= 'color:green'><i>Your Training Information Has Been Recorded</i></span>";
@@ -686,7 +685,7 @@
 				}        
             
 		}
-		public function statUpdatePostGrad($data , $userId){
+			public function statUpdatePostGrad($data , $userId){
 			$status=$this->fm->validation($data['status']);
          $status = mysqli_real_escape_string($this->db->link, $status);
          $query="UPDATE tbl_postgraduate
@@ -756,5 +755,33 @@
 				}        
             
 		}
+
+		public function statUpdatevocational($data , $userId){
+			$status=$this->fm->validation($data['status']);
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_vocational
+                   SET status=' $status' WHERE userId='$userId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='education.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+            
+		}
+		 public function trainingstatupdate($status, $userId){
+	       
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_training
+                   SET status=' $status' WHERE userId ='$userId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					//echo "<script> window.location='education.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+	    }
 	}//main class
 ?>

@@ -18,7 +18,7 @@
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                              <li><a href="secondarySchooling.php"> Secondary Schooling (S.S.C) </a></li>
-                             <li><a href="oLevel.php"> Junior Schooling (J.S.C) </a></li>
+                             <li><a href="oLevel.php"> O level </a></li>
                              <li><a href="vocational.php"> Vocational </a></li>
                             </ul>
                         </div>    

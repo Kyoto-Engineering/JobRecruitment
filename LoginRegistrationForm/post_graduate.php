@@ -52,7 +52,23 @@
                                 <a href="postgraduate_other.php"> <button class="btn btn-primary" type="button" >Click Here if Your University is not on the List
                             </button></a>
 
-
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Your Degree Name</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="deid">
+                <option>Select Your Degree</option>
+                 <?php
+                    $cvd = new Curriculum();
+                    $gets = $cvd->getStudydegree();
+                    if ($gets) {
+                    while ($value = $gets->fetch_assoc()) {
+                   
+                ?>
+                   <option value="<?php echo $value['deid'];?>" ><?php echo $value['degName'];?></option>
+                  <?php } } ?>
+                </select>
+              </div>
+              
+              
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Your Mejor Subject</label>
                 <select class="form-control" id="exampleFormControlSelect1" name="studydeptId">

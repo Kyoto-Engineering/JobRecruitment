@@ -64,19 +64,19 @@ class Education
 
 	}
 
-	public function olevelInsert($data, $userId){
+		public function olevelInsert($data, $userId){
 		$name 		 = $this->fm->validation($data['name']);
-		$cgpa 		 = $this->fm->validation($data['cgpa']);
+		//$cgpa 		 = $this->fm->validation($data['cgpa']);
 		$pyearid 	 = $this->fm->validation($data['pyearid']);
-		$divId 	     = $this->fm->validation($data['divId']);
+		$board 	     = $this->fm->validation($data['divId']);
 		
 
 		$name		 = mysqli_real_escape_string($this->db->link, $name);
-		$cgpa		 = mysqli_real_escape_string($this->db->link, $cgpa);
+		//$cgpa		 = mysqli_real_escape_string($this->db->link, $cgpa);
 		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
-		$divId	 	 = mysqli_real_escape_string($this->db->link, $divId);
+		$board	 	 = mysqli_real_escape_string($this->db->link, $board);
 
-		if ($name == "" || $cgpa == "" || $pyearid == ""|| $divId == "") {
+		if ($name == "" || $pyearid == ""|| $board == "") {
 			$msg = "Select or Fill All The Data";
 			return $msg;
 		}
@@ -89,16 +89,19 @@ class Education
 
 
 		}else{
-			$query = "INSERT INTO tbl_olevel(userId, name, cgpa, pyearid, divId) VALUES('$userId', '$name', '$cgpa', '$pyearid', '$divId')";
+			$query = "INSERT INTO tbl_olevel(userId, name, pyearid, divId) VALUES('$userId', '$name',  '$pyearid', '$board')";
 			$result = $this->db->insert($query);
 			if ($result) {
-				echo "<script>window.location = 'education.php'</script>";
+				echo "<script>window.location = 'oLevel.php'</script>";
 			}else{
 				$msg = "Not Insert";
 				return $msg;
 			}
 		}
 	}
+
+	
+
 
 	public function vocationalInsert($data, $userId){
 		$name 		 = $this->fm->validation($data['name']);
@@ -223,14 +226,12 @@ class Education
 		$cgpa 		 = $this->fm->validation($data['cgpa']);
 		$pyearid 	 = $this->fm->validation($data['pyearid']);
 		
-
 		$uId 		 = mysqli_real_escape_string($this->db->link, $uId);
 		$studydeptId = mysqli_real_escape_string($this->db->link, $studydeptId);
 		$minor = mysqli_real_escape_string($this->db->link, $minor);
 		$cgpa 		 = mysqli_real_escape_string($this->db->link, $cgpa);
 		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
 		
-
 		if ($uId == "" || $studydeptId == "" ||  $cgpa == "" || $pyearid == "" ) {
 			$msg = "Select or Fill All The Data";
 			return $msg;
@@ -240,9 +241,6 @@ class Education
 		if ($getData) {
 			$msg = "<span style='color:red'>Your Undergraduate Info Already Added By You</span>";
 			return $msg;
-
-
-
 		}else{
 			$query = "INSERT INTO tbl_grad(userId, uId, studydeptId,minor, cgpa, pyearid) VALUES('$userId', '$uId', '$studydeptId', '$minor','$cgpa', '$pyearid')";
 			$result = $this->db->insert($query);
@@ -253,7 +251,6 @@ class Education
 				return $msg;
 			}
 		}
-
 	}
 	public function otherInsert($data, $userId){
 	
@@ -292,6 +289,8 @@ class Education
 	public function postotherInsert($data, $userId){
 	
 		$name        =$this->fm->validation($data['name']);
+		$deid       =$this->fm->validation($data['deid']);
+
 		$studydeptId = $this->fm->validation($data['studydeptId']);
 		$minor = $this->fm->validation($data['minor']);
 		$cgpa 		 = $this->fm->validation($data['cgpa']);
@@ -301,17 +300,18 @@ class Education
 		
 		
 		$name 	     = mysqli_real_escape_string($this->db->link, $name);
+		$deid 	     = mysqli_real_escape_string($this->db->link, $deid);
 		$studydeptId = mysqli_real_escape_string($this->db->link, $studydeptId);
 		$minor = mysqli_real_escape_string($this->db->link, $minor);
 		$cgpa 		 = mysqli_real_escape_string($this->db->link, $cgpa);
 		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
 		
 
-		if ( $name == "" || $studydeptId == "" ||  $cgpa == "" || $pyearid == "" ) {
+		if ( $name == "" || $deid =="" || $studydeptId == "" ||  $cgpa == "" || $pyearid == "" ) {
 			$msg = "Select or Fill All The Data";
 			return $msg;
 		}else{
-			$query = "INSERT INTO tbl_p_other(userId,  name, studydeptId, minor, cgpa, pyearid) VALUES('$userId',  '$name', '$studydeptId', '$minor' ,'$cgpa', '$pyearid')";
+			$query = "INSERT INTO tbl_p_other(userId,  name,deid , studydeptId, minor, cgpa, pyearid) VALUES('$userId',  '$name','$deid', '$studydeptId', '$minor' ,'$cgpa', '$pyearid')";
 			$result = $this->db->insert($query);
 			if ($result) {
 					echo "<script>window.location = 'education.php'</script>";
@@ -328,6 +328,7 @@ class Education
 
 	public function postgraduateInsert($data, $userId){
 		$uId 		 = $this->fm->validation($data['uId']);
+		$deid  	 = $this->fm->validation($data['deid']);
 		$studydeptId = $this->fm->validation($data['studydeptId']);
 		$minor = $this->fm->validation($data['minor']);
 		$cgpa 		 = $this->fm->validation($data['cgpa']);
@@ -335,18 +336,19 @@ class Education
 		
 
 		$uId 		 = mysqli_real_escape_string($this->db->link, $uId);
+		$deid	 = mysqli_real_escape_string($this->db->link, $deid);
 		$studydeptId = mysqli_real_escape_string($this->db->link, $studydeptId);
 		$minor = mysqli_real_escape_string($this->db->link, $minor);
 		$cgpa 		 = mysqli_real_escape_string($this->db->link, $cgpa);
 		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
-		
+	
 
-		if ($uId == "" || $studydeptId == "" || $cgpa == "" || $pyearid == "" ) {
+		if ($uId == "" || $deid == "" ||  $studydeptId == "" || $cgpa == "" || $pyearid == "" ) {
 			$msg = "Select or Fill All The Data";
 			return $msg;
 		}
 		else{
-			$query = "INSERT INTO tbl_postgraduate(userId, uId, studydeptId,minor, cgpa, pyearid) VALUES('$userId', '$uId', '$studydeptId','$minor', '$cgpa', '$pyearid')";
+			$query = "INSERT INTO tbl_postgraduate(userId, uId, deid, studydeptId,minor, cgpa, pyearid) VALUES('$userId', '$uId', '$deid','$studydeptId','$minor', '$cgpa', '$pyearid' )";
 			$result = $this->db->insert($query);
 			if ($result) {
 					echo "<script>window.location = 'education.php'</script>";
@@ -357,6 +359,7 @@ class Education
 		}
 
 	}
+    
 	public function editmyschool($userId){
 		 $query  = "SELECT * FROM  tbl_school WHERE userId='$userId'";
 			$result = $this->db->select($query);
@@ -619,6 +622,18 @@ public function editmypostgrad($userId){
 			}
 		}
 	}
+  public function olevelstatupdate($status, $userId){
+        $status = mysqli_real_escape_string($this->db->link, $status);
+        
+        $query = "UPDATE tbl_olevel
+        SET status = '1' WHERE userId = '$userId'";
+        $result = $this->db->update($query);
+        if($result){
+            echo "<script>window.location = 'education.php'";
+        }else{
+             echo "<script>window.location = 'olevel.php'";
+        }
+    }
 
 }//main class
 ?>

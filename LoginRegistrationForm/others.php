@@ -13,7 +13,7 @@
 <?php
       $add=new address();
        
-        $userId = Session::get("userId");
+        
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
             
              $insertUg = $edu->otherInsert($_POST, $userId);

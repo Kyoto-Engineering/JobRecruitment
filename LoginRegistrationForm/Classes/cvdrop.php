@@ -81,4 +81,86 @@
 		$result = $this->db->select($query);
 		return $result;
 	}
+	public function getgraddegree(){
+		$query = "SELECT * FROM tbl_degree_grad ORDER BY id DESC";
+		$result = $this->db->select($query);
+		return $result;
+	}
+		public function insertolevelsubject($data, $userId){
+		$oid 		 = $this->fm->validation($data['oid']);
+		$grade 		 = $this->fm->validation($data['grade']);
+
+		$oid	 = mysqli_real_escape_string($this->db->link, $oid);
+		$grade	 = mysqli_real_escape_string($this->db->link, $grade);
+
+		if ($oid == ""|| $grade == "") {
+			$msg = "You Dont Select your subject or not give your grade";
+			return $msg;
+		}else{
+			$query = "INSERT INTO tbl_olevel_grads(userid, oid, grade) VALUES('$userId', '$oid', '$grade')";
+			$result = $this->db->insert($query);
+			if ($result) {
+				echo "<script>window.location = 'oLevel.php'</script>";
+			}else{
+				$msg = "your Subject & Grade Has Not Been Record Successfully";
+				return $msg;
+			}
+		}
+
+
+	}
+
+	public function insertAlevelsubject($data, $userId){
+		$oid 		 = $this->fm->validation($data['oid']);
+		$grade 		 = $this->fm->validation($data['grade']);
+
+		$oid	 = mysqli_real_escape_string($this->db->link, $oid);
+		$grade	 = mysqli_real_escape_string($this->db->link, $grade);
+
+		if ($oid == ""|| $grade == "") {
+			$msg = "You Dont Select your subject or not give your grade";
+			return $msg;
+		}else{
+			$query = "INSERT INTO tbl_alevel_grade(userid, oid, grade) VALUES('$userId', '$oid', '$grade')";
+			$result = $this->db->insert($query);
+			if ($result) {
+				echo "<script>window.location = 'aLevel.php'</script>";
+			}else{
+				$msg = "your Subject & Grade Has Not Been Record Successfully";
+				return $msg;
+			}
+		}
+	}
+	public function getAllolevelresult($userId){
+		  $query = "SELECT p.*, c.subjectname
+				FROM tbl_olevel_grads as p, tbl_level_subject as c
+				WHERE p.oid = c.oid AND userId = '$userId' ORDER BY oid DESC";
+			//$query = "SELECT * FROM tbl_school WHERE userId = '$uId'";
+			$result = $this->db->select($query);
+			return $result;
+	}
+	
+	public function getAllAlevelresult($userId){
+		$query = "SELECT p.*, c.alevel
+				FROM tbl_alevel_grade as p, tbl_level_subject as c
+				WHERE p.oid = c.oid AND userId = '$userId' ORDER BY oid DESC";
+			//$query = "SELECT * FROM tbl_school WHERE userId = '$uId'";
+			$result = $this->db->select($query);
+			return $result;
+	}
+	public function getAlevelsubjects(){
+		$query = "SELECT * FROM tbl_level_subject ORDER BY oid ASC LIMIT 75";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function getOlevelsubjects(){
+		$query = "SELECT * FROM tbl_level_subject ORDER BY oid ASC LIMIT 49";
+		$result = $this->db->select($query);
+		return $result;
+	}
+		public function getStudydegree(){
+		$query = "SELECT * FROM tbl_degree_grad ORDER BY deid DESC";
+		$result = $this->db->select($query);
+		return $result;
+	}
 }//main class close

@@ -9,19 +9,15 @@
     }
  
 ?>
-<?php
-      $add=new address();
-       
-        $userId = Session::get("userId");
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
-            
-             $insertInfo = $add->infoInsert($_POST, $userId);
-             $updateInfo = $add->statUpdateTraining($_POST , $userId);
-        }
+
+<?php 
+
+   if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['info'])) {
+       $status = $_POST['info'];
+        $insertInfo = $add->trainingstatupdate($status, $userId);
+    }
  
 ?>
-
-
         
 <div class="container">
         <div>
@@ -39,29 +35,29 @@
             <form action="" method="post" class="container">
             <p>
                     <label>Training Institution</label>
-                    <input class="form-control" id="usr" name="tInstitution" type="text" placeholder="Name of the institution from which you have received training" required>
+                    <input class="form-control" id="usr" name="tInstitution" type="text" placeholder="Name of the institution from which you have received training" >
                 </p>
 
            
 
                 <p>
                     <label>Training Name</label>
-                    <input class="form-control" id="usr" type="text" name="trainingName" placeholder="Name of the training course" required>
+                    <input class="form-control" id="usr" type="text" name="trainingName" placeholder="Name of the training course" >
                 </p>
                 
                 <br>
                 
                 <p>
                     <label>Training Topic</label>
-                    <input class="form-control" id="usr" type="text" name="tTopic" placeholder="Topic of the training course" required>
+                    <input class="form-control" id="usr" type="text" name="tTopic" placeholder="Topic of the training course" >
                 </p>
                 <p>
                     <label>Start Month</label>
-                    <input class="form-control" id="usr" type="text" name="sMonth" placeholder="Ex :- Jan-2017" required>
+                    <input class="form-control" id="usr" type="text" name="sMonth" placeholder="Ex :- Jan-2017" >
                 </p>
                 <p>
                     <label>End Month</label>
-                    <input class="form-control" id="usr" type="text" name="eMonth" placeholder="Ex :- Mar-2017" required>
+                    <input class="form-control" id="usr" type="text" name="eMonth" placeholder="Ex :- Mar-2017" >
                 </p>
                 
                 <br>
@@ -69,7 +65,7 @@
                 <p>
 
                     <label>Training Length</label>
-                    <input class="form-control" id="usr"type="text" name="tLenth"  placeholder="ex :- 3 months" required>
+                    <input class="form-control" id="usr" type="text" name="tLenth"  placeholder="ex :- 3 months" >
                 </p>
 
                 
@@ -79,15 +75,29 @@
                 <div class="row">
               <div class="col-md-4">
                <input class="form-control"  type="hidden" name="status" value="1"/> 
-            <input type="submit" name="academic" value="My Professional Training Ends Here" class="btn btn-primary" >
+            <input type="submit" name="submit" value="My Professional Training Ends Here" class="btn btn-primary" >
              </div>
-              <div class="col-md-4" style="margin-left: -50px;">
+              
+              
+              <div class="col-md-3" style="margin-left: -50px;">
+                <a href='professionalTraining.php'>
                 <button type="submit" name="submit"  class="btn btn-primary">I have More Training to Input</button>
-                
+                </a>
             </div>
-            </div>
-                
             </form>
+            
+            
+            <form action="" method="post">
+            
+            <div class="col-md-3">
+               <input  type="hidden" name="status" value="1"/> 
+            <input type="submit" name="info" value="I don't have any Professional Training to insert" class="btn btn-primary" >
+             </div>
+             
+             </form>
+            </div>
+                
+            
             </div>
             <div class="col-md-6 col-md-offset-3"></div>
         </div> <!--row-->
