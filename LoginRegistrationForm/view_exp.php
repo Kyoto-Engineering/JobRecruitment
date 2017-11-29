@@ -9,41 +9,45 @@
       
 
 ?>
-
-
-       
-
-        <div class="container">
-         <?php
-         $getinfo=$add->getAllExp($userId) ;
-         if ($getinfo) {
-
+<div class="container">
+<h3><center>Work Experience</center></h3>
+<?php
+         $getstatinfo=$add->getAllStatExp($userId) ;
+         if ($getstatinfo) {
           
-         while ($value = $getinfo->fetch_assoc()) {
+         while ($data = $getstatinfo->fetch_assoc()) {
+?>
+
+    <?php
+        if ($data['status']=="1") { 
+          echo " <span style='color:green;'> <center> <h2>Thank You for Completing This Section.</h2></center></span>";
+
+          $getexp = $add->getAllExp($userId);
+           if ($getexp) {
+              $i = "0";
           
+         while ($value = $getexp->fetch_assoc()) {
+            $i++;
         ?>
+        
+          <div class="container">
+         
         <div class="row">
         
        
         <div class="col-md-4">
-            <h2> Working Experience</h2>
+            <h5>Working Experience :<?php echo $i ; ?> </h5>
             <h5>Company Name:<?php echo $value['companyName'] ; ?> </h5>
             <h5>Designation:<?php echo $value['designation'] ;?> </h5>
             <h5>Employment Length:<?php echo $value['workingPeriod'] ; ?> </h5>
+           
             
             
            
 
              
             </div>
-           
-         
-
-
-
- 
-
-        
+     
         <div class="col-md-8">
         <br/><br/>
                <p>
@@ -55,15 +59,27 @@
                </p>
            </div>
 </div>
- <?php } } ?>
 </div>
+       
+
+       <?php 
+        } } } 
+         ?>
+        
+   
 
 
+ <?php } } ?>      
+<br/><br/>
 
+<?php 
+ $getinfo=$add->getExpperson($userId) ;
+if (!$getinfo) { 
+ echo "<span style='color:red;'><center><h2>You have not Completed This Section</h2></center></span>";
+}
+?>
 
-
-
-
+</div>
 
 
 <?php include_once "inc/footer.php";?>

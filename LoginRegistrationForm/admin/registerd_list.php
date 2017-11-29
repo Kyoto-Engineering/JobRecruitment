@@ -57,7 +57,7 @@
                        
                         <th>Specialization</th>
                         <th>SignUp-Time </th>
-                        
+                        <th></th>
                       </tr>
                     </thead>
                     
@@ -76,9 +76,9 @@
                             ?>
                         <td><?php echo $i;?></td>
                         <td>
-                            <a href="applicant_details.php?user=<?php echo $uId;?>">
+                            <a href="listing_people.php?user=<?php echo $uId;?>">
                             <?php echo $value['userName'];?>
-                            </a>
+                            <!--</a>-->
                             </td>
                             <td>
                                 <?php
@@ -124,7 +124,21 @@ echo $age;?>years</td>
                           
                         <td><?php echo $value['specialization'];?></td>
                         <td><?php echo $fm->formatDate($value['date']);?></td>
-                       
+                        <td><?php
+                            if ($value['listing']=="1") { 
+                              echo "<span style='font-size:bold;'>Gray</span>";
+
+                              }elseif ($value['listing']=="2") { 
+
+                              echo "<span style='font-size:bold;'>Black</span>";
+                              
+                           }elseif($value['listing']=="3"){
+                               echo "<span style='font-size:bold;'>White Listed</span>";
+                               }else {
+                              echo "Not Listed";
+                            }?>
+
+                        </td>
                       </tr>
                       
                       <?php } } ?>

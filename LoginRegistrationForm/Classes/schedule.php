@@ -17,7 +17,6 @@
 			$this->db = new Database();
 			$this->fm = new Format();
 		}	
-//createdate
 		public function CreateSchedule($data){
 			$date = $this->fm->validation($data['date']);
 			$date = mysqli_real_escape_string($this->db->link, $date);
@@ -36,7 +35,7 @@
 
 		}
 //create interview Schedule		
-		public function CreateinterviewSchedule($data, $jId){
+		public function CreateinterviewSchedule($data, $uId){
 			$date = $this->fm->validation($data['interviewdate']);
 			$stime = $this->fm->validation($data['starttime']);
 			$endtime = $this->fm->validation($data['endtime']);
@@ -49,10 +48,12 @@
 			$venue		= mysqli_real_escape_string($this->db->link, $venue);
 			
 			//get job id matching user id from apply table
-			$Jquery = "SELECT * FROM tbl_apply WHERE jId = '$jId'";
+			$Jquery = "SELECT * FROM tbl_apply WHERE userId = '$uId'";
 			$result = $this->db->select($Jquery)->fetch_assoc();
-			$uId = $result['userId'];
-
+			$jId = $result['jId'];
+			
+			
+            
 			$Mquery = "SELECT * FROM tbl_user_reg WHERE regId = '$uId'";
 			$result = $this->db->select($Mquery)->fetch_assoc();
 			$email = $result['email'];
@@ -82,9 +83,62 @@
 
 							$email_to = "recruitment@keal.com.bd";
 							$email_subject= "Interview Schedule";
-							$email_message= "This person has been registered and sent for email verification:
-							Name : $userName
-							Email : $email";
+							$email_message= "
+Dear $userName,
+Thank you for your interest in career in our company
+Congratulations!!
+
+Your application for Internship has been accepted. We would be delighted to hold
+a meeting with you on any of the following day:
+							
+Date : $date,
+Time : $stime,
+Venue: $venue,
+								 
+Please confirm your participation by clicking the
+following link:
+https://recruitment.keal.com.bd/LoginRegistrationForm/my_jobs.php
+Prior to select your option please go to the
+following link and register yourself please make
+sure that you have completed all your academic
+information to the following portal:
+
+https://recruitment.keal.com.bd/LoginRegistrationForm/resume.php
+								 
+Note: Your email is your username and put your mobile number as your password
+								 
+Please do not write back to this email. If you are otherwise not contacted by us
+your interview date is confirmed. However, if you want to change your date
+please write an email request or send a request
+using the following link:
+								 
+https://recruitment.keal.com.bd/LoginRegistrationForm/re_schedule.php
+								 
+If  you do not want to participate please do not forget to click on the following link:
+								 
+Please bring along the following items during the
+interview:
+								 
+1) All your Transcripts till date
+2) An updated CV Printed. If not you may take a print out of the same on the
+spot during interview
+3) Your Photo Identity Document, such as Passport, NID, Birth Registration etc.
+4) Academic Credentials.
+								 
+See you then,
+Thank you
+								 
+Recruitment Office
+Kyoto Engineering & Automation Ltd
+B2 House 64 Block B Road 3
+Niketon Gulshan Dhaka 1212
+								 
+Emergency Contact Numbers:
+01844046621
+01844046666
+01844046677";
+
+							
 
 
 							$headers1 = 'From: '.$email_to."\r\n".
@@ -93,60 +147,63 @@
 							 
 							'X-Mailer: PHP/' . phpversion();
 
-							$email_subject1= "Interview Schedule";
-							$email_message1= "Dear $userName,
+							$email_subject1= "Your Interview Schedule";
+							$email_message1= "
+							Dear $userName,
+Thank you for your interest in career in our company
+Congratulations!!
 
-							Thank you for your interest in career in our company
-							Congratulations!!
-
-							Your application for Internship has been accepted. We would be delighted to hold a meeting with you on 
-							any of the following day:
+Your application for Internship has been accepted. We would be delighted to hold
+a meeting with you on any of the following day:
 							
-								Date
-								Time
-								Venue
+Date : $date,
+Time : $stime,
+Venue: $venue,
 								 
-								Please confirm your participation by clicking the following link:
-								 
-								https://recruitment.keal.com.bd/
-								 
-								Prior to select your option please go to the following link and register yourself please make sure that you have completed all your academic information to the following portal:
-								 
-								https://recruitment.keal.com.bd/
-								 
-								Note: Your email is your username and put your mobile number as your password
-								 
-								Please do not write back to this email. If you are otherwise not contacted by us your interview date is confirmed. However, if you want to change your date please write an email request or send a request using the following link:
-								 
-								https://recruitment.keal.com.bd/
-								 
-								If  you do not want to participate please do not forget to click on the following link:
-								 
-								 
-								Please bring along the following items during the interview:
-								 
-								1) All your Transcripts till date
-								2) An updated CV Printed. If not you may take a print out of the same on the spot during interview
-								3) Your Photo Identity Document, such as Passport, NID, Birth Registration etc.
-								4) Academic Credentials.
-								 
-								See you then,
-								 
-								Thank you
-								 
-								Recruitment Office
-								Kyoto Engineering & Automation Ltd
-								B2 House 64 Block B Road 3
-								Niketon Gulshan Dhaka 1212
-								 
-								Emergency Contact Numbers:
-								 
-								01844046621
-								01844046666
-								01844046677
-							 
-							";
+Please confirm your participation by clicking the
+following link:
+https://recruitment.keal.com.bd/LoginRegistrationForm/my_jobs.php
+Prior to select your option please go to the
+following link and register yourself please make
+sure that you have completed all your academic
+information to the following portal:
 
+https://recruitment.keal.com.bd/LoginRegistrationForm/resume.php
+								 
+Note: Your email is your username and put your mobile number as your password
+								 
+Please do not write back to this email. If you are otherwise not contacted by us
+your interview date is confirmed. However, if you want to change your date
+please write an email request or send a request
+using the following link:
+								 
+https://recruitment.keal.com.bd/LoginRegistrationForm/re_schedule.php
+								 
+If  you do not want to participate please do not forget to click on the following link:
+								 
+Please bring along the following items during the
+interview:
+								 
+1) All your Transcripts till date
+2) An updated CV Printed. If not you may take a print out of the same on the
+spot during interview
+3) Your Photo Identity Document, such as Passport, NID, Birth Registration etc.
+4) Academic Credentials.
+								 
+See you then,
+Thank you
+								 
+Recruitment Office
+Kyoto Engineering & Automation Ltd
+B2 House 64 Block B Road 3
+Niketon Gulshan Dhaka 1212
+								 
+Emergency Contact Numbers:
+01844046621
+01844046666
+01844046677";
+
+							 
 							$email_message2= 'Date'.$date."\r\n";
 							mail("<$email_to>","$email_subject","$email_message","$headers");
 
@@ -183,26 +240,31 @@
 			$result = $this->db->select($query);
 			return $result;
 		}
+		
+		
 
 		public function getTime(){
 			$query = "SELECT * FROM tbl_time ORDER BY id DESC";
 			$result = $this->db->select($query);
 			return $result;
 		}
-		
-		
 	
-	public function getApplicantBy(){
+		public function getApplicantBy(){
 			$query = "SELECT p.*, u.userName
 				FROM tbl_apply as p, tbl_user_reg as u
-				WHERE p.userId = u.regId AND status = '1' ORDER BY p.id DESC";
+				WHERE p.userId = u.regId AND status='1' ORDER BY p.id DESC";
 	
 		$result= $this->db->select($query);
 		return $result;
 		}
 
-
-	public function getAlladdressby($uId){
+       public function getInterview($uId, $jId){
+           $query = "SELECT * FROM tbl_interview WHERE userId = '$uId' AND jId = '$jId'";
+           $result = $this->db->select($query);
+           return $result;
+       }
+        
+    public function getAlladdressby($uId){
 			$query = "SELECT p.*, d.divName, e.distName, t.thName, b.postName 
 			FROM tbl_address as p, tbl_division as d, tbl_district as e, tbl_thana as t, tbl_post as b
 			WHERE p.divId= d.divId AND
@@ -223,14 +285,7 @@
 			$result = $this->db->select($query);
 			return $result;
 	}	
-
-	public function getInterview($uId, $jId){
-           $query = "SELECT * FROM tbl_interview WHERE userId = '$uId' AND jId = '$jId'";
-           $result = $this->db->select($query);
-           return $result;
-       }
-       
-     public function delByid($Did){
+	    public function delByid($Did){
 
 		$query = "DELETE FROM tbl_date WHERE id = '$Did' ";
 		$delCart = $this->db->delete($query);
@@ -241,12 +296,15 @@
 			return $msg;
 		}
       }
-      public function getInterviewApplicant(){
-      	
-      	$query="SELECT p.*,r.userName FROM tbl_interview as p,tbl_user_reg as r WHERE p.userId=r.regId AND 
-      	            p.status='1' ORDER BY p.interviewdate DESC";
+       public function getInterviewApplicant($idate){
+	 	//$date = date('Y-m-d');
+      $query="SELECT p.*,r.userName FROM tbl_interview as p,tbl_user_reg as r WHERE p.userId=r.regId AND 
+      	            p.status='1' AND interviewdate = '$idate' ORDER BY p.interviewdate DESC";
       	  $result = $this->db->select($query);
            return $result;
 
+
       }
+
+	
 } ?>

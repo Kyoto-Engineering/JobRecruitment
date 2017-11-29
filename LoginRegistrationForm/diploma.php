@@ -10,7 +10,15 @@
     }
  
 ?>
-
+<?php 
+  
+   if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
+       $insertdiploma = $edu->diplomaInsert($_POST, $userId);
+       $status = $_POST['status'];
+        $insertoverall = $edu->diplomaStatInsert($status, $userId);
+    }
+ 
+?>
 
         <div class="container" ">
             
@@ -20,24 +28,38 @@
                    <form action="" method="post">
   <div class="form-group">
     <label for="exampleFormControlInput1">Name of Institution</label>
-    <input type="text" class="form-control" name="name" id="exampleFormControlInput1" >
+    <input type="text" class="form-control" name="name" id="exampleFormControlInput1" placeholder="Your Institute Name">
   </div>
   <div class="form-group">
-                <label for="exampleFormControlSelect1">Name Of Degree</label>
-                <select class="form-control" id="exampleFormControlSelect1" name="degId">
-                <option>Select Your Degree</option>
+                <label for="exampleFormControlSelect1">Name Of Your Discipline</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="id">
+                <option>Select Your Discipline</option>
                  <?php
                     $cvd = new Curriculum();
-                    $getdg = $cvd->getDegree();
+                    $getdg = $cvd->getDsipline();
                     if ($getdg) {
                     while ($value = $getdg->fetch_assoc()) {
                    
                 ?>
-                   <option value="<?php echo $value['degId'];?>" ><?php echo $value['degName'];?></option>
+                   <option value="<?php echo $value['id'];?>" ><?php echo $value['disipline'];?></option>
                   <?php } } ?>
                 </select>
               </div>
-  
+  <!--<div class="form-group">
+                <label for="exampleFormControlSelect1">Name Of Department</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="dId">
+                <option>Select Your Department</option>
+                 <?php
+                    //$cvd = new Curriculum();
+                    //$getyd = $cvd->getDept();
+                    //if ($getyd) {
+                    //while ($value = $getyd->fetch_assoc()) {
+                   
+                ?>
+                   <option value="<?php// echo $value['dId'];?>" ><?php// echo $value['deptName'];?></option>
+                  <?php// } } ?>
+                </select>
+              </div>-->
   <div class="form-group">
                 <label for="exampleFormControlSelect1">Education Board</label>
                 <select class="form-control" id="exampleFormControlSelect1" name="divId">
@@ -55,7 +77,7 @@
               </div>
 
   <div class="form-group">
-    <label for="exampleFormControlInput1">G.P.A</label>
+    <label for="exampleFormControlInput1">G.P.A/Grade</label>
     <input type="text" name="cgpa" class="form-control" id="exampleFormControlInput1" placeholder="CGPA 5.00">
   </div>
    <div class="form-group">
@@ -73,7 +95,16 @@
                   <?php } } ?>
                 </select>
               </div>
-  <p><button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Submit</button></p>
+            <div class="row">
+              <div class="col-md-3">
+               <input class="form-control"  type="hidden" name="status" value="1"/> 
+            <input type="submit" name="academic" value="My Academic Life Ends Here" class="btn btn-primary" >
+             </div>
+              <div class="col-md-3" style="margin-left: 78px;"><input class="form-control"  type="hidden" name="status" value="1"/> 
+                <button type="submit" name="submit"  class="btn btn-primary">I have More Education to Input</button>
+                
+            </div>
+            </div>
 </form>
                </div>
            </div> 

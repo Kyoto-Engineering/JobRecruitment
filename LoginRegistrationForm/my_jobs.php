@@ -81,7 +81,7 @@
             if ($value['status'] == "0") {
                 echo "<span style='color:red; font-weight:bold;'>Pending</span>";
             }elseif ($value['status'] == "1") {
-                echo "<span style='color:green; font-weight:bold;'>Selected</span>";
+                echo "<span style='color:green; font-weight:bold;'>In-Process</span>";
             }elseif ($value['status'] == "2") {
                 echo "<span style='color:red; font-weight:bold;'>Deselected</span>";
             }else{

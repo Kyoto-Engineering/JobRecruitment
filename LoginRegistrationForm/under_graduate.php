@@ -11,13 +11,12 @@
  
 ?>
  <?php
-      $add=new address();
-       $edu = new Education();
-        $userId = Session::get("userId");
+     
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
             
              $insertUg = $edu->undergraduateInsert($_POST, $userId);
-             $updatestat = $add->statUpdateGrad($_POST , $userId);
+              $status = $_POST['status'];
+             $updatestat = $edu->statUpdateGrad($status , $userId);
         }
  
 ?>
@@ -49,6 +48,22 @@
                <p>(If Your University Name Is Not in the List You Can Insert Form Here.)</p>
                                 <a href="others.php"> <button class="btn btn-primary" type="button" >Click Here if Your University is not on the List
                             </button></a>
+                            
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Your Degree Name</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="deid">
+                <option>Select Your Degree</option>
+                 <?php
+                    $cvd = new Curriculum();
+                    $gets = $cvd->getStudydegree();
+                    if ($gets) {
+                    while ($value = $gets->fetch_assoc()) {
+                   
+                ?>
+                   <option value="<?php echo $value['deid'];?>" ><?php echo $value['degName'];?></option>
+                  <?php } } ?>
+                </select>
+              </div>
 
 
               <div class="form-group">
@@ -116,6 +131,7 @@
             <input type="submit" name="academic" value="My Academic Life Ends Here" class="btn btn-primary" >
              </div>
               <div class="col-md-3" style="margin-left: -50px;">
+                     <input class="form-control"  type="hidden" name="status" value="1"/>
                 <button type="submit" name="submit"  class="btn btn-primary">I have More Education to Input</button>
                 
             </div>

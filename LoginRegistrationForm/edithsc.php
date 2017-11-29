@@ -16,7 +16,7 @@
 
     
     <div class="container">
-        <a href="education.php"><button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Go Back</button></a>  
+       <a href="view_education_detail.php"><button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Go Back</button></a> 
         <header> <h2> HSC Educational Details </h2> </header> <br>
         <?php
             if(isset($updatehsc)){
@@ -107,7 +107,7 @@
                 </select>
               </div>
              <p>
-                <button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Submit</button>  
+                <button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Update</button>  
             </p>
 </form>
 <?php } } ?>

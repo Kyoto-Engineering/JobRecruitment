@@ -12,13 +12,12 @@
  
 ?>
 <?php
-      $add=new address();
-       $edu = new Education();
-        $userId = Session::get("userId");
+      
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
             
              $insertUg = $edu->postgraduateInsert($_POST, $userId);
-             $updatestat = $add->statUpdatePostGrad($_POST , $userId);
+              $status = $_POST['status'];
+             $updatestat = $edu->statUpdatePostGrad($status , $userId);
         }
  
 ?>
@@ -133,6 +132,7 @@
             <input type="submit" name="academic" value="My Academic Life Ends Here" class="btn btn-primary" >
              </div>
               <div class="col-md-3" style="margin-left: -50px;">
+                  <input class="form-control"  type="hidden" name="status" value="1"/> 
                 <button type="submit" name="submit"  class="btn btn-primary">I have More Education to Input</button>
                 
             </div>

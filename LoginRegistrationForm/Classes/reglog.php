@@ -82,9 +82,10 @@ class Signup
 
 							$email_to = "recruitment@keal.com.bd";
 							$email_subject= "Account Verification";
-							$email_message= "This person has been registered and sent for email verification:
-							Name : $userName
-							Email : $email";
+							$email_message= "
+This person has been registered and sent for email verification:
+Name : $userName,
+Email : $email";
 							
 							
 
@@ -95,35 +96,49 @@ class Signup
 							 
 							'X-Mailer: PHP/' . phpversion();
 
-							$email_subject1= "Account Verification Text Revision & Process Note!";
-							$email_message1= "Dear $userName,
+							$email_subject1= "Account Verification";
+		  $email_message1= "
+Dear $userName,
 
-						Welcome Aboard!!
+Welcome Aboard!!
  
-                        Thank you for signing up in our recruitment program.
+Thank you for signing up in our recruitment program.
  
-                    If you have received this email successfully we have verified your email address properly. Please click the following link to confirm your acknowledgement of receiving the email:
+If you have received this email successfully we have verified your
+email address properly. Please click the following link to confirm
+your acknowledgement of receiving the email:
  
-                http://recruitment.keal.com.bd/LoginRegistrationForm/verify_email.php?phone=$phone
+http://recruitment.keal.com.bd/LoginRegistrationForm/verify_email.php?phone=$phone
  
-                Please note that the recruitment process would ideally take the following course:
+Please note that the recruitment process would ideally take the
+following course:
 
-            Step 1: Apply for the job which is available for you and best suits your career intent
-            Step 2: You need to complete your resume
-            Step 3: Now, the Recruitment Officer may select you for an interview
-            Step 4: Come for the interview on the due date if you are selected for interview.
-            Step 5: If you want to reschedule the date you may request for a Reschedule
-            Step 6: HR may or may not approve your request for reschedule. If you are absent for the interview you may all start over from Step 1
+Step 1: Apply for the job which is available for you and best suits
+your career intent
+Step 2: You need to complete your resume/CV/biodata according to
+prescribed format. You may also upload your resume in pdf format.The
+file size should be between 100-300 kb.
+Step 3: Now, the Recruitment Officer may select you for an interview
+Step 4: Come for the interview on the due date if you are selected
+for interview.
+Step 5: If you want to reschedule the date you may request for a
+Reschedule
+Step 6: HR may or may not approve your request for reschedule. If
+you are absent for the interview you may all start over from Step 1
  
-        Please note that in every step you will be notified by email. Please do not forget to check your Spam or Junk mailbox for the emails and react to them in time.
+Please note that in every step you will be notified by email. Please
+do not forget to check your Spam or Junk mailbox for the emails and
+react to them in time.
+    
+Note: Your email is your username and put your mobile number as your
+password
         
-        Note: Your email is your username and put your mobile number as your password
-        
-        We are excited to have you on board with us in the journey of career development.
+We are excited to have you on board with us in the journey of career
+development.
  
-        Good Luck!!";
+Good Luck!!";
 
-							mail("<$email_to>","$email_subject","$email_message","$headers");
+	                    mail("<$email_to>","$email_subject","$email_message","$headers");
 
 							mail("<$email>","$email_subject1","$email_message1","$headers1");
 

@@ -13,6 +13,16 @@
        
 
         <div class="container">
+            <div class="row">
+                  <div class="col-md-12">
+                   <div class="btn-group">
+                          <a href="view_address.php">
+                <button type="button" class="btn btn-primary"><- Go Back</button>
+                    </a>
+                    </div>
+                      
+                  </div>
+              </div>
             <div class="col-sm-6" id="adminForm">
             <h2>Present Address</h2>
             <br>
@@ -178,7 +188,7 @@
 
                 
                 <p>
-                    <button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Submit</button>
+                    <button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Update</button>
                 </p>
                 
                 <br>

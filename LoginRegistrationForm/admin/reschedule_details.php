@@ -52,42 +52,20 @@
           ?>
         </span>
         <br/><br/>
-        <table class="table">
-    <thead>
-    
-      <tr>
-        <th>Serial</th>
-        <th>JobTitle</th>
-        <th>Applicant Name</th>
-        <th>Convenient Time</th>
-        <th>Convenient Date</th>
-        <th>Reason</th>
-        <th></th>
-        
-        
-      </tr>
-    </thead>
-    <tbody>
-    <?php 
+        <?php 
          $getSche = $edu->getscheduleJob();
           if ($getSche) {
-            $i = "0";
+            
             while ($value = $getSche->fetch_assoc()) {
-              $i++;
+             
     ?>
-      <tr class="success">
-        <td><?php echo $i;?></td>
-        <td><?php echo $value['jobtitle'];?></td>
-        <td><?php echo $value['userName'];?></td>
-        <td><?php echo $fm->formatTime($value['dtime']);?></td>
-        <td><?php echo $fm->formDate($value['ddate']);?></td>
-        <td><?php echo $value['reason'];?></td>
-
-        
-      </tr>
-      <?php } } ?>
-    </tbody>
-</table>
+    <h4><span style='font-weight: bold;'>Applicant Name:</span>&nbsp;<span style='font-family: sans-serif;'> <?php echo $value['userName'];?></span>&nbsp;</h4>
+    <h5><span style='font-weight: bold;'>Apply For:</span>&nbsp;<span style='font-family: sans-serif;'>  <?php echo $value['jobtitle'];?></span>&nbsp;</h5>
+    
+    <p><span style='font-weight: bold;'>Requested Date:</span>&nbsp;<span style='font-family: sans-serif;'>    <?php echo $fm->formDate($value['ddate']);?></span>&nbsp;</p>
+    <p><span style='font-weight: bold;'>Requested Time:</span>&nbsp;<span style='font-family: sans-serif;'>    <?php echo $fm->formatTime($value['dtime']);?></span>&nbsp;</p>
+    <p><span style='font-weight: bold;'>Reason For Re-schedule:</span>&nbsp;<br/><span style='font-family: sans-serif;'>  <?php echo $value['reason'];?></span>&nbsp;</p>
+    <?php } } ?>
  <div class="container">
  
   <form action="" method="POST">

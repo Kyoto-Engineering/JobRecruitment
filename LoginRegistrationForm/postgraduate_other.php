@@ -13,11 +13,12 @@
 <?php
       $add=new address();
        
-        $userId = Session::get("userId");
+        
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
             
              $insertUg = $edu->postotherInsert($_POST, $userId);
-             $updatestat = $add->statUpdatePostOther($_POST , $userId);
+             $status = $_POST['status'];
+             $updatestat = $edu->statUpdatePostOther($status , $userId);
         }
  
 ?>
@@ -35,6 +36,22 @@
             <div class="form-group">
                 <label for="exampleFormControlInput1">University Name</label>
                 <input type="text" class="form-control" name="name" id="exampleFormControlInput1" placeholder="Your Institute Name">
+              </div>
+              
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Name of your Degree</label>
+        <select class="form-control"  name="deid">
+                <option>Select Your Degree</option>
+                 <?php
+                    $cvd = new Curriculum();
+                    $getstudy = $cvd->getStudydegree();
+                    if ($getstudy) {
+                    while ($data = $getstudy->fetch_assoc()) {
+                   
+                ?>
+                   <option value="<?php echo $data['deid'];?>" ><?php echo $data['degName'];?></option>
+                  <?php } } ?>
+                </select>
               </div>
 
 
@@ -102,6 +119,7 @@
             <input type="submit" name="academic" value="My Academic Life Ends Here" class="btn btn-primary" >
              </div>
               <div class="col-md-3" style="margin-left: -50px;">
+                  <input class="form-control"  type="hidden" name="status" value="1"/> 
                 <button type="submit" name="submit"  class="btn btn-primary">I have More Education to Input</button>
                 
             </div>

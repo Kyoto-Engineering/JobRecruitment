@@ -6,6 +6,7 @@
   $userId = Session::get('userId');
    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         $insertInfo = $add->infoInsert($_POST, $userId);
+       
     }
  
 ?>
@@ -65,7 +66,7 @@
                 <p>
 
                     <label>Training Length</label>
-                    <input class="form-control" id="usr" type="text" name="tLenth"  placeholder="ex :- 3 months" >
+                    <input class="form-control" id="usr"type="text" name="tLenth"  placeholder="ex :- 3 months" >
                 </p>
 
                 
@@ -81,6 +82,7 @@
               
               <div class="col-md-3" style="margin-left: -50px;">
                 <a href='professionalTraining.php'>
+                     <input class="form-control"  type="hidden" name="status" value="0"/>
                 <button type="submit" name="submit"  class="btn btn-primary">I have More Training to Input</button>
                 </a>
             </div>
@@ -91,7 +93,7 @@
             
             <div class="col-md-3">
                <input  type="hidden" name="status" value="1"/> 
-            <input type="submit" name="info" value="I don't have any Professional Training to insert" class="btn btn-primary" >
+            <input type="submit" name="info" value="I have No Professional Training" class="btn btn-primary" >
              </div>
              
              </form>

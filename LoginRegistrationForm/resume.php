@@ -46,15 +46,7 @@
                             </button></a>
                            
                             </div>
-                             <div class="row other_row">
-                             <div class="col-md-12 text-center">
-                              <p>(If Your Institute Is Not In the List You Can Insert Form Here.)</p>
-                                <a href="others.php"> <button class="btn btn-primary" type="button" >Others..
-                            </button></a>
-
-                             </div>
-
-                           </div> 
+                            
                             </div>
 
 

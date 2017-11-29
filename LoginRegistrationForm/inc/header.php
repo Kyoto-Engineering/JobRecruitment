@@ -24,7 +24,7 @@ include_once "Classes/frontclass.php";
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Kyoto Recruitment System</title>
-
+    <link rel="shortcut icon" href="images/favicon.ico" />
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
      <link href="css/buton.css" rel="stylesheet">
@@ -37,6 +37,11 @@ include_once "Classes/frontclass.php";
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .icon{
+            float:right;
+        }
+    </style>
   </head>
   <body>
     <nav class="navbar navbar-default">
@@ -65,7 +70,10 @@ include_once "Classes/frontclass.php";
                              ?>
 
                              <?php 
-                              if ($userId == $data['userId']) {
+                              if (!$userId == $data['userId']) {
+                                 echo "No Info";
+                               }else{
+                                
                                 $userDob =  $data['dob'];
 
 //Create a DateTime object using the user's date of birth.
@@ -81,9 +89,7 @@ $difference = $now->diff($dob);
 $age = $difference->y;
 
 //Print it out.
-echo "<span style='color:green'>$age years</span>"; 
-                               }else{
-                                echo "No Info";
+echo "<span style='color:green'>$age years</span>";
                               }
                              ?>
 
@@ -101,11 +107,12 @@ echo "<span style='color:green'>$age years</span>";
                           while($value = $getdata->fetch_assoc()){
                             ?>
                             <?php 
-
-                              if ($userId == $value['userId']) {
-                               echo $value['area']; echo $value['distName'];
+                            
+                              if (!$userId == $value['userId']) {
+                                 echo "<span style='color:red'>No Training</span>";
                               }else{
-                                 echo "No Address";
+                                 
+                                 echo $value['area']; echo $value['distName'];
                               }
                             ?>
          
@@ -126,14 +133,17 @@ echo "<span style='color:green'>$age years</span>";
 
                              ?> </a></li>
                       <li><a href="view_exp.php" class="w3-bar-item">My Work Experience <br/>
-                      <?php
-                        $getdata = $allF->getworking($userId);
-                         if (!$getdata) {
-                               echo "<span style='color:red'>No Experience</span>"; 
-                              }else{
-                                 echo "<span style='color:green'>Experience added</span>";
-                              }
-                               ?>
+                      <?php 
+                      /*
+                        $query = "SELECT userId FROM tbl_workingexperience WHERE userId= '$userId'";
+                        if ($result = mysqli_query($db->link, $query)) {
+                          $rowcount = mysqli_num_rows($result);
+                         echo $rowcount;
+                         echo "added";
+                        }else{
+                          echo "0 added";
+                        }*/
+                      ?>
                        </a></li>
                        <li><a href="view_portfolio.php" class="w3-bar-item">My Portfolio</a></li>
                     </ul>
@@ -147,7 +157,7 @@ echo "<span style='color:green'>$age years</span>";
        
                     ?>
                     
-                        <img src="<?php echo $value['image'];?>" alt="image" height="16" width="12px" />
+                        <img src="<?php echo $value['image'];?>" alt="image" height="40px" width="30px" />
                     
                     <?php } } ?>&nbsp;<?php echo Session::get('userName');?></i></a></li>
                             <?php

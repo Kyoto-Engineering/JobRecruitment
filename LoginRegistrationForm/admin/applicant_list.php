@@ -3,11 +3,16 @@
  <?php include_once "inc/sidebar.php";?>    
   <?php include_once "../Classes/schedule.php";?>
   <?php include_once "../helpers/Format.php";?>
-
-
+ 
 <?php 
   $time = new Schedule();
     $fm = new Format();
+?>
+
+<?php
+  if (isset($_GET['idate'])) {
+    $idate = $_GET['idate'];
+  }
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -46,7 +51,7 @@
     <tbody>
           <?php 
 
-            $getApplicant = $time->getInterviewApplicant();
+            $getApplicant = $time->getInterviewApplicant($idate);
             if ($getApplicant) {
               $i ="0";
               while ($value = $getApplicant->fetch_assoc()) {
@@ -83,7 +88,6 @@
          
 
     </section>
-    
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

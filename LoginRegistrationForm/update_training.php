@@ -12,6 +12,7 @@
 
         
 <div class="container">
+    <a href="view_professional.php"><button type="submit" name="" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Go Back</button></a>
         <div>
             <h3 style="text-align:center"> Professional Training Inclusion Form</h3> <br>
           
@@ -76,7 +77,7 @@
                 
                                 
                 <p>
-                    <button type="submit" name="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" name="submit" class="btn btn-default">Update</button>
                 </p>
                 
             </form>

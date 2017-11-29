@@ -163,7 +163,9 @@
               </div>
               <div class="col-md-3" style="margin-left: -50px;">
               
-                <a href="education.php"><button type="button"  class="btn btn-primary"> I have More Education to Input</button></a>
+                <a href="education.php">
+                 <input type="hidden" name="status" value="1" /> 
+                <button type="button" name="submit"  class="btn btn-primary"> I have More Education to Input</button></a>
                 </div>
                 
             </div>
