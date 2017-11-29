@@ -89,25 +89,23 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['info'])){
                <input class="form-control"  type="hidden" name="status" value="1"/> 
             <input type="submit" name="academic" value="My Working Experience Ends Here" class="btn btn-primary" >
              </div>
-              <div class="col-md-3" style="margin-left: -50px;">
+              <div class="col-md-4" style="margin-left: -50px;">
                 <button type="submit" name="submit"  class="btn btn-primary">I have More Working Experience to Input</button>
                 
             </div>
-           
+            </div>
                 
             </form>
         </div>
         
         <form action="" method="post">
             
-            <div class="col-md-3" style="margin-left: 700px;margin-top:-33px;">
+            <div class="col-md-3" style="margin-left: 720px; margin-top:-43px;">
                <input  type="hidden" name="status" value="1"/> 
-            <input type="submit" name="info" value="I don't have any Working Experience" class="btn btn-primary" >
+            <input type="submit" name="info" value="I have No Working Experience" class="btn btn-primary" >
              </div>
-               </div>
              
              </form>
-            
 </div>
         
 

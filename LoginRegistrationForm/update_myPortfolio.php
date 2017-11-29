@@ -17,6 +17,7 @@
 
 
  <div class="container">
+     <a href="view_portfolio.php"><button type="submit" name="" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Go Back</button></a>
         <div class="row">
         <div class="col-md-6">
             <h2> My Portfolio </h2>
@@ -52,7 +53,7 @@
                  <p>
 
 
-                    <button type="submit" name="submit" >Submit</button>
+                    <button type="submit" name="submit" >Update</button>
 
 
                 </p>

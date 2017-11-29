@@ -20,7 +20,8 @@
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
             
             $Vinsert = $edu->vocationalInsert($_POST, $userId);
-             $updatestat = $add->statUpdatevocational($_POST , $userId);
+              $status = $_POST['status'];
+             $updatestat = $edu->statUpdatevocational($status , $userId);
         }
  
 ?>
@@ -81,6 +82,7 @@
             <input type="submit" name="academic" value="My Academic Life Ends Here" class="btn btn-primary" >
              </div>
               <div class="col-md-3" style="margin-left: -50px;">
+               <input class="form-control"  type="hidden" name="status" value="1"/> 
                 <button type="submit" name="submit"  class="btn btn-primary">I have More Education to Input</button>
                 
             </div>

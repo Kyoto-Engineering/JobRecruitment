@@ -53,7 +53,7 @@
  <div class="content-wrapper">
 <section class="content-header">
       <h1><center>
-       Score Board
+        Score Board
        </center>
       </h1>
       <ol class="breadcrumb">

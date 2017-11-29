@@ -12,14 +12,11 @@
        
 
         <div class="container">
-           
-
-
 
         <?php
             
         ?>
-            <div class="col-sm-6" id="adminForm">
+            <div class="col-sm-6">
             <h2>Permanent Address</h2>
             <?php
                 if (isset($insertpAdd)) {
@@ -27,7 +24,7 @@
                 }
             ?>
             <br>
-            <form action="" method="post" class="w3-container">
+            <form action="" method="post">
                  <!--<p> 
                                      <label for="sel1">Same as present Address</label>
                                         <select class="form-control" id="sellect" name="id">
@@ -47,42 +44,42 @@
                                 </p>-->
                  <p>
                     <label> Flat/Level/Floor No</label>
-                    <input class="w3-input" type="text" name="flat" placeholder="Your Flat/Level/Floor No; ex:Flat-B2/Level-3/2nd Floor" >
+                    <input class="form-control" type="text" name="flat" placeholder="Your Flat/Level/Floor No; ex:Flat-B2/Level-3/2nd Floor" >
                 </p>
                 
                 <br>
                 
                 <p>
                     <label> Holding No </label>
-                    <input class="w3-input" type="text" name="holding" placeholder="Holding No of your residence; Ex;64, 432/C etc" >
+                    <input class="form-control" type="text" name="holding" placeholder="Holding No of your residence; Ex;64, 432/C etc" >
                 </p>
                 
                 <br>
                 
                 <p>
                     <label> Building Name </label>
-                    <input class="w3-input" type="text" name="building" placeholder="Name of your residence; Ex: Iqbal center, Rangpur House etc" >
+                    <input class="form-control" type="text" name="building" placeholder="Name of your residence; Ex: Iqbal center, Rangpur House etc" >
                 </p>
                 
                 <br>
                 
                 <p>
                     <label> Road No / Road Name </label>
-                    <input class="w3-input" type="text" name="road" placeholder="Road no of your residence; Ex:5, Atish Dipankar Road etc" >
+                    <input class="form-control" type="text" name="road" placeholder="Road no of your residence; Ex:5, Atish Dipankar Road etc" >
                 </p>
                 
                 <br>
                 
                 <p>
                     <label> Block/Sector </label>
-                    <input class="w3-input" type="text" name="block" placeholder="Block/Sector name/number of your residence; Ex:B,13 etc" >
+                    <input class="form-control" type="text" name="block" placeholder="Block/Sector name/number of your residence; Ex:B,13 etc" >
                 </p>
                 
                 <br>
                 
                 <p>
                     <label> Area / Village </label>
-                    <input class="w3-input" type="text" name="area" placeholder="Area name of your residence; ex: Niketon, Mohakhali" >
+                    <input class="form-control" type="text" name="area" placeholder="Area name of your residence; ex: Niketon, Mohakhali" >
                 </p>
                 
                 <br>
@@ -169,7 +166,32 @@
                 <br>
             </form>
         </div>
-        </div>
+   </div>      
+                <div class=col-sm-2>
+                 <?php
+                //$userId = Session::get("userId");
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['next'])) {
+                    $updatestat = $add->paddstatUpdate($_POST , $uId);
+                }
+            ?>
+<?php
+$getp = $add->getPaddStat($uId);
+if($getp){?>
+
+
+             
+            <form action="" method="post" >
+            <input class="form-control"  type="hidden" name="status" value="1"/> 
+            <input type="submit" name="next" value="next" class="btn btn-primary">
+            </form>
+            
+            </div>
+            
+<?php } ?>
+        
+        
+        
+       
     
         
 

@@ -16,7 +16,7 @@
 
     
     <div class="container">
-        <a href="education.php"><button type="submit" name="" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Go Back</button></a>  
+        <a href="view_education_detail.php"><button type="submit" name="" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Go Back</button></a>  
         <header> <h2> Update Under Graduate Details </h2> </header> <br>
         
          <?php

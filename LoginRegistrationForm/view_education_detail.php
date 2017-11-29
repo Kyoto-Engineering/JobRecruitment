@@ -1,20 +1,6 @@
        <?php include_once "inc/header.php";?>
  <?php include_once "Classes/frontResume.php";?>
  <?php include_once "helpers/Format.php";?>
- <style>.icon{
-    float:right;
-    font-weight:bold;
- }
- 
- .icon:hover{
-     background-color:#eee;
-     border:1px solid gray;
-     border-radius:5px;
-     height: auto;
-     width:2.3%;
-     padding:5px 8px;
- }
- </style>
           <?php
             $edu = new FrontResume();
             $fm = new Format();
@@ -124,7 +110,7 @@
       <tr>
         <td>SL</td>
         <td>Institute</td>
-        <td>Achieved Grade/td>
+        <td>Achieved Grade</td>
         <td>Passing Year</td>
         
         <td>Education Board</td>
@@ -213,7 +199,8 @@
       <tr>
         <td>SL</td>
         <td>Institute</td>
-        <td>Name of Degree</td>
+         <td>Name of Degree</td>
+        
         <td>cgpa</td>
         <td>Passing Year</td>
         <td>Board</td>
@@ -226,7 +213,7 @@
         <td><?php echo $i ;?></td>
         <td><?php echo $value['name'];?></td>
         <td><?php echo $value['degName'];?></td>
-       
+         
         <td><?php echo $value['cgpa'];?></td>
         <td><?php echo $value['pyear'];?></td>
         <td><?php echo $value['divName'];?></td>
@@ -330,6 +317,55 @@
       <?php } } ?>
 
 <!-- /6th row end-->
+<!-- 7th row -->
+      <?php
+        $getver = $edu->getotheruniversityby($uId);
+        if ($getver) {
+            $i = 0;
+            while($value = $getver->fetch_assoc()){
+                $i++;
+
+    ?>
+      <div class="row">
+          
+          <div class="col-md-12">
+              <a href="#">
+                 <span class="glyphicon glyphicon-pencil icon"></span>
+              </a>
+          </div>
+       <table class="table">
+    <thead>
+      <tr>
+        <td>SL</td>
+        <td>Education Type</td>
+        <td>University</td>
+        <td>Department Of Study</td>
+        <td>cgpa</td>
+        <td>Passing Year</td>
+        
+        
+      </tr>
+    </thead>
+    <tbody>
+    <h3>University Education</h3>
+    
+      <tr>
+        <td><?php echo $i ;?></td>
+        <td><?php echo $value['edutype'];?></td>
+        <td><?php echo $value['name'];?></td>
+        <td><?php echo $value['studyDept'];?></td>
+        
+        <td><?php echo $value['cgpa'];?></td>
+        <td><?php echo $value['pyear'];?></td>
+       
+      </tr>
+   
+    </tbody>
+  </table>
+      </div>
+      <?php } } ?>
+
+<!-- /7th row end-->
       <!-- Main row -->
      
     

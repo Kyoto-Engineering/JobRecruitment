@@ -12,7 +12,17 @@
  
 ?>
     
-    
+ <?php
+      
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
+            
+             $insertssc = $edu->sscInsert($_POST, $userId);
+             $status = $_POST['status'];
+             $updatestat = $edu->statUpdateSchool($status , $userId);
+        }
+ 
+?>
+   
 
     
     <div class="container">
@@ -86,25 +96,14 @@
                <input class="form-control"  type="hidden" name="status" value="1"/> 
             <input type="submit" name="academic" value="My Academic Life Ends Here" class="btn btn-primary" >
              </div>
-              <div class="col-md-3" style="margin-left: -50px;">
+              <div class="col-md-3" style="margin-left: -50px;"><input class="form-control"  type="hidden" name="status" value="1"/> 
                 <button type="submit" name="submit"  class="btn btn-primary">I have More Education to Input</button>
                 
             </div>
             </div>
               
 </form>
- <?php
-      $add=new address();
-       $edu = new Education();
-        $userId = Session::get("userId");
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
-            
-             $insertssc = $edu->sscInsert($_POST, $userId);
-             $updatestat = $add->statUpdateSchool($_POST , $userId);
-        }
  
-?>
-
            
 </div>
     </div>

@@ -39,14 +39,42 @@
     }
  
 ?>
+<?php 
 
+    //$userId = Session::get("userId");
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
+        $applyresult = $_POST['applyresult'];
+        
+        $updateApply = $allF->updateapplyrersultForjob($userId, $applyresult);
+    }
+ 
+?>
         
 
         
 <br/><br/>
         
-        
+   <!-- loop will start here-->
+        <?php
+            $getcomment = $allF->getlistingvalue($userId);
+            if($getcomment){
+                while ($data = $getcomment->fetch_assoc()) {
+                   
+        ?>
+        <?php
+            if ($data['listing'] =="1") {
+               echo "<script>window.location = 'list.php'</script>";
+            }elseif($data['listing'] =="2"){
+                 echo "<script>window.location = 'list.php'</script>";
+            }else{?>      
         <div class="container">
+            <!--feedback button-->
+               
+                <div class="row">
+                    <div class="col-md-12 ">
+                    <a href="feedback.php" ><button type="button" class="feedback btn btn-lg btn-primary " >Give Us Your Feedback</button></a>  
+                    </div>
+                </div>
             <h3> Welcome to Kyoto Recruitment Portal</h3>
             
             <br>
@@ -134,9 +162,10 @@ echo $age;?>Years
                 <div class="col-md-4">
                     <a href="my_jobs.php" ><button type="button" class="btn btn-primary " >My Applied Jobs</button></a> 
                 </div>
+                
                 <div class="col-md-4">
                      <a href="resume.php" ><button type="button" class="btn btn-primary  ">My Resume</button></a>
-                     <h5>Provide Your information by Clicking this Button</h5>
+                      <h5 style="color:green ;">Provide Your information by Clicking this Button</h5>
                  </div>
 
                  <?php
@@ -225,7 +254,7 @@ echo $age;?>Years
                 if ($date > $vd){ ?>
                     <input name="Disabled" type="button" disabled="disabled" value="Expired" />
                     <?php }else{ ?>
-                     
+                     <input type="hidden" name="applyresult" value="1">
                      <input type="submit" name="submit" value="Apply"/>
                
                <?php } ?>
@@ -242,6 +271,10 @@ echo $age;?>Years
             </div>
             
         </div>
+        <?php  }
+        ?>
+        
+        <?php } } ?>
        <br> <br>
 
 <?php include_once "inc/footer.php";?>

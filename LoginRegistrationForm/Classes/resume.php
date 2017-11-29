@@ -63,14 +63,16 @@
 			$value = $this->db->select($query);
 			return $value;
 		}
-public function getpgraduationby($uId){
+		
+		public function getpgraduationby($uId){
 			$query = "SELECT p.*, c.pyear, d.studyDept, u.uName
 				FROM tbl_postgraduate as p, tbl_passingyear as c, tbl_studydept as d, tbl_university as u
 				WHERE p.pyearid = c.pyearid AND p.studydeptId = d.studydeptId AND p.uId = u.uId AND userId = '$uId'";
 			$value = $this->db->select($query);
 			return $value;
 		}
-		public function updateStatus($status, $uId){
+
+		public function updateStatus($status, $uId, $jId){
 			
 			$status = mysqli_real_escape_string($this->db->link, $status);
 
@@ -83,11 +85,82 @@ public function getpgraduationby($uId){
 				$msg = "Please Give Your Opinion First & Then Click SEND";
 				return $msg;
 			}else{
-				$query = "UPDATE `tbl_apply` SET `status`='$status' WHERE userId = '$uId'";
+				$query = "UPDATE `tbl_apply` SET `status`='$status' WHERE userId = '$uId' AND jId = '$jId'";
 				$update_row = $this->db->update($query);
 				if ($update_row) {
-					    $msg = "Your Option Has Been Recorded";
-						    return $msg;
+					    //$msg = "Your Option Has Been Recorded";
+						    //return $msg;
+						   					?>
+                                <script>
+                                alert('You have been Shortlisted');
+                                window.location.href='applicant_details.php';
+                                </script>
+                            <?php
+
+
+							$headers = 'From: '.$email."\r\n".
+							 
+							'Reply-To: '.$email."\r\n" .
+							 
+							'X-Mailer: PHP/' . phpversion();
+
+							$email_to = "recruitment@keal.com.bd";
+							$email_subject= "You have been Shortlisted";
+							$email_message= "
+Dear $userName,
+Congratulations!!
+ 
+Recruitment Officer has found you to be a competent
+candidate for interview. Very soon you will receive an email
+notifying your date and time of interview.
+ 
+Stay connected.
+Wish you the Best of Luck!!
+                        
+Recruitment Office
+Kyoto Engineering & Automation Ltd
+B2 House 64 Block B Road 3
+Niketon Gulshan Dhaka 1212
+
+Emergency Contact Numbers:
+01844046621
+01844046666
+01844046677";
+
+
+							$headers1 = 'From: '.$email_to."\r\n".
+							 
+							'Reply-To: '.$email_to."\r\n" .
+							 
+							'X-Mailer: PHP/' . phpversion();
+
+							$email_subject1= "Acceptance of your Application";
+							$email_message1= "
+Dear $userName,
+Congratulations!!
+ 
+Recruitment Officer has found you to be a competent
+candidate for interview. Very soon you will receive an email
+notifying your date and time of interview.
+ 
+Stay connected.
+Wish you the Best of Luck!!
+                        
+                        
+Recruitment Office
+Kyoto Engineering & Automation Ltd
+B2 House 64 Block B Road 3
+Niketon Gulshan Dhaka 1212
+								 
+Emergency Contact Numbers:
+01844046621
+01844046666
+01844046677";
+						$email_message2= 'Date'.$date."\r\n";
+							mail("<$email_to>","$email_subject","$email_message","$headers");
+
+							mail("<$email>","$email_subject1","$email_message1","$headers1");
+				
 						}else{
 						    $msg = "Your Option Not Recorded";
 						    return $msg;
@@ -262,11 +335,6 @@ public function getpgraduationby($uId){
 			$result = $this->db->select($query);
 			return $result;
 		}
-		public function getApplicant($uId){
-			$query = "SELECT * FROM tbl_user_reg WHERE regId = '$uId'";
-			$result = $this->db->select($query);
-			return $result;
-		}
 		
 		public function getWorkby($uId){
 			$query = "SELECT * FROM tbl_workingexperience WHERE userId = '$uId'";
@@ -285,5 +353,60 @@ public function getpgraduationby($uId){
 			$query = "SELECT * FROM tbl_disappertime WHERE userId = '$userId'";
 				$result = $this->db->select($query);
 				return $result;
+		}
+		
+		public function getSignupdate($uId){
+				$query = "SELECT * FROM tbl_user_reg WHERE regId = '$uId'";
+				$result = $this->db->select($query);
+				return $result;
+		}
+
+		public function getShortList($uId){
+				$query = "SELECT * FROM tbl_apply WHERE userId = '$uId'";
+				$result = $this->db->select($query);
+				return $result;
+		}
+		
+
+		public function getAttendence($uId){
+				$query = "SELECT * FROM tbl_interview WHERE userId = '$uId'";
+				$result = $this->db->select($query);
+				return $result;
+		}
+
+		public function getInterviewDate($uId){
+				$query = "SELECT * FROM tbl_interview WHERE userId = '$uId'";
+				$result = $this->db->select($query);
+				return $result;
+		}
+		
+		public function addlistingpeople($data, $uId){
+		$listing = 	$this->fm->validation($data['listing']);
+
+		$listing = mysqli_real_escape_string($this->db->link, $listing);
+
+		if ($listing == "") {
+			$msg = "Keep Check Any One!!";
+			return $msg;
+		}else{
+			$Query = "UPDATE tbl_user_reg 
+			SET 
+			listing = '$listing'
+			
+			WHERE regId = '$uId'";
+			$update_row = $this->db->update($Query);
+			if ($update_row) {
+				$msg = "<span style='color:green'>Successfully Add Comment</span>";
+				return $msg;
+			}else{
+				$msg = "<span style='color:red'>Not Add Comment</span>";
+				return $msg;
+			}
+		}
+	}
+	public function getApplicant($uId){
+			$query = "SELECT * FROM tbl_user_reg WHERE regId = '$uId'";
+			$result = $this->db->select($query);
+			return $result;
 		}
 	}//main class

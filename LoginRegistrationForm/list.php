@@ -55,7 +55,7 @@ body{
 					<p><em>You have Restricted Login Right!!</em></p>
 				</div>
 
-
+    <form action="" method="post">
 				<div class="butn">
 					<p>
 					<input type="submit" name="submit" value="PLEASE CONTACT ADMIN">
@@ -63,7 +63,7 @@ body{
 				</div> 
 				
 			</div>
-
+    </form>
 
 
 					

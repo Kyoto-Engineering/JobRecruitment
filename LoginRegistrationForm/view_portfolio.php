@@ -15,13 +15,24 @@
 
         <div class="container">
         <?php
+         $getstatinfo=$add->getAllStatPort($userId) ;
+         if ($getstatinfo) {
+          
+         while ($data = $getstatinfo->fetch_assoc()) {
+?>
+    <?php
+        if ($data['status']=="1") { 
+          echo " <span style='color:green;'> <center> <h2>Thank You for Completing This Section.</h2></center></span>";
+
          $getportfolio=$add->getPortfolio($userId);
          if ($getportfolio) {
-
+         $i = "0";
           
          while ($value = $getportfolio->fetch_assoc()) {
-          
-        ?>
+            $i++;
+        ?> 
+
+       
         <div class="row">
         
         
@@ -49,17 +60,27 @@
          
 
 </div>
- <?php } } ?>
+ </div>
+       
 
-        </div>
+       <?php 
+        } } } 
+         ?>
+        
+   
 
 
+ <?php } } ?>      
+<br/><br/>
 
+<?php 
+ $getinfo=$add->getPortperson($userId) ;
+if (!$getinfo) { 
+ echo "<span style='color:red;'><center><h2>You have not Completed This Section</h2></center></span>";
+}
+?>
 
-
-
-
-
+</div>
 
 
 <?php include_once "inc/footer.php";?>

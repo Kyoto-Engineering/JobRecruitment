@@ -10,10 +10,9 @@
 
   <!-- Content Wrapper. Contains page content -->
 <?php
-    if (!isset($_GET['user']) || $_GET['user'] == NULL ) {
-        echo "<script>window.location = 'applied_job.php'</script>";
-      }else{
+    if(isset($_GET['user']) && !empty($_GET['user']) AND isset($_GET['jId']) && !empty($_GET['jId'])){
         $uId = $_GET['user'];
+        $jId = $_GET['jId'];
       }
 
 ?> 
@@ -23,7 +22,7 @@
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
         $status = $_POST['status'];
         
-        $addcomment = $edu->updateStatus($status, $uId);
+        $addcomment = $edu->updateStatus($status, $uId, $jId);
     }
  
 ?>
@@ -283,7 +282,7 @@
       </div>
       <?php } } ?>
 <!-- /5th row end-->
- <!-- 6th row -->
+<!-- 6th row -->
 <?php
         $getver = $edu->getpgraduationby($uId);
         if ($getver) {
@@ -323,9 +322,6 @@
       </div>
       <?php } } ?>
  <!-- /6th row end-->
-
-
-
       <!-- 7th row -->
 <?php
         $gettr = $edu->gettrainingby($uId);
@@ -376,11 +372,11 @@
   <form action="" method="post">
    <label>Slecet Your Comment</label>
     <br>
-                    <input class="w3-radio" type="radio"   name="status" value="1" checked>
+                    <input class="w3-radio" type="radio"   name="status" value="1">
                     <label>Select</label>
-                    &nbsp;
+                   <!-- &nbsp;
                     <input class="w3-radio" type="radio"   name="status" value="2">
-                    <label>Deselect</label>
+                    <label>Deselect</label>-->
                     
    <p><button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Submit</button></p>
   </form> 

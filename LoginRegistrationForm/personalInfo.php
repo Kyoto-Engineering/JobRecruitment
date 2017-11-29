@@ -57,7 +57,7 @@
 
                 <p>
                     <label> <b> Gender </b> </label> <br>
-                    <input class="w3-radio" type="radio"   name="gender" value="male" checked>
+                    <input class="w3-radio" type="radio"   name="gender" value="male" >
                     <label>Male</label>
                     &nbsp;
                     <input class="w3-radio" type="radio"   name="gender" value="female">
@@ -77,7 +77,7 @@
                     <input class="w3-radio" type="radio" name="maritalStatus" value="married">
                     <label>Married</label>
                     &nbsp;
-                    <input class="w3-radio" type="radio" name="maritalStatus" value="single" checked>
+                    <input class="w3-radio" type="radio" name="maritalStatus" value="single">
                     <label>Single</label>
                 </p>
                 
@@ -86,37 +86,39 @@
                 <br>
                                   
                 
-                    <div class="row">
-                    <div class="col-md-3">
+                    
+                    
+                   <div class="row">
+                    <div class="col-md-2">
                     <button type="submit" name="submit" class="btn btn-primary">Submit </button> 
                     </div>
 
                
                </form>
+               
+             <?php
+                //$userId = Session::get("userId");
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['next'])) {
+                    $updatestat = $add->statUpdate($_POST , $userId);
+                }
+            ?>
+<?php
+$getp = $add->getInfop($userId);
+if($getp){
 
-                <?php
-        $userId = Session::get("userId");
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['next'])) {
-            $updatestat = $add->statUpdate($_POST , $userId);
-        }
- 
 ?>
 
-             <div class="col-md-3"> 
+
+             <div class="col-md-2"> 
             <form action="" method="post" >
             <input class="form-control"  type="hidden" name="status" value="1"/> 
             <input type="submit" name="next" value="next" class="btn btn-primary">
             </form>
             </div>
             </div>
-
-                    
-          
-
-
-                
             
-            </div>
+            </div><!-- next butn-->
+<?php } ?>
              <div class="col-md-6 ">
 <?php 
     if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['submit'])) {

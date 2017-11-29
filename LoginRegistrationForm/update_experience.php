@@ -13,6 +13,7 @@
 
         
 <div class="container">
+    <a href="view_exp.php"><button type="submit" name="" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Go Back</button></a>
         <?php
             if(isset($updateExp)){
                 echo $updateExp;
@@ -69,7 +70,7 @@
                 
                                 
                 <p>
-                    <button class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding" type="submit" name="submit" class="btn btn-default">Submit</button>
+                    <button class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding" type="submit" name="submit" class="btn btn-default">Update</button>
                 </p>
                 
             </form>

@@ -21,7 +21,7 @@
                     echo $insertAdd;
                 }
              ?>
-            <form action="" method="post" class="w3-container">
+            <form action="" method="post">
                 <p>
                     <label> Flat/Level/Floor No</label>
                     <input class="form-control" id="usr" type="text" name="flat" placeholder="Your Flat/Level/Floor No; ex:Flat-B2/Level-3/2nd Floor" >
@@ -146,14 +146,40 @@
                     <button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Submit</button>
                 </p>
                 
+                
+                
+                
                 <br>
             </form>
-
-            
         </div>
 
 
 
+        </div>
+        <div class=col-sm-2>
+                 <?php
+                //$userId = Session::get("userId");
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['next'])) {
+                    $updatestat = $add->addstatUpdate($_POST , $uId);
+                }
+            ?>
+<?php
+$getp = $add->getaddStat($uId);
+if($getp){
+
+?>
+
+
+             
+            <form action="" method="post" >
+            <input class="form-control"  type="hidden" name="status" value="1"/> 
+            <input type="submit" name="next" value="next" class="btn btn-primary">
+            </form>
+            
+            </div>
+            
+            </div><!-- next butn-->
+<?php } ?>
         </div>
         </div>
     

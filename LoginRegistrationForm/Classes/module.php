@@ -56,7 +56,7 @@
 			$description = mysqli_real_escape_string($this->db->link, $description);
 
 			if ($deptName == "" || $description == "") {
-				$msg = "Fill Up All field";
+				$msg = "<span style='color:green'>Department Name Is Empty!!</span>";
 						return $msg;
 			}
 			$dpquery = "SELECT * FROM tbl_department WHERE deptName = '$deptName' LIMIT 1";
@@ -426,12 +426,6 @@
 				$result= $this->db->select($query);
 				return $result;
 	}
-
-	public function getAllpeopleforGap(){
-		$query = "SELECT * FROM tbl_user_reg ORDER BY regId DESC limit 100 ";
-		$result = $this->db->select($query);
-		return $result;
-	} 
 	
 	
 	public function getallparticipant(){
@@ -549,14 +543,12 @@
 							$email_to = "recruitment@keal.com.bd";
 							$email_subject= "Absentee Confirmation email";
 							$email_message= "
-											Dear $userName,
-											We regret to inform you that you missed the the following interview session:
-											In order to avail another session of interview please click below:
- 
- 
-											Please note that we reserve the right to blacklist/ greylist you for not being logical
-											enough to explain the reason for being absent.
-											Best Regards";
+Dear $userName,
+We regret to inform you that you missed the the following interview session:
+In order to avail another session of interview please click below:
+Please note that we reserve the right to blacklist/ greylist you for not being
+logical enough to explain the reason for being absent.
+Best Regards";
 
 
 							$headers1 = 'From: '.$email_to."\r\n".
@@ -565,30 +557,26 @@
 							 
 							'X-Mailer: PHP/' . phpversion();
 
-		$email_subject1= "Absentee Confirmation email";
-		$email_message1= "Dear $userName,
+							$email_subject1= "Absentee Confirmation email";
+							$email_message1= "
+Dear $userName,
 
-							                  We regret to inform you that you missed the the following interview session:
-											In order to avail another session of interview please click below:
- 
- 
-											Please note that we reserve the right to blacklist/ greylist you for not being logical
-											enough to explain the reason for being absent.
-											Best Regards
+We regret to inform you that you missed the the following interview session: 
+In order to avail another session of interview please click below:
+Please note that we reserve the right to blacklist/ greylist you for not being
+logical enough to explain the reason for being absent.
+Best Regards,
 								
+Recruitment Office
+Kyoto Engineering & Automation Ltd
+B2 House 64 Block B Road 3
+Niketon Gulshan Dhaka 1212
 								 
-								Recruitment Office
-								Kyoto Engineering & Automation Ltd
-								B2 House 64 Block B Road 3
-								Niketon Gulshan Dhaka 1212
+Emergency Contact Numbers:
 								 
-								Emergency Contact Numbers:
-								 
-								01844046621
-								01844046666
-								01844046677
-							 
-							";
+01844046621
+01844046666
+01844046677";
 
 							$email_message2= 'Date'.$date."\r\n";
 							mail("<$email_to>","$email_subject","$email_message","$headers");
@@ -632,29 +620,43 @@ public function sendProcess($userId, $jId, $info){
 
 							$email_to = "recruitment@keal.com.bd";
 							$email_subject= "How to Complete your Application & Process Note";
-							$email_message= "Dear $userName,
-					Welcome Aboard!!
+							$email_message= "
+Dear $userName,
+Welcome Aboard!!
  
-					Thank you for signing up in our recruitment program.
+Thank you for signing up in our recruitment program.
 							 
-					If you have received this email successfully we have verified your email address properly. Please click the following link to confirm your acknowledgement of receiving the email:
+If you have received this email successfully we have verified your email address
+properly. Please click the following link to confirm your acknowledgement of
+receiving the email:
 							 
-					https:\\www.recruitment.keal.com.bd
+https:\\www.recruitment.keal.com.bd
 							 
-					Please note that the recruitment process would ideally take the following course:
+Please note that the recruitment process would ideally take the following cours:
 
-					Step 1: Apply for the job which is available for you and best suits your career intent
-					Step 2: You need to complete your resume
-					Step 3: Now, the Recruitment Officer may select you for an interview
-					Step 4: Come for the interview on the due date if you are selected for interview.
-					Step 5: If you want to reschedule the date you may request for a Reschedule
-					Step 6: HR may or may not approve your request for reschedule. If you are absent for the interview you may all start over from Step 1
+Step 1: Apply for the job which is available for you and best suits your career
+intent.
+
+Step 2: You need to complete your resume/CV/biodata according to prescribed
+format. You may also upload your resume in pdf format.The file size should be
+between 100-300 kb.
+
+Step 3: Now, the Recruitment Officer may select you for an interview.
+
+Step 4: Come for the interview on the due date if you are selected for intervie.
+
+Step 5: If you want to reschedule the date you may request for a Reschedule.
+
+Step 6: HR may or may not approve your request for reschedule. If you are absent
+for the interview you may all start over from Step 1.
 							 
-					Please note that in every step you will be notified by email. Please do not forget to check your Spam or Junk mailbox for the emails and react to them in time.
+Please note that in every step you will be notified by email. Please do not
+forget to check your Spam or Junk mailbox for the emails and react to them in
+time.
  
-					We are excited to have you on board with us in the journey of career development.
+We are excited to have you on board with us in the journey of career development
 							 
-					Good Luck!!";
+Good Luck!!";
 
 
 							$headers1 = 'From: '.$email_to."\r\n".
@@ -664,37 +666,44 @@ public function sendProcess($userId, $jId, $info){
 							'X-Mailer: PHP/' . phpversion();
 
 							$email_subject1= "How to Complete your Application & Process Note";
-							$email_message1= "Dear $userName,
+							$email_message1= "
+Dear $userName,
 
-						Welcome Aboard!!
+Welcome Aboard!!
  
-						Thank you for signing up in our recruitment program.
+Thank you for signing up in our recruitment program.
 							 
-						If you have received this email successfully we have
-						verified your email address properly. Please click the
-						following link to confirm your acknowledgement of
-						receiving the email:
+If you have received this email successfully we have verified your email address
+properly. Please click the following link to confirm your acknowledgement of
+receiving the email:
 							 
-						https:\\www.recruitment.keal.com.bd
+https:\\www.recruitment.keal.com.bd
 							 
-						Please note that the recruitment process would ideall
-						take the following course:
+Please note that the recruitment process would ideall take the following course:
 
-						Step 1: Apply for the job which is available for you and best suits your career intent
-						Step 2: You need to complete your resume
-						Step 3: Now, the Recruitment Officer may select you for an interview
-						Step 4: Come for the interview on the due date if you are selected for interview.
-						Step 5: If you want to reschedule the date you may request for a Reschedule
-						Step 6: HR may or may not approve your request for reschedule. If you are absent for the interview you may all start over from Step 1
+Step 1: Apply for the job which is available for you and best suits your career
+intent.
+
+Step 2: You need to complete your resume/CV/biodata according to prescribed
+format. You may also upload your resume in pdf format.The file size should be
+between 100-300 kb.
+
+Step 3: Now, the Recruitment Officer may select you for an interview.
+
+Step 4: Come for the interview on the due date if you are selected for intervie.
+
+Step 5: If you want to reschedule the date you may request for a Reschedule.
+
+Step 6: HR may or may not approve your request for reschedule. If you are absent
+for the interview you may all start over from Step 1.
 							 
-						Please note that in every step you will be notified by
-						email. Please do not forget to check your Spam or Junk 
-						mailbox for the emails and react to them in time.
+Please note that in every step you will be notified by email. Please do not
+forget to check your Spam or Junk mailbox for the emails and react to them in
+time.
  
-						We are excited to have you on board with us in the
-						journey of career development.
+We are excited to have you on board with us in the journey of career development
 							 
-						Good Luck!!";
+Good Luck!!";
 
 							$email_message2= 'Date'.$date."\r\n";
 							mail("<$email_to>","$email_subject","$email_message","$headers");
@@ -710,7 +719,88 @@ public function sendProcess($userId, $jId, $info){
 				$result = $this->db->select($query);
 				return $result;
 			}
-    public function getGapAnalysis(){
+
+		
+	public function getAlljoblist(){
+		$query = "SELECT * FROM tbl_jobtitle ORDER BY jId DESC";
+				$result = $this->db->select($query);
+				return $result;
+	}
+
+	public function getAlljoblistbyId($jid){
+		$query = "SELECT * FROM tbl_jobtitle WHERE jId = '$jid'";
+				$result = $this->db->select($query);
+				return $result;
+	}
+
+	public function jobTileEdit($data, $file, $jid){
+		$jobtitle = 	$this->fm->validation($data['jobtitle']);
+		$description = 	$this->fm->validation($data['description']);
+
+		$jobtitle = mysqli_real_escape_string($this->db->link, $jobtitle);
+		$description = mysqli_real_escape_string($this->db->link, $description);
+
+		if ($jobtitle == "" || $description == "") {
+			$msg = "Fillup all Field!";
+			return $msg;
+		}else{
+			$Query = "UPDATE tbl_jobtitle 
+			SET 
+			jobtitle = '$jobtitle',
+			description = '$description'
+			WHERE jId = '$jid'";
+			$update_row = $this->db->update($Query);
+			if ($update_row) {
+				$msg = "<span style='color:green'>Successfully Updated</span>";
+				return $msg;
+			}else{
+				$msg = "<span style='color:red'>Not Updated</span>";
+				return $msg;
+			}
+		}
+		
+	}
+	public function uploadDescription($jid, $file){
+		 $permited  = array('pdf');
+			  $file_name = $file['jd']['name'];
+			  $file_size = $file['jd']['size'];
+			  $file_temp = $file['jd']['tmp_name'];
+
+		      $div           = explode('.', $file_name);
+		      $file_ext      = strtolower(end($div));
+		      $unique_file   = substr(md5(time()), 0, 10).'.'.$file_ext;
+		      $uploaded_file = "JdBank/".$unique_file;
+
+		      if ($uploaded_file == "") {
+		    	 
+		    	 $errmsg = "Browse Your Resume First And Submit";
+		    	 return $errmsg;
+
+		    	}elseif ($file_size >500000) {
+			     $msg = "<span style='color:red'>Pdf Size should be not more then 500KB!</span>";
+			     return $msg;
+   			 	} elseif (in_array($file_ext, $permited) === false) {
+
+		     	$msg = "<span style='color:red'>You can upload only:-".implode(', ', $permited)."</span>";
+		     	return $msg;
+    			} else {
+			    	 move_uploaded_file($file_temp, $uploaded_file);
+			    	 $query = "UPDATE tbl_jobtitle
+			    	 SET 
+			    	 jd = '$uploaded_file'
+			    	 WHERE jId = '$jid'";
+			    	 $update_row = $this->db->update($query);
+			    	 if ($update_row) {
+			    	 	$msg = "<span style='color:green'>JD Upload complete</span>";
+			    	 	return $msg;
+			    	 }else{
+			    	 	$msg = "<span style='color:red'>JD Upload Not complete</span>";
+			    	 	return $msg;
+			    	 }
+			    	}
+
+	}
+	public function getGapAnalysis(){
 	$query="SELECT p.*, r.userName
 	FROM tbl_gap_analysis as p,tbl_user_reg as r
 	WHERE p.userId= r.regId";
@@ -718,7 +808,13 @@ public function sendProcess($userId, $jId, $info){
 			return $result;
 			
 }
-public function gapCreate($data, $uId){
+
+	public function getAllpeopleforGap(){
+		$query = "SELECT * FROM tbl_user_reg ORDER BY regId DESC limit 100 ";
+		$result = $this->db->select($query);
+		return $result;
+	} 
+	public function gapCreate($data, $uId){
 
 		$gap = 	$this->fm->validation($data['gap']);
 		$gap = mysqli_real_escape_string($this->db->link, $gap);
@@ -738,6 +834,160 @@ public function gapCreate($data, $uId){
 						return $msg;
 				}
 			}
+		}
+		public function createNewUser($data){
+		$uname 		= 	$this->fm->validation($data['uname']);
+		$activity   = 	$this->fm->validation($data['activity']);
+		$datee 		= 	$this->fm->validation($data['datee']);
+		$pass 		= 	$this->fm->validation($data['pass']);
+		$email 		= 	$this->fm->validation($data['email']);
+		$designation = 	$this->fm->validation($data['designation']);
+
+		$uname 		= mysqli_real_escape_string($this->db->link, $uname);
+		$activity 	= mysqli_real_escape_string($this->db->link, $activity);
+		$pass 		= mysqli_real_escape_string($this->db->link, md5($pass));
+		$datee 		= mysqli_real_escape_string($this->db->link, $datee);
+		$email 		= mysqli_real_escape_string($this->db->link, $email);
+		$designation 		= mysqli_real_escape_string($this->db->link, $designation);
+
+		if ($uname == "" || $pass == ""|| $activity == ""|| $datee==""|| $email == "" || $designation == "" ) {
+			$msg ="<span style='color:red'>Field Is Empty!!</span>";
+			return $msg;
+		}else{
+			$query = "INSERT INTO tbl_login(uname, pass, datee, email, designation, activity) VALUES('$uname', '$pass', '$datee', '$email', '$designation', '$activity')";
+			$result = $this->db->insert($query);
+			if ($result) {
+				$msg = "<span style='color:#fff'>New InterViewer Has Been Created Successfully</span>";
+				return $msg;
+			}else{
+				$msg = "<span style='color:red'>New InterViewer not Created Successfully</span>";
+				return $msg;
+			}
+		}
+	}
+	public function getInterviewer(){
+		$query = "SELECT * FROM tbl_login WHERE activity = '3'";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	
+		public function uploadPropicture($adminId, $file){
+		
+			  $permited  = array('jpg', 'jpeg', 'png', 'gif');
+			  $file_name = $file['image']['name'];
+			  $file_size = $file['image']['size'];
+			  $file_temp = $file['image']['tmp_name'];
+
+		      $div            = explode('.', $file_name);
+		      $file_ext       = strtolower(end($div));
+		      $unique_image   = substr(md5(time()), 0, 10).'.'.$file_ext;
+		      $uploaded_image = "uploads/".$unique_image;
+
+
+		    if ($uploaded_image == "") {
+		    	 
+		    	 $errmsg = "<span style='color:red'>Browse Your Picture First And Submit</span>";
+		    	 return $errmsg;
+
+		    	}elseif ($file_size >1048567) {
+			     echo "<span style='color:red'>Image Size should be less then 1MB!</span>";
+
+   			 	} elseif (in_array($file_ext, $permited) === false) {
+
+		     	echo "<span style='color:red'>You can upload only:-".implode(', ', $permited)."</span>";
+
+    			} else {
+			    	 move_uploaded_file($file_temp, $uploaded_image);
+			    	 $query = "UPDATE tbl_login 
+			    	 			SET 
+			    	 			image = '$uploaded_image'
+
+			    	 			WHERE id = '$adminId'";
+			    	 $update_row = $this->db->update($query);
+			    	 if ($update_row) {
+			    	 	$msg = "<span style='color:green'>Image Upload complete</span>";
+			    	 	return $msg;
+			    	 }else{
+			    	 	$msg = "<span>Image Upload Not complete</span>";
+			    	 	return $msg;
+			    	 }
+			    	}
+		}
+
+
+		public function getdetails($adminId){
+			$query = "SELECT * FROM tbl_login WHERE id = '$adminId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		
+		public function changeUserpass($data, $adminId){
+			$oldpass 	   = 	$this->fm->validation($data['oldpass']);
+			$newpass       = 	$this->fm->validation($data['newpass']);
+			$confirmpass   = 	$this->fm->validation($data['confirmpass']);
+
+			$oldpassword 	= mysqli_real_escape_string($this->db->link, md5($oldpass));
+			$newpass 		= mysqli_real_escape_string($this->db->link, md5($newpass));
+			$confirmpass 	= mysqli_real_escape_string($this->db->link, md5($confirmpass));
+
+			$queryget = "SELECT pass FROM tbl_login WHERE id='$adminId'";
+			$row = $this->db->select($queryget)->fetch_assoc();
+		
+			$oldpassworddb = $row['pass'];
+
+			//check pass
+			if ($oldpassword==$oldpassworddb){
+				
+				//check twonew pass
+				if ($newpass==$confirmpass){
+				//success
+				//change pass in db
+			
+				
+						$querychange = "UPDATE tbl_login SET
+			 				pass ='$newpass'
+			 				 WHERE id='$adminId'";
+			 			$query_update = $this->db->update($querychange);
+						if ($query_update) {
+							$msg = "<span style='color:white'>Your Password Has Changed Successfully</span>";
+							return $msg;
+						}else{
+							$msg = "Not Change";
+							return $msg;
+						}
+					
+				}
+			}
+		}
+		
+		public function createBoard($data, $uId){
+			$date = date('Y-m-d');
+			$id = $this->fm->validation($data['id']);
+			
+			$query = "SELECT * FROM tbl_login WHERE id = '$uId'";
+			$result = $this->db->select($query)->fetch_assoc();
+			$uname = $result['uname'];
+			$email = $result['email'];
+			$designation = $result['designation'];
+
+			$Inserted = "INSERT INTO 
+			tbl_iboard(bId, uname, email, designation, datee) 
+			VALUES('$id', '$uname', '$email', '$designation', '$date')";
+			$result = $this->db->insert($Inserted);
+			if ($result) {
+				$msg = "InterViewer Selected";
+				return $msg;
+			}else{
+				$msg = "InterViewer Not Selected";
+				return $msg;
+			}
+		}
+
+
+		public function getBoard($tarikh){
+			$query = "SELECT * FROM tbl_iboard WHERE datee = '$tarikh' ORDER BY uname ASC";
+			$result = $this->db->select($query);
+			return $result;
 		}
 		public function criteriaInput($data, $adminId, $uId){
 			$criteria1		= 	$this->fm->validation($data['criteria1']);
@@ -799,5 +1049,10 @@ public function gapCreate($data, $uId){
 				}
 			}
 		}
-	
+		
+		public function getAllapplystat($uId){
+			$query = "SELECT * FROM tbl_apply WHERE userId = '$uId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
 } ?>

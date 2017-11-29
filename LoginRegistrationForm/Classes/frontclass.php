@@ -30,6 +30,16 @@
 	}
 
 	 public function applyForjob($userId, $jsid){
+	    date_default_timezone_set('Asia/Dhaka');
+	    $date = $this->fm->formDate(date("d-m-Y"));
+        
+		
+	     $Mquery = "SELECT * FROM tbl_user_reg WHERE regId = '$userId'";
+			$result = $this->db->select($Mquery)->fetch_assoc();
+			$email = $result['email'];
+			$userName = $result['userName'];
+
+	     
 	 	$jsid	 = mysqli_real_escape_string($this->db->link, $jsid);
 		$userId	 = mysqli_real_escape_string($this->db->link, $userId);
 		$Cquery  = "SELECT * FROM tbl_apply WHERE jsId = '$jsid' AND userId = '$userId'";
@@ -56,8 +66,94 @@
 			$query = "INSERT INTO tbl_apply(jsId, userId, jId, dId, levelId, lastdApplication, degId, mimcomp, mxmComp, expDate, prerequisite) VALUES('$jsid', '$userId', '$jId', '$dId', '$levelId', '$ldApplication', '$degId', '$mimcomp', '$mxmcomp', '$expDate', '$prerequisite')";
 			$inserted_row = $this->db->insert($query);
 			if ($inserted_row) {
-				$msg = "Successfully Applied";
-				return $msg;
+				//$msg = "Successfully Applied";
+				//return $msg;
+				
+				
+												?>
+                                <script>
+                                alert('Acceptance of your Application');
+                                window.location.href='index.php';
+                                </script>
+                            <?php
+
+
+			$headers = 'From: '.$email."\r\n".
+							 
+		    'Reply-To: '.$email."\r\n" .
+							 
+			'X-Mailer: PHP/' . phpversion();
+
+			$email_to = "recruitment@keal.com.bd";
+			$email_subject= "Acceptance of your Application";
+			$email_message= "
+Dear $userName,
+Thank you for interest in building your career in a smart way.
+You have recently applied for the following:
+
+a) Date of Application:$date,
+b) Expected Joining By:$expDate,
+c) Your Interview Date: Not Fixed Yet.
+                        
+Please do not forget to complete your resume according to the following link:
+                    
+https://recruitment.keal.com.bd/LoginRegistrationForm/resume.php
+                        
+Stay Well!! Wish you the Best of Luck!!
+                        
+Recruitment Office
+Kyoto Engineering & Automation Ltd
+B2 House 64 Block B Road 3
+Niketon Gulshan Dhaka 1212
+								 
+Emergency Contact Numbers:
+								 
+01844046621
+01844046666
+01844046677";
+
+
+							$headers1 = 'From: '.$email_to."\r\n".
+							 
+							'Reply-To: '.$email_to."\r\n" .
+							 
+							'X-Mailer: PHP/' . phpversion();
+
+$email_subject1= "Acceptance of your Application";
+$email_message1= "
+Dear $userName,
+Thank you for interest in building your career in a smart way.
+You have recently applied for the following:
+
+a) Date of Application:$date,
+b) Expected Joining By:$expDate,
+c) Your Interview Date: Not Fixed Yet.
+                        
+Please do not forget to complete your resume according
+to the following link:
+                    
+https://recruitment.keal.com.bd/LoginRegistrationForm/resume.php
+                        
+Stay Well!! Wish you the Best of Luck!!
+                        
+                        
+Recruitment Office
+Kyoto Engineering & Automation Ltd
+B2 House 64 Block B Road 3
+Niketon Gulshan Dhaka 1212
+								 
+Emergency Contact Numbers:
+								 
+01844046621
+01844046666
+01844046677";
+
+							$email_message2= 'Date'.$date."\r\n";
+							mail("<$email_to>","$email_subject","$email_message","$headers");
+
+							mail("<$email>","$email_subject1","$email_message1","$headers1");
+				
+				
 			}else{
 				$msg = "Not Successfully Applied";
 				return $msg;
@@ -65,6 +161,14 @@
 			}
 	 }
 	 
+	 public function updateapplyrersultForjob($userId, $applyresult){
+	 	$applyresult = mysqli_real_escape_string($this->db->link, $applyresult);
+	 	$query = "UPDATE tbl_user_reg
+	 	SET applyresult = '1' WHERE regId = '$userId'";
+	 	$result = $this->db->update($query);
+	 	return $result;
+	 }
+
 	 public function getapplyUser($userId){
 	     $query = "SELECT * FROM tbl_apply WHERE userId = '$userId' AND status='1'";
 	     $result = $this->db->select($query);
@@ -172,19 +276,19 @@
 
 							$email_to = "recruitment@keal.com.bd";
 							$email_subject= " Request For InterView Re-Schedule";
-							$email_message= "Dear Recruitment Officer,
+							$email_message= "
+
+Dear Recruitment Officer,
  
-                I have submitted a request for Interview Reschedule. I would be 
-                grateful if you kindly approve this request for Reschedule. I 
-                regret any inconvenience caused by this request. I understand 
-                that it is your prerogative to approve this request. I also 
-                confirm that I will not make any complaint if the request is not
-                approved.
+I have submitted a request for Interview Reschedule. I would be grateful if you
+kindly approve this request for Reschedule. I regret any inconvenience caused by
+this request. I understand that it is your prerogative to approve this request.
+I also confirm that I will not make any complaint if the request is not approve.
  
-                I will wait for your confirmation.
+I will wait for your confirmation.
  
-                Thank you,
-                $userName";
+Thank you,
+$userName";
 
 
 							$headers1 = 'From: '.$email_to."\r\n".
@@ -194,51 +298,57 @@
 							'X-Mailer: PHP/' . phpversion();
 
 							$email_subject1= "InterView Re-Schedule Request";
-							$email_message1= "Dear $userName,
+							$email_message1= "
+Dear $userName,
 
-							Thank you for your interest in career in our company
-							Congratulations!!
+Thank you for your interest in career in our company
+Congratulations!!
 
-							You Request For InterView Re-Schedule Has been successfully Submited by you. Your Requested time is Pending now.
+You Request For InterView Re-Schedule Has been successfully Submited by you.
+Your Requested time is Pending now.
 								 
-								Please visit your profile by clicking the following link for update information:
+Please visit your profile by clicking the following link for update information:
+
+https://recruitment.keal.com.bd/
 								 
-								https://recruitment.keal.com.bd/
+Prior to select your option please go to the following link and register
+yourself please make sure that you have completed all your academic information
+to the following portal:
 								 
-								Prior to select your option please go to the following link and register yourself please make sure that you have completed all your academic information to the following portal:
+https://recruitment.keal.com.bd/
+
+Note: Your email is your username and put your mobile number as your password
 								 
-								https://recruitment.keal.com.bd/
+Please do not write back to this email. If you are otherwise not contacted by us
+your interview date is confirmed. However, if you want to change your date
+please write an email request or send a request using the following link:
 								 
-								Note: Your email is your username and put your mobile number as your password
+https://recruitment.keal.com.bd/
 								 
-								Please do not write back to this email. If you are otherwise not contacted by us your interview date is confirmed. However, if you want to change your date please write an email request or send a request using the following link:
+If  you do not want to participate please do not forget to click on the
+following link:
 								 
-								https://recruitment.keal.com.bd/
+
+Please bring along the following items during the interview:
+1) All your Transcripts till date
+2) An updated CV Printed. If not you may take a print out of the same on the
+spot during interview
+3) Your Photo Identity Document, such as Passport, NID, Birth Registration etc.
+4) Academic Credentials.
 								 
-								If  you do not want to participate please do not forget to click on the following link:
+See you then,
 								 
+Thank you
 								 
-								Please bring along the following items during the interview:
-								 
-								1) All your Transcripts till date
-								2) An updated CV Printed. If not you may take a print out of the same on the spot during interview
-								3) Your Photo Identity Document, such as Passport, NID, Birth Registration etc.
-								4) Academic Credentials.
-								 
-								See you then,
-								 
-								Thank you
-								 
-								Recruitment Office
-								Kyoto Engineering & Automation Ltd
-								B2 House 64 Block B Road 3
-								Niketon Gulshan Dhaka 1212
-								 
-								Emergency Contact Numbers:
-								 
-								01844046621
-								01844046666
-								01844046677
+Recruitment Office
+Kyoto Engineering & Automation Ltd
+B2 House 64 Block B Road 3
+Niketon Gulshan Dhaka 1212
+
+Emergency Contact Numbers:
+01844046621
+01844046666
+01844046677
 							 
 							";
 
@@ -317,10 +427,11 @@
 
 							$email_to = "recruitment@keal.com.bd";
 							$email_subject= "Job Interview Response From Applicant";
-							$email_message= "This person has Response For Job Interview:
-							Name : $userName
-							Email : $email
-							This Person Is confirm  $msg in the Interview
+							$email_message= "
+This person has Response For Job Interview:
+Name : $userName
+Email : $email
+This Person Is confirm  $msg in the Interview
 							";
 							
 							
@@ -333,25 +444,24 @@
 							'X-Mailer: PHP/' . phpversion();
 
 							$email_subject1= "Job Interview Response From You!";
-							$email_message1= "Dear $userName,
+							$email_message1= "
+Dear $userName,
 
-							Thank you for your interest in career in our company
-							Congratulations!!
-
-							We confirm your  $msg.
+Thank you for your interest in career in our company
+Congratulations!!
+We confirm your  $msg.
 								 
-								Thank you
+Thank you
 								 
-								Recruitment Office
-								Kyoto Engineering & Automation Ltd
-								B2 House 64 Block B Road 3
-								Niketon Gulshan Dhaka 1212
+Recruitment Office
+Kyoto Engineering & Automation Ltd
+B2 House 64 Block B Road 3
+Niketon Gulshan Dhaka 1212
 								 
-								Emergency Contact Numbers:
-								 
-								01844046621
-								01844046666
-								01844046677
+Emergency Contact Numbers:
+01844046621
+01844046666
+01844046677
 							 
 							";
 
@@ -417,5 +527,34 @@
 		$result = $this->db->select($query);
 			return $result;
 	}
+    public function getjobDes($jId){
+        $query = "SELECT * FROM tbl_jobtitle WHERE jId = '$jId'";
+		$result = $this->db->select($query);
+			return $result;
+    }
+    public function getlistingvalue($userId){
+		$query = "SELECT listing FROM tbl_user_reg WHERE regId = '$userId'";
+				$result = $this->db->select($query);
+				return $result;
+	}
+	
+	public function userfeedback($data, $userId){
+		$link 	 = $this->fm->validation($data['link']);
+		$gap = $this->fm->validation($data['gap']);
+		$comment = $this->fm->validation($data['comment']);
 
+		$link = mysqli_real_escape_string($this->db->link, $link);
+		$gap = mysqli_real_escape_string($this->db->link, $gap);
+		$comment = mysqli_real_escape_string($this->db->link, $comment);
+
+		$query = "INSERT INTO tbl_gap_analysis(userId, gap, comment, link) VALUES('$userId', '$gap', '$comment', '$link')";
+		$insert_row = $this->db->insert($query);
+		if ($insert_row) {
+			$msg = "<span style='color:green'>Your Opinion has been posted</span>";
+			return $msg;
+		}else{
+			$msg = "<span style='color:green'>Your Opinion has been not posted</span>";
+			return $msg;
+		}
+	}
 	}?>

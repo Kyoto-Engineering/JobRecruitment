@@ -93,6 +93,7 @@
 			$flat		 = mysqli_real_escape_string($this->db->link, $flat);
 			$holding	 = mysqli_real_escape_string($this->db->link, $holding);
 			$building	 = mysqli_real_escape_string($this->db->link, $building);
+			$road		 = mysqli_real_escape_string($this->db->link, $road);
 			$block		 = mysqli_real_escape_string($this->db->link, $block);
 			$area		 = mysqli_real_escape_string($this->db->link, $area);
 
@@ -103,10 +104,12 @@
 			
 
 			
-				$query ="INSERT INTO tbl_address(userId, flat, holding, building, block, area, divId, distId, thId, postId) VALUES ('$uId', '$flat', '$holding', '$building', '$block', '$area', '$divId', '$distId', '$thId', '$postId')";
+				$query ="INSERT INTO tbl_address(userId, flat, holding, building,road, block, area, divId, distId, thId, postId) VALUES ('$uId', '$flat', '$holding', '$building', '$road', '$block', '$area', '$divId', '$distId', '$thId', '$postId')";
 				$result = $this->db->insert($query);
 				if ($result) {
-					header("Location:permanent_address.php");
+					//header("Location:permanent_address.php");
+					$msg = "<span style = 'color:green'>Your Permanent Address has been recorded</span>";
+					return $msg;
 				}else{
 					$msg = "Your present Address not recorded";
 					return $msg;
@@ -115,9 +118,10 @@
 
 		}
 
+
 		public function paddressInsert($uId, $data){
 
-			//$pid 	     = $this->fm->validation($data['pid']);
+			$id 	     = $this->fm->validation($data['id']);
 			$flat 		 = $this->fm->validation($data['flat']);
 			$holding 	 = $this->fm->validation($data['holding']);
 			$building 	 = $this->fm->validation($data['building']);
@@ -131,7 +135,7 @@
 			$postId 	 = $this->fm->validation($data['postId']);
 			/*$codeId 	 = $this->fm->validation($data['codeId']);*/
 
-			//$pid		 	 = mysqli_real_escape_string($this->db->link, $pid);
+			$id		 	 = mysqli_real_escape_string($this->db->link, $id);
 			$flat		 = mysqli_real_escape_string($this->db->link, $flat);
 			$holding	 = mysqli_real_escape_string($this->db->link, $holding);
 			$building	 = mysqli_real_escape_string($this->db->link, $building);
@@ -143,11 +147,18 @@
 			$distId		 = mysqli_real_escape_string($this->db->link, $distId);
 			$thId		 = mysqli_real_escape_string($this->db->link, $thId);
 			$postId		 = mysqli_real_escape_string($this->db->link, $postId);
-
-			$query = "INSERT INTO tbl_paddress(userId, flat, holding, building,road, block, area, divId, distId, thId, postId) VALUES('$uId','$flat', '$holding', '$building','$road', '$block','$area', 'divId', '$distId', '$thId', '$postId')";
+                
+            $squery = "SELECT * FROM tbl_paddress WHERE userId = '$uId' ";
+	        	$getData = $this->db->select($squery);
+		        if ($getData) {
+			    $msg = "<span style='color:red;'>Your Permanent Address Already Added Once By You. You can update Your address!!";
+			    return $msg;
+		        }
+			
+			$query = "INSERT INTO tbl_paddress(userId, id,flat, holding, building,road, block, area, divId, distId, thId, postId) VALUES('$uId','$id','$flat', '$holding', '$building','$road', '$block','$area', 'divId', '$distId', '$thId', '$postId')";
 				$result = $this->db->insert($query);
 				if ($result) {
-					$msg = "Your Permanent Address has been recorded";
+					$msg = "<span style = 'color:green'>Your Permanent Address has been recorded</span>";
 					return $msg;
 				}else{
 					$msg = "Your Permanent Address not recorded";
@@ -155,7 +166,7 @@
 				}
 		}
 
-			public function infoInsert($data, $userId){
+		public function infoInsert($data, $userId){
 			$tInstitution 	= $this->fm->validation($data['tInstitution']);
 			$trainingName 	= $this->fm->validation($data['trainingName']);
 			$tTopic 		= $this->fm->validation($data['tTopic']);
@@ -186,6 +197,7 @@
 			}
 
 		}
+	
 		public function personalInfo($data, $userId){
 			
 			$perName 		= $this->fm->validation($data['perName']);
@@ -195,8 +207,6 @@
 			$gender 		= $this->fm->validation($data['gender']);
 			$nId 		= $this->fm->validation($data['nId']);
 			$maritalStatus 	= $this->fm->validation($data['maritalStatus']);
-			
-			
 
 			
 			$perName = mysqli_real_escape_string($this->db->link, $perName);
@@ -206,9 +216,14 @@
 			$gender = mysqli_real_escape_string($this->db->link, $gender);
 			$nId = mysqli_real_escape_string($this->db->link, $nId);
 			$maritalStatus = mysqli_real_escape_string($this->db->link, $maritalStatus);
-			
-			
-			if ($perName == "" || $perEmail == "" || $perPhone == "" || $dob == "" || $gender == "" || $nId == "" || $maritalStatus == "" ) {
+            
+             $squery = "SELECT * FROM tbl_personalinfo WHERE userId = '$userId' ";
+	        	$getData = $this->db->select($squery);
+		        if ($getData) {
+			    $msg = "<span style='color:red;'>Your Information Already Added Once By You. You can update it";
+			    return $msg;
+		        }
+			if ($perName == "" || $perEmail == "" || $perPhone == "" || $dob == "" || $gender == "" || $nId == "" || $maritalStatus == "") {
 
 				$msg = "Field Must Not be Empty!!";
 				return $msg;
@@ -222,7 +237,6 @@
 					$msg = "Personal Info not recorded";
 					return $msg;
 				}
-
 			}
 
 
@@ -232,21 +246,22 @@
 
 		public function portfolio($data, $userId){
 			
-			$link		= $this->fm->validation($data['link']);
+			 $link		= $this->fm->validation($data['link']);
 		     $uId		= $this->fm->validation($data['uId']);
              $password		= $this->fm->validation($data['password']);
+             $status		= $this->fm->validation($data['status']);
 			
 			$link = mysqli_real_escape_string($this->db->link, $link);
 			$uId = mysqli_real_escape_string($this->db->link, $uId);
 			$password = mysqli_real_escape_string($this->db->link, $password);
-			
+			$status = mysqli_real_escape_string($this->db->link, $status);
 
 			if ($link == "" ) {
 
 				$msg = "Field Must Not be Empty!!";
 				return $msg;
 			}else{
-				$query = "INSERT INTO tbl_portfolio(userId, link,uId,password) VALUES('$userId','$link','$uId','$password')";
+				$query = "INSERT INTO tbl_portfolio(userId, link,uId,password, status) VALUES('$userId','$link','$uId','$password','$status')";
 				$result = $this->db->insert($query);
 				if ($result) {
 					$msg = "Portfolio Added";
@@ -258,6 +273,20 @@
 			}
 
 
+		}
+		
+		public function portfoliostatupdate($data , $userId){
+		   $status		= $this->fm->validation($data['status']); 
+		   $status = mysqli_real_escape_string($this->db->link, $status);
+		   	$query="UPDATE  tbl_portfolio
+                   SET status=' $status' WHERE userId='$userId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='education.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}     
 		}
 //upload image
 		public function uploadpicture($userId, $file){
@@ -317,8 +346,13 @@
 		      $file_ext      = strtolower(end($div));
 		      $unique_file   = substr(md5(time()), 0, 10).'.'.$file_ext;
 		      $uploaded_file = "admin/Resume/".$unique_file;
-
-		      if ($uploaded_file == "") {
+                
+                $squery = "SELECT * FROM tbl_upload WHERE userId = '$userId'";
+		        $getData = $this->db->select($squery);
+		        if ($getData) {
+		        	$msg = "<span style='color:red'>Resume Already Added Once By You!!</span>";
+			        return $msg;
+		        }elseif ($uploaded_file == "") {
 		    	 
 		    	 $errmsg = "Browse Your Resume First And Submit";
 		    	 return $errmsg;
@@ -376,17 +410,100 @@
 			$result = $this->db->select($query);
 			return $result;
 		}
-      public function getTraining($userId){
+		 public function getTraining($userId){
 			$query  = "SELECT * FROM  tbl_training WHERE userId='$userId'";
 			$result = $this->db->select($query);
 			return $result;
 		}
 
-		 public function getAllExp($userId){
+	 public function getAllExp($userId){
 			$query  = "SELECT * FROM  tbl_workingexperience WHERE userId='$userId'";
 			$result = $this->db->select($query);
 			return $result;
 		}
+		 public function getAllStatExp($userId){
+			$query  = "SELECT status FROM  tbl_workingexperience WHERE userId='$userId' LIMIT 1";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		public function getExpperson($userId){
+			$query  = "SELECT * FROM  tbl_workingexperience WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		 public function getAllStattraining($userId){
+			$query  = "SELECT status FROM  tbl_training WHERE userId='$userId' LIMIT 1";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		public function getAllStatPort($userId){
+			$query  = "SELECT status FROM  tbl_portfolio WHERE userId='$userId' LIMIT 1";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		public function getPortperson($userId){
+			$query  = "SELECT * FROM  tbl_portfolio WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+
+		public function getTrainingperson($userId){
+			$query  = "SELECT * FROM  tbl_training WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		
+		public function editmyInformation($userId){
+		    $query  = "SELECT * FROM  tbl_personalinfo WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		
+		public function updatepersonalInfo($data , $userId){
+		    $perName 		= $this->fm->validation($data['perName']);
+		
+			
+			$dob 			= $this->fm->validation($data['dob']);
+			$gender 		= $this->fm->validation($data['gender']);
+			$nId 		= $this->fm->validation($data['nId']);
+			$maritalStatus 	= $this->fm->validation($data['maritalStatus']);
+
+			
+			$perName = mysqli_real_escape_string($this->db->link, $perName);
+			
+			$dob = mysqli_real_escape_string($this->db->link, $dob);
+			$gender = mysqli_real_escape_string($this->db->link, $gender);
+			$nId = mysqli_real_escape_string($this->db->link, $nId);
+			$maritalStatus = mysqli_real_escape_string($this->db->link, $maritalStatus);
+
+			if ($perName == "" || $dob == "" || $gender == "" || $nId == "" || $maritalStatus == "") {
+
+				$msg = "Field Must Not be Empty!!";
+				return $msg;
+			}else{
+				$query = "UPDATE tbl_personalinfo
+				SET 
+				
+				userId = '$userId',
+				perName = '$perName', 
+				perEmail = '$perEmail',
+				perPhone =  '$perPhone',
+				dob =  '$dob',
+				gender = '$gender', 
+				nId =  '$nId',
+				maritalStatus = '$maritalStatus'
+				WHERE userId = '$userId'";
+				$result = $this->db->update($query);
+				if ($result) {
+					$msg = "<span style = 'color:green'>Personal Info Updated</span>";
+					return $msg;
+				}else{
+					$msg = "<span style = 'color:red'>Personal Info not Updated</span>";
+					return $msg;
+				}
+			}
+		}
+		
 		public function editPortfolio($userId){
 		    $query  = "SELECT * FROM  tbl_portfolio WHERE userId='$userId'";
 			$result = $this->db->select($query);
@@ -452,7 +569,7 @@
 			$flat		 = mysqli_real_escape_string($this->db->link, $flat);
 			$holding	 = mysqli_real_escape_string($this->db->link, $holding);
 			$building	 = mysqli_real_escape_string($this->db->link, $building);
-			$road		 = mysqli_real_escape_string($this->db->link, $road);
+			$road	 = mysqli_real_escape_string($this->db->link, $road);
 			$block		 = mysqli_real_escape_string($this->db->link, $block);
 			$area		 = mysqli_real_escape_string($this->db->link, $area);
 
@@ -464,12 +581,12 @@
 
 			
 				$query ="UPDATE tbl_address
-			SET	
+			SET	userId = '$uId',
 				flat = '$flat',
 				holding = '$holding',
+				road='$road',
 				 building = '$building',
 				 block = '$block',
-				 road='$road',
 				 area = '$area',
 				 divId =  '$divId',
 				 distId = '$distId', 
@@ -497,6 +614,7 @@
 			$flat 		 = $this->fm->validation($data['flat']);
 			$holding 	 = $this->fm->validation($data['holding']);
 			$building 	 = $this->fm->validation($data['building']);
+			$road 		 = $this->fm->validation($data['road']);
 			$block 		 = $this->fm->validation($data['block']);
 			$area 		 = $this->fm->validation($data['area']);
 			
@@ -509,6 +627,7 @@
 			$flat		 = mysqli_real_escape_string($this->db->link, $flat);
 			$holding	 = mysqli_real_escape_string($this->db->link, $holding);
 			$building	 = mysqli_real_escape_string($this->db->link, $building);
+			$road		 = mysqli_real_escape_string($this->db->link, $road);
 			$block		 = mysqli_real_escape_string($this->db->link, $block);
 			$area		 = mysqli_real_escape_string($this->db->link, $area);
 
@@ -524,6 +643,7 @@
 				flat = '$flat',
 				holding = '$holding',
 				 building = '$building',
+				 road='$road',
 				 block = '$block',
 				 area = '$area',
 				 divId =  '$divId',
@@ -542,7 +662,6 @@
 				}
 
 		}
-
 		public function editAllExp($uId){
 			$query="SELECT * FROM tbl_workingexperience WHERE userId='$uId'";
 			$result=$this->db->select($query);
@@ -578,7 +697,13 @@
            
             
         }
-        public function editAllTraining($uId){
+        
+        public function getuserresume($userId){
+            $query = "SELECT * FROM tbl_upload WHERE userId = '$userId'";
+            $result = $this->db->select($query);
+            return $result;
+        }
+ public function editAllTraining($uId){
 			$query="SELECT * FROM tbl_training WHERE userId='$uId'";
 			$result=$this->db->select($query);
 			return $result ;
@@ -623,19 +748,14 @@
 			}
 
 		}
-		 public function getuserresume($userId){
-            $query = "SELECT * FROM tbl_upload WHERE userId = '$userId'";
-            $result = $this->db->select($query);
-            return $result;
-        }
-        public function statUpdate($data , $userId){
-        $status=$this->fm->validation($data['status']);
+		public function statUpdateHsc($data , $userId){
+			$status=$this->fm->validation($data['status']);
          $status = mysqli_real_escape_string($this->db->link, $status);
-         $query="UPDATE tbl_personalinfo
+         $query="UPDATE tbl_hsc
                    SET status=' $status' WHERE userId='$userId'";
            $result = $this->db->update($query);
 				if ($result) {
-					echo "<script> window.location='basicinfo.php'</script>";
+					echo "<script> window.location='hsc.php'</script>";
 				}else{
 					$msg = "Not Updated";
 					return $msg;
@@ -656,21 +776,35 @@
 				}        
             
 		}
-		public function statUpdateHsc($data , $userId){
-			$status=$this->fm->validation($data['status']);
+	public function statUpdate($data , $userId){
+        $status=$this->fm->validation($data['status']);
          $status = mysqli_real_escape_string($this->db->link, $status);
-         $query="UPDATE tbl_hsc
+         $query="UPDATE tbl_personalinfo
                    SET status=' $status' WHERE userId='$userId'";
            $result = $this->db->update($query);
 				if ($result) {
-					echo "<script> window.location='hsc.php'</script>";
+					echo "<script> window.location='basicinfo.php'</script>";
 				}else{
 					$msg = "Not Updated";
 					return $msg;
 				}        
             
 		}
-
+		
+		public function addstatUpdate($data , $uId){
+        $status=$this->fm->validation($data['status']);
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_address
+                   SET status=' $status' WHERE userId ='$uId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='permanent_address.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+            
+		}
 		public function statUpdateGrad($data , $userId){
 			$status=$this->fm->validation($data['status']);
          $status = mysqli_real_escape_string($this->db->link, $status);
@@ -685,7 +819,7 @@
 				}        
             
 		}
-			public function statUpdatePostGrad($data , $userId){
+	public function statUpdatePostGrad($data , $userId){
 			$status=$this->fm->validation($data['status']);
          $status = mysqli_real_escape_string($this->db->link, $status);
          $query="UPDATE tbl_postgraduate
@@ -699,19 +833,95 @@
 				}        
             
 		}
-		public function statUpdateTraining($data , $userId){
-			$status=$this->fm->validation($data['status']);
+		public function statUpdatevocational($data , $userId){
+		$status=$this->fm->validation($data['status']);
          $status = mysqli_real_escape_string($this->db->link, $status);
-         $query="UPDATE tbl_training
+         $query="UPDATE tbl_vocational
                    SET status=' $status' WHERE userId='$userId'";
            $result = $this->db->update($query);
 				if ($result) {
-					echo "<script> window.location='professionalTraining.php'</script>";
+					echo "<script> window.location='education.php'</script>";
 				}else{
 					$msg = "Not Updated";
 					return $msg;
 				}        
-
+            
+		}
+		
+		public function paddstatUpdate($data , $uId){
+		 $status=$this->fm->validation($data['status']);
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_paddress
+                   SET status=' $status' WHERE userId='$uId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='education.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+		}
+		
+		public function getInfop($userId){
+		    $query = "SELECT * FROM tbl_personalinfo WHERE userId = '$userId'";
+		    $result = $this->db->select($query);
+		    return $result;
+		    
+		}
+		
+		public function getaddStat($uId){
+		    $query = "SELECT * FROM tbl_address WHERE userId = '$uId'";
+		    $result = $this->db->select($query);
+		    return $result;
+		    
+		}
+		
+		public function getpaddStat($uId){
+		    $query = "SELECT * FROM tbl_paddress WHERE userId = '$uId'";
+		    $result = $this->db->select($query);
+		    return $result;
+		    
+		}
+	    
+	    public function trainingstatupdate($status, $userId){
+	       
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_training
+                   SET status=' $status' WHERE userId ='$userId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					//echo "<script> window.location='education.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+	    }
+	   public function statUpdatePostOther($data , $userId){
+			$status=$this->fm->validation($data['status']);
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_p_other
+                   SET status=' $status' WHERE userId='$userId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='education.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+            
+		}
+		
+		public function workstatUpddate($status, $uId){
+		    $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="UPDATE tbl_workingexperience
+                   SET status='1' WHERE userId='$uId'";
+           $result = $this->db->update($query);
+				if ($result) {
+					echo "<script> window.location='education.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
 		}
 		public function statUpdateExp($data , $uId){
       $status=$this->fm->validation($data['status']);
@@ -729,7 +939,7 @@
 		public function statUpdateOther($data , $userId){
 			$status=$this->fm->validation($data['status']);
          $status = mysqli_real_escape_string($this->db->link, $status);
-         $query="UPDATE tbl_other
+         $query="UPDATE tbl_others
                    SET status=' $status' WHERE userId='$userId'";
            $result = $this->db->update($query);
 				if ($result) {
@@ -740,48 +950,16 @@
 				}        
             
 		}
-
-		public function statUpdatePostOther($data , $userId){
-			$status=$this->fm->validation($data['status']);
-         $status = mysqli_real_escape_string($this->db->link, $status);
-         $query="UPDATE tbl_p_other
-                   SET status=' $status' WHERE userId='$userId'";
-           $result = $this->db->update($query);
-				if ($result) {
-					echo "<script> window.location='education.php'</script>";
-				}else{
-					$msg = "Not Updated";
-					return $msg;
-				}        
-            
-		}
-
-		public function statUpdatevocational($data , $userId){
-			$status=$this->fm->validation($data['status']);
-         $status = mysqli_real_escape_string($this->db->link, $status);
-         $query="UPDATE tbl_vocational
-                   SET status=' $status' WHERE userId='$userId'";
-           $result = $this->db->update($query);
-				if ($result) {
-					echo "<script> window.location='education.php'</script>";
-				}else{
-					$msg = "Not Updated";
-					return $msg;
-				}        
-            
-		}
-		 public function trainingstatupdate($status, $userId){
-	       
-         $status = mysqli_real_escape_string($this->db->link, $status);
-         $query="UPDATE tbl_training
-                   SET status=' $status' WHERE userId ='$userId'";
-           $result = $this->db->update($query);
-				if ($result) {
-					//echo "<script> window.location='education.php'</script>";
-				}else{
-					$msg = "Not Updated";
-					return $msg;
-				}        
+		
+		 public function getAllOverall($userId){
+	    	$query = "SELECT * FROM tbl_overall WHERE userId = '$userId'";
+	    	$result = $this->db->select($query);
+	    	return $result;
+	    }
+	     public function getAllUserOverall($userId){
+	    	$query = "SELECT * FROM tbl_overall WHERE userId = '$userId'";
+	    	$result = $this->db->select($query);
+	    	return $result;
 	    }
 	}//main class
 ?>

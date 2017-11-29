@@ -55,38 +55,20 @@
 		$result = $this->db->select($query);
 		return $result;
 	}
-
-	public function getDegree(){
-		$query = "SELECT * FROM tbl_degree ORDER BY degId DESC";
+	
+	public function getDsipline(){
+		$query = "SELECT * FROM tbl_diploma_disipline ORDER BY id DESC";
 		$result = $this->db->select($query);
 		return $result;
 	}
-	public function getCgpa(){
-		$query = "SELECT * FROM tbl_cgpa ORDER BY cgpaid DESC";
+	
+	public function getStudydegree(){
+		$query = "SELECT * FROM tbl_degree_grad ORDER BY deid DESC";
 		$result = $this->db->select($query);
 		return $result;
 	}
-	public function getVersity(){
-		$query = "SELECT * FROM tbl_university ORDER BY uId DESC";
-		$result = $this->db->select($query);
-		return $result;
-	}
-	public function getDept(){
-		$query = "SELECT * FROM tbl_department ORDER BY dId DESC";
-		$result = $this->db->select($query);
-		return $result;
-	}
-	public function getStudydept(){
-		$query = "SELECT * FROM tbl_studydept ORDER BY studydeptId DESC";
-		$result = $this->db->select($query);
-		return $result;
-	}
-	public function getgraddegree(){
-		$query = "SELECT * FROM tbl_degree_grad ORDER BY id DESC";
-		$result = $this->db->select($query);
-		return $result;
-	}
-		public function insertolevelsubject($data, $userId){
+    
+    	public function insertolevelsubject($data, $userId){
 		$oid 		 = $this->fm->validation($data['oid']);
 		$grade 		 = $this->fm->validation($data['grade']);
 
@@ -158,8 +140,29 @@
 		$result = $this->db->select($query);
 		return $result;
 	}
-		public function getStudydegree(){
-		$query = "SELECT * FROM tbl_degree_grad ORDER BY deid DESC";
+	
+	public function getDegree(){
+		$query = "SELECT * FROM tbl_degree ORDER BY degId DESC";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function getCgpa(){
+		$query = "SELECT * FROM tbl_cgpa ORDER BY cgpaid DESC";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function getVersity(){
+		$query = "SELECT * FROM tbl_university ORDER BY uName ASC";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function getDept(){
+		$query = "SELECT * FROM tbl_department ORDER BY dId DESC";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function getStudydept(){
+		$query = "SELECT * FROM tbl_studydept ORDER BY studydeptId DESC";
 		$result = $this->db->select($query);
 		return $result;
 	}

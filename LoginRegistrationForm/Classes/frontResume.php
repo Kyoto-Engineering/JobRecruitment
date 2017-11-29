@@ -53,7 +53,7 @@
 		return $value;
 		}
 
-		public function getdiplomainfoby($uId){
+	public function getdiplomainfoby($uId){
 			$query = "SELECT p.*, c.pyear, j.divName,  g.degName
 				FROM tbl_diploma as p, tbl_passingyear as c, tbl_division as j, tbl_degree as g
 				WHERE p.divId = j.divId AND p.pyearid = c.pyearid AND p.degId = g.degId  AND userId = '$uId'";
@@ -70,7 +70,6 @@
 			$value = $this->db->select($query);
 			return $value;
 		}
-
 		public function getpgraduationby($uId){
 			$query = "SELECT p.*, c.pyear, d.studyDept, u.uName
 				FROM tbl_postgraduate as p, tbl_passingyear as c, tbl_studydept as d, tbl_university as u
@@ -98,5 +97,13 @@
 		    
 		
 		}
+        
+        public function getotheruniversityby($uId){
 
+			$query = "SELECT p.*, c.pyear, d.studyDept
+				FROM tbl_others as p, tbl_passingyear as c, tbl_studydept as d
+				WHERE p.pyearid = c.pyearid AND p.studydeptId = d.studydeptId AND userId = '$uId'";
+			$value = $this->db->select($query);
+			return $value;
+		}
 }?>

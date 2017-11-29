@@ -98,7 +98,7 @@
      
         
         <td>
-        <a href="applicant_details.php?user=<?php echo $uId;?>">
+        <a href="applicant_details.php?user=<?php echo urlencode($uId);?>;&amp;jId=<?php echo urlencode($jId);?>">
         <input type="button" value="View"/> </a>
         </td>
              <td>
@@ -112,7 +112,22 @@
          
 
        </form> 
-       
+       <td>
+        <?php
+          $getstat = $allM->getAllapplystat($uId);
+          if ($getstat) {
+            while($data = $getstat->fetch_assoc()){
+         ?>
+         <?php 
+
+          if ($data['status'] == "1") {
+            echo "<span style='color:green;'>Shortlisted</span>";
+          }else{
+            echo "";
+          }
+         ?>
+         <?php } } ?>
+       </td>
 
       </tr>
    <?php } } ?>
