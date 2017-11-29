@@ -559,7 +559,7 @@ Emergency Contact Numbers:
 	}
 
 	public function getspecilization(){
-		$query = "SELECT * FROM tbl_specialization ORDER BY spId DESC";
+		$query = "SELECT * FROM tbl_specialization ORDER BY specialization ASC";
 		$result = $this->db->select($query);
 		return $result;
 	}
