@@ -415,6 +415,19 @@ public function postgraduateInsert($data, $userId){
 		}
 
 	}
+		public function statUpdatePostGrad($status , $userId){
+		$status	 	 = mysqli_real_escape_string($this->db->link, $status);
+
+		$query = "INSERT INTO tbl_overall(userId, postgrad) VALUES('$userId', '$status')";
+		$result = $this->db->insert($query);
+		if ($result) {
+			echo "<script>window.location = 'education.php'</script>";
+		}else{
+			$msg = "Not Insert";
+			return $msg;
+		}
+	}
+    
     
     public function editmyschool($userId){
 		 $query  = "SELECT * FROM  tbl_school WHERE userId='$userId'";
@@ -731,6 +744,8 @@ public function editmyvocational($userId){
 		$minor = $this->fm->validation($data['minor']);
 		$cgpa 		 = $this->fm->validation($data['cgpa']);
 		$pyearid 	 = $this->fm->validation($data['pyearid']);
+		$status 	 = $this->fm->validation($data['status']);
+		
 		
 
 		
@@ -741,13 +756,14 @@ public function editmyvocational($userId){
 		$minor = mysqli_real_escape_string($this->db->link, $minor);
 		$cgpa 		 = mysqli_real_escape_string($this->db->link, $cgpa);
 		$pyearid	 = mysqli_real_escape_string($this->db->link, $pyearid);
+		$status	 = mysqli_real_escape_string($this->db->link, $status);
 		
 
 		if ( $name == "" || $deid =="" || $studydeptId == "" ||  $cgpa == "" || $pyearid == "" ) {
 			$msg = "Select or Fill All The Data";
 			return $msg;
 		}else{
-			$query = "INSERT INTO tbl_p_other(userId,  name,deid , studydeptId, minor, cgpa, pyearid) VALUES('$userId',  '$name','$deid', '$studydeptId', '$minor' ,'$cgpa', '$pyearid')";
+			$query = "INSERT INTO tbl_p_other(userId,  name,deid , studydeptId, minor, cgpa, pyearid,status) VALUES('$userId',  '$name','$deid', '$studydeptId', '$minor' ,'$cgpa', '$pyearid','$status')";
 			$result = $this->db->insert($query);
 			if ($result) {
 					echo "<script>window.location = 'education.php'</script>";
@@ -758,8 +774,18 @@ public function editmyvocational($userId){
 		}
 
 	}
+		public function statUpdatePostOther($status , $userId){
+		$status	 	 = mysqli_real_escape_string($this->db->link, $status);
 
-
+		$query = "INSERT INTO tbl_overall(userId, otherPgard) VALUES('$userId', '$status')";
+		$result = $this->db->insert($query);
+		if ($result) {
+			echo "<script>window.location = 'education.php'</script>";
+		}else{
+			$msg = "Not Insert";
+			return $msg;
+		}
+	}
 	
 	
 }//main class

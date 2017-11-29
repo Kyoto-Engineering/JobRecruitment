@@ -72,7 +72,7 @@
                     echo "<center><h2><span style='color:green;'>Thank You for completing Your Educational Information</span></h2><center>";
                   }elseif ($value['diploma'] == '1') {
                     echo "<center><h2><span style='color:green;'>Thank You for completing Your Educational Information</span></h2><center>";
-                  }elseif ($value['aLevel'] == '1') {
+                  }elseif ($value['alevel'] == '1') {
                     echo "<center><h2><span style='color:green;'>Thank You for completing Your Educational Information</span></h2><center>";
                   }elseif ($value['ugard'] == '1') {
                     echo "<center><h2><span style='color:green;'>Thank You for completing Your Educational Information</span></h2><center>";

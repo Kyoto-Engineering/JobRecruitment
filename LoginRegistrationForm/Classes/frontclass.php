@@ -557,4 +557,57 @@ Emergency Contact Numbers:
 			return $msg;
 		}
 	}
+
+	public function getspecilization(){
+		$query = "SELECT * FROM tbl_specialization ORDER BY spId DESC";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function getrelationship(){
+		$query = "SELECT * FROM tbl_relationship ";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function refInsert($data, $userId){
+	
+		$name        =$this->fm->validation($data['name']);
+		$organization       =$this->fm->validation($data['organization']);
+		$designation        =$this->fm->validation($data['designation']);
+		$email        =$this->fm->validation($data['email']);
+		$phone        =$this->fm->validation($data['phone']);
+		$specialization        =$this->fm->validation($data['specialization']);
+		$relationship        =$this->fm->validation($data['relationship']);
+		
+		
+		
+
+		
+		
+		$name 	     = mysqli_real_escape_string($this->db->link, $name);
+		$organization	     = mysqli_real_escape_string($this->db->link, $organization);
+		$designation 	     = mysqli_real_escape_string($this->db->link, $designation);
+		$email 	     = mysqli_real_escape_string($this->db->link, $email);
+		$phone 	     = mysqli_real_escape_string($this->db->link, $phone);
+		$specialization 	     = mysqli_real_escape_string($this->db->link, $specialization);
+		$relationship 	     = mysqli_real_escape_string($this->db->link, $relationship);
+		
+		
+
+		if ( $name == "" || $organization =="" || $designation == "" ||  $email == "" || $phone == "" || $specialization == "" ||  $relationship == ""  ) {
+			$msg = "Select or Fill All The Data";
+			return $msg;
+		}else{
+			$query = "INSERT INTO tbl_reference(userId,  name,organization , designation, email, phone, specialization,relationship) VALUES('$userId',  '$name','$organization', '$designation', '$email' ,'$phone', '$specialization','$relationship')";
+			$result = $this->db->insert($query);
+			if ($result) {
+					echo "<script>window.location = 'resume.php'</script>";
+			}else{
+				$msg = "Not Insert";
+				return $msg;
+			}
+		}
+
+	}
+		
+	
 	}?>

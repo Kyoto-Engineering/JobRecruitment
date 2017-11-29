@@ -46,7 +46,18 @@
                             </button></a>
                            
                             </div>
+
                             
+                            </div>
+                            <br/>
+                            <div class="row">
+                            <center> <div class="col-md-offset-5 col-md-2">
+                        
+                            <a href="reference.php"> <button class="btn btn-primary" type="button" > References
+                            </button></a>
+                           
+                            </div></center>
+
                             </div>
 
 
