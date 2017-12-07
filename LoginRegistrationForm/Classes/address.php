@@ -178,10 +178,12 @@
 			$tInstitution = mysqli_real_escape_string($this->db->link, $tInstitution);
 			$trainingName = mysqli_real_escape_string($this->db->link, $trainingName);
 			$tTopic		  = mysqli_real_escape_string($this->db->link, $tTopic);
+			$sMonth		  = mysqli_real_escape_string($this->db->link, $sMonth);
+			$eMonth		  = mysqli_real_escape_string($this->db->link, $eMonth);
 			$tLenth		  = mysqli_real_escape_string($this->db->link, $tLenth);
             $status		  = mysqli_real_escape_string($this->db->link, $status);
             
-			if ($tInstitution == "" || $trainingName == "" || $tTopic == ""	|| $tLenth == "") {
+			if ($tInstitution == "" || $trainingName == "" || $tTopic == ""	|| $tLenth == ""|| $sMonth == "" || $eMonth== "") {
 				$msg = "Field Must Not be Empty!!";
 				return $msg;
 			}else{
@@ -275,19 +277,6 @@
 
 		}
 		
-		public function portfoliostatupdate($data , $userId){
-		   $status		= $this->fm->validation($data['status']); 
-		   $status = mysqli_real_escape_string($this->db->link, $status);
-		   	$query="UPDATE  tbl_portfolio
-                   SET status=' $status' WHERE userId='$userId'";
-           $result = $this->db->update($query);
-				if ($result) {
-					echo "<script> window.location='education.php'</script>";
-				}else{
-					$msg = "Not Updated";
-					return $msg;
-				}     
-		}
 //upload image
 		public function uploadpicture($userId, $file){
 			  $permited  = array('jpg', 'jpeg', 'png', 'gif');
@@ -883,19 +872,7 @@
 		    
 		}
 	    
-	    public function trainingstatupdate($status, $userId){
-	       
-         $status = mysqli_real_escape_string($this->db->link, $status);
-         $query="UPDATE tbl_training
-                   SET status=' $status' WHERE userId ='$userId'";
-           $result = $this->db->update($query);
-				if ($result) {
-					//echo "<script> window.location='education.php'</script>";
-				}else{
-					$msg = "Not Updated";
-					return $msg;
-				}        
-	    }
+	   
 	   public function statUpdatePostOther($data , $userId){
 			$status=$this->fm->validation($data['status']);
          $status = mysqli_real_escape_string($this->db->link, $status);
@@ -936,6 +913,55 @@
 					return $msg;
 				}     
 		}
+		 public function statUpdateRef($status, $uId){
+        	$status		 = mysqli_real_escape_string($this->db->link, $status);
+
+        	 $query = "INSERT INTO tbl_overall(userId, ref) VALUES('$uId', '$status')";
+             $insert_row = $this->db->insert($query);
+              if($insert_row){
+                   echo "<script>window.location = 'resume.php'";
+               }else{
+                    $msg= "Your Working Experience Not Added!!";
+                   return $msg;
+               } 
+        }
+
+         public function statUpdateTraining($status, $userId){
+        	$status		 = mysqli_real_escape_string($this->db->link, $status);
+
+        	 $query = "INSERT INTO tbl_overall(userId, training) VALUES('$userId', '$status')";
+             $insert_row = $this->db->insert($query);
+              if($insert_row){
+                   echo "<script>window.location = 'resume.php'";
+               }else{
+                    $msg= "Your Working Experience Not Added!!";
+                   return $msg;
+               } 
+        }
+        public function refstatUpddate($status, $uId){
+        	$status		 = mysqli_real_escape_string($this->db->link, $status);
+
+        	 $query = "INSERT INTO tbl_reference(userId, status) VALUES('$uId', '$status')";
+             $insert_row = $this->db->insert($query);
+              if($insert_row){
+                   echo "<script>window.location = 'resume.php'";
+               }else{
+                    $msg= "Your Working Experience Not Added!!";
+                   return $msg;
+               } 
+        }
+         public function trainingstatupdate($status, $userId){
+        	$status		 = mysqli_real_escape_string($this->db->link, $status);
+
+        	 $query = "INSERT INTO tbl_training(userId, status) VALUES('$userId', '$status')";
+             $insert_row = $this->db->insert($query);
+              if($insert_row){
+                   echo "<script>window.location = 'resume.php'";
+               }else{
+                    $msg= "Your Working Experience Not Added!!";
+                   return $msg;
+               } 
+        }
 		public function statUpdateOther($data , $userId){
 			$status=$this->fm->validation($data['status']);
          $status = mysqli_real_escape_string($this->db->link, $status);
@@ -961,5 +987,45 @@
 	    	$result = $this->db->select($query);
 	    	return $result;
 	    }
+
+	   public function statUpdatePort($status , $uId){
+      
+         $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="INSERT INTO tbl_overall(userId, port) VALUES('$uId', '$status')";
+           $result = $this->db->insert($query);
+				if ($result) {
+					echo "<script> window.location='resume.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}     
+		}
+		public function portfoliostatupdate($status, $userId){
+		    $status = mysqli_real_escape_string($this->db->link, $status);
+         $query="INSERT INTO tbl_portfolio(userId, status) VALUES($userId, $status)";
+           $result = $this->db->insert($query);
+				if ($result) {
+					echo "<script> window.location='resume.php'</script>";
+				}else{
+					$msg = "Not Updated";
+					return $msg;
+				}        
+		}
+		 public function getAllStatRef($userId){
+			$query  = "SELECT status FROM  tbl_reference WHERE userId='$userId' LIMIT 1 ";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		public function getRef($userId){
+			$query  = "SELECT p.*,  r.relationType, s.specialization 
+			 FROM tbl_reference as p,  tbl_relationship as r,tbl_specialization as s WHERE p.relationship = r.id AND p.specialization=s.spId AND userId = '$userId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		 public function getRefer($userId){
+			$query  = "SELECT status FROM  tbl_reference WHERE userId='$userId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
 	}//main class
 ?>

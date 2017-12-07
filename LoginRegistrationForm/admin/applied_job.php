@@ -68,7 +68,7 @@
             $jId = $value['jId'];
           ?>
         <td><?php echo $i ;?></td>
-        <td><?php echo $value['userName'];?></td>
+        <td><a href="applicant_details.php?user=<?php echo urlencode($uId);?>;&amp;jId=<?php echo urlencode($jId);?>"><?php echo $value['userName'];?></a></td>
         <td><?php echo $value['jobtitle'];?></td>
         <td><?php echo $value['deptName'];?></td>
        
@@ -98,7 +98,7 @@
      
         
         <td>
-        <a href="applicant_details.php?user=<?php echo urlencode($uId);?>;&amp;jId=<?php echo urlencode($jId);?>">
+        
         <input type="button" value="View"/> </a>
         </td>
              <td>

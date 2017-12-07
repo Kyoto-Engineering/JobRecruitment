@@ -1,13 +1,24 @@
 <?php include_once "inc/header.php";?>
 <?php include_once "Classes/address.php";?>
 
-<?php 
-  $add = new Address();
+<?php
+       $add = new Address();
   $userId = Session::get('userId');
-   if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-        $insertInfo = $add->infoInsert($_POST, $userId);
-       
-    }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+            
+             $insertTraining = $add->infoInsert($_POST, $userId);
+            
+        }
+ 
+?>
+<?php
+     
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
+            
+             $insertTraining = $add->infoInsert($_POST, $userId);
+             $status = $_POST['status'];
+             $updateRef = $add->statUpdateTraining($status , $userId);
+        }
  
 ?>
 
@@ -76,16 +87,14 @@
                 <div class="row">
               <div class="col-md-4">
                <input class="form-control"  type="hidden" name="status" value="1"/> 
-            <input type="submit" name="submit" value="My Professional Training Ends Here" class="btn btn-primary" >
+            <input type="submit" name="academic" value="My Training Ends Here" class="btn btn-primary" >
              </div>
               
-              
-              <div class="col-md-3" style="margin-left: -50px;">
-                <a href='professionalTraining.php'>
-                     <input class="form-control"  type="hidden" name="status" value="0"/>
-                <button type="submit" name="submit"  class="btn btn-primary">I have More Training to Input</button>
-                </a>
-            </div>
+              <div class="row">
+              <div class="col-md-4">
+               <input class="form-control"  type="hidden" name="status" value="1"/> 
+            <input type="submit" name="submit" value="I've More Training To Input" class="btn btn-primary" >
+             </div>
             </form>
             
             

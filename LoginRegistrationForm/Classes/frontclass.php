@@ -577,7 +577,7 @@ Emergency Contact Numbers:
 		$phone        =$this->fm->validation($data['phone']);
 		$specialization        =$this->fm->validation($data['specialization']);
 		$relationship        =$this->fm->validation($data['relationship']);
-		
+		$status		 = mysqli_real_escape_string($this->db->link, $status);
 		
 		
 
@@ -590,6 +590,7 @@ Emergency Contact Numbers:
 		$phone 	     = mysqli_real_escape_string($this->db->link, $phone);
 		$specialization 	     = mysqli_real_escape_string($this->db->link, $specialization);
 		$relationship 	     = mysqli_real_escape_string($this->db->link, $relationship);
+		$status 	     = mysqli_real_escape_string($this->db->link, $status);
 		
 		
 
@@ -597,7 +598,7 @@ Emergency Contact Numbers:
 			$msg = "Select or Fill All The Data";
 			return $msg;
 		}else{
-			$query = "INSERT INTO tbl_reference(userId,  name,organization , designation, email, phone, specialization,relationship) VALUES('$userId',  '$name','$organization', '$designation', '$email' ,'$phone', '$specialization','$relationship')";
+			$query = "INSERT INTO tbl_reference(userId,  name,organization , designation, email, phone, specialization,relationship,status) VALUES('$userId',  '$name','$organization', '$designation', '$email' ,'$phone', '$specialization','$relationship','$status')";
 			$result = $this->db->insert($query);
 			if ($result) {
 					echo "<script>window.location = 'resume.php'</script>";

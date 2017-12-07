@@ -14,20 +14,25 @@
         }
  
 ?>
+
 <?php
-        $userId = Session::get("userId");
+     
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['academic'])) {
-            $infoAdd = $add->portfolio($_POST , $userId);
+            
+               $infoAdd = $add->portfolio($_POST , $userId);
+             $status = $_POST['status'];
+             $updatePort = $add->statUpdatePort($status , $userId);
         }
  
 ?>
 <?php
-        
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
-            $infoAdd = $add->portfoliostatupdate($_POST , $userId);
-        }
- 
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['info'])){
+    $status = $_POST['status'];
+    $updatew = $add->portfoliostatupdate($status, $userId);
+  }
 ?>
+
+
 
 
  <div class="container">
@@ -57,31 +62,32 @@
                 </p>
 
                  <p>
-                     <div class="col-md-4" style="margin-left: -50px;">
-            <input class="form-control"  type="hidden" name="status" value="1"/> 
-            <input type="submit" name="submit" value="My Portfolio link Insert Ends Here" class="btn btn-primary" >
-            </div>
-                </p>
+                      <div class="row">
+              <div class="col-md-4">
+               <input class="form-control"  type="hidden" name="status" value="1"/> 
+            <input type="submit" name="academic" value="My portfolio Ends Here" class="btn btn-primary" >
+             </div>
+              <div class="col-md-4" style="margin-left: -50px;">
+                <button type="submit" name="submit"  class="btn btn-primary">I have More link to Input</button>
                 
-                <p> <div class="col-md-4" style="margin-left: 50px;">
-                <a href= 'portfolio.php'><button type="submit" name="academic"  class="btn btn-primary">I have More link to Input</button>
-                </a>
-                </div></p>
+            </div>
                 </form>
                
         </div>
-        <br/><br/>
+        </p>
+        
          <form action="" method="post">
-             <br/><br/>
-                <p> <div class="col-md-4" style="margin-top:-35px; margin-left: 535px;">
-               <input class="form-control"  type="hidden" name="status" value="1"/> 
-            <input type="submit" name="update" value="I dont have any portfolio" class="btn btn-primary" >
-             </div></p>
-                
-             </form>   
+            
+            <div class="col-md-3" style="margin-left: 720px; margin-top:-43px;">
+               <input  type="hidden" name="status" value="1"/> 
+            <input type="submit" name="info" value="I have No portfolio" class="btn btn-primary" >
+             </div>
+             
+             </form>
+        </div>
         </div>
         
-        </div>
+      
 
 
 
