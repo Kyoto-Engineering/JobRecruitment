@@ -146,6 +146,7 @@ echo "<span style='color:green'>$age years</span>";
                       ?>
                        </a></li>
                        <li><a href="view_portfolio.php" class="w3-bar-item">My Portfolio</a></li>
+                       <li><a href="view_ref.php" class="w3-bar-item"> My Reference </a></li>
                     </ul>
                     
                     <ul class="nav navbar-nav navbar-right">
